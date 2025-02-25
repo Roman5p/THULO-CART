@@ -27,6 +27,13 @@ class HomeController extends Controller
     public function productDetails($id)
     {
         $product = Product::findOrFail($id);
-        return view('frontend.product-details', compact('product'));
+        $carts= Cart::where('user_id', auth()->id())->get();
+        return view('frontend.product-details', compact('product','carts'));
+    }
+
+    public function aboutus()
+    {
+        $carts = Cart::where('user_id', auth()->id())->get();
+        return view('frontend.aboutus', compact('carts'));
     }
 }

@@ -15,19 +15,25 @@
             </h4>
             <ul class="list-group mb-3">
                 @foreach ($carts as $cart)
-                    <li class="list-group-item d-flex justify-content-between">
-                        <div>
-                            <h6 class="my-0">{{ $loop->iteration }}. {{ optional($cart->product)->name }}</h6>
-                            <small class="text-body-secondary"></small>
+                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 py-3">
+                        <div class="d-flex align-items-center w-75">
+                            <h6 class="mb-0 fw-bold text-dark">{{ $loop->iteration }}.
+                                {{ optional($cart->product)->name ?? 'Unnamed Product' }}</h6>
+                            <small class="text-muted ms-2 d-none d-md-block">(SKU:
+                                {{ optional($cart->product)->sku ?? 'N/A' }})</small>
                         </div>
-                        <span class="text-body-secondary">Rs.{{ $cart->product->actual_amount }}</span>
-                        <form action="{{ route('deleteCart', $cart->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-link p-0 m-0">
-                                <i class="bi bi-trash remove-btn"></i>
-                            </button>
-                        </form>
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">Rs.
+                                {{ number_format($cart->product->actual_amount ?? 0, 2) }}</span>
+                            <form action="{{ route('deleteCart', $cart->id) }}" method="POST" class="m-0">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-1"
+                                    title="Remove Item">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
+                        </div>
                     </li>
                 @endforeach
 
@@ -255,6 +261,9 @@
                     <li class="nav-item active">
                         <a href="{{ route('index') }}" class="nav-link">Home</a>
                     </li>
+                    <li class="nav-item active">
+                        <a href="{{route('aboutus')}}" class="nav-link">About Us</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
                             data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
@@ -323,51 +332,63 @@
                     @else
                         <li class="d-flex align-items-center gap-1">
                             <div class="dropdown">
-                                <a href="#" class="p-2 mx-1 text-decoration-none d-flex align-items-center gap-1"
+                                <!-- Dropdown Toggle -->
+                                <a href="#" class="p-2 mx-1 text-decoration-none d-flex align-items-center gap-2"
                                     id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="Profile Picture"
-                                        class="rounded-circle" width="50" height="45">
-                                    <span>{{ Auth::user()->name }}</span>
+                                        class="rounded-circle object-fit-cover" width="40" height="40">
+                                    <span class="d-none d-md-inline fw-medium">{{ Auth::user()->name }}</span>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end shadow-lg">
+
+                                <!-- Dropdown Menu -->
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg mt-2" style="min-width: 250px;">
+                                    <!-- Profile Header -->
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0 me-3">
+                                        <a class="dropdown-item py-3" href="#">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="flex-shrink-0">
                                                     <img src="{{ asset('storage/' . auth()->user()->profile) }}"
-                                                        alt="Profile Picture" class="rounded-circle" width="50"
-                                                        height="47">
+                                                        alt="Profile Picture" class="rounded-circle object-fit-cover"
+                                                        width="50" height="50">
                                                 </div>
-                                                <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block">{{ auth()->user()->name }}</span>
-                                                    {{-- <small class="text-muted">Admin</small> --}}
+                                                <div class="flex-grow-1 overflow-hidden">
+                                                    <span
+                                                        class="fw-semibold d-block text-truncate">{{ auth()->user()->name }}</span>
+                                                    <small class="text-muted d-block text-truncate">Admin</small>
                                                 </div>
                                             </div>
                                         </a>
                                     </li>
                                     <li>
-                                        <div class="dropdown-divider"></div>
+                                        <hr class="dropdown-divider">
                                     </li>
+
+                                    <!-- Menu Items -->
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bi bi-person me-2"></i>
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                            <i class="bi bi-person fs-5"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="bi bi-gear me-2"></i>
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                            <i class="bi bi-gear fs-5"></i>
                                             <span class="align-middle">Settings</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <div class="dropdown-divider"></div>
+                                        <hr class="dropdown-divider">
                                     </li>
+
+                                    <!-- Logout -->
                                     <li>
-                                        <form action="{{ route('logout') }}" class="d-inline-block" method='post'>
+                                        <form action="{{ route('logout') }}" method="POST"
+                                            class="d-inline-block w-100">
                                             @csrf
-                                            <button type="submit" class="dropdown-item text-danger">
-                                                <i class="bi bi-power me-2"></i>Logout
+                                            <button type="submit"
+                                                class="dropdown-item text-danger d-flex align-items-center gap-2 py-2">
+                                                <i class="bi bi-power fs-5"></i>
+                                                <span>Logout</span>
                                             </button>
                                         </form>
                                     </li>

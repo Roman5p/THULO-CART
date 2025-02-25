@@ -70,14 +70,18 @@
                                                 <td>{{ $product->is_new ? 'Yes' : 'No' }}</td>
                                                 <td>
                                                     <div class="d-flex gap-1 align-items-center">
-                                                        <a class="btn btn-sm btn-primary px-2 py-1" href="{{ route('admin.products.edit', $product->id) }}">Edit</a>
-                                                        <form action="{{ route('admin.products.destroy', $product->id) }}" method="post" onsubmit="return confirm('Are you sure?')" class="m-0">
+                                                        <a class="btn btn-sm btn-primary px-2 py-1"
+                                                            href="{{ route('admin.products.edit', $product->id) }}">Edit</a>
+                                                        <form action="{{ route('admin.products.destroy', $product->id) }}"
+                                                            method="post" onsubmit="return confirm('Are you sure?')"
+                                                            class="m-0">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" class="btn btn-sm btn-danger px-2 py-1">Delete</button>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-danger px-2 py-1">Delete</button>
                                                         </form>
                                                     </div>
-                                                    
+
 
                                                 </td>
                                             </tr>
