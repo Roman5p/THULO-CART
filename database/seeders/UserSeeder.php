@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        user::insert([
+        User::insert([
             [
                 'name' => 'Roman',
                 'email' => 'roman@gmail.com',
@@ -31,15 +31,17 @@ class UserSeeder extends Seeder
                 'role' => 'user',
                 'gender' => 'male',
                 'contact' => '1234567890',
-            ],
-            [
-                'name' => 'Admin',
-                'email' => 'admin@gmail.com',
-                'password' => bcrypt('password'),
-                'role' => 'admin',
-                'gender' => 'male',
-                'contact' => '1234567890',
-            ],
+            ]
+            
+        ]);
+
+        User::insert([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+            'gender' => 'male',
+            'contact' => '1234567890',
         ]);
     }
 }

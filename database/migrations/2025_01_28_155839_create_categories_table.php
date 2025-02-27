@@ -16,8 +16,10 @@ return new class extends Migration
         // Create the 'categories' table
         Schema::create('categories', function (Blueprint $table) {
             $table->id(); // Add an auto-incrementing primary key column
+            $table->string('slug')->unique(); 
             $table->string('name'); // Add a string column for the category name
             $table->string('image')->nullable();
+            $table->longText('description')->nullable(); // Add a long text column for the category description
             $table->timestamps(); // Add timestamp columns for created_at and updated_at
         });
     }

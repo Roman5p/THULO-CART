@@ -219,12 +219,13 @@
                 class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
                 <div class="d-flex align-items-center my-3 my-sm-0">
                     <a href="{{ route('index') }}" class="navbar-brand">
-                        <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo" class="img-fluid">
+                        <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo" class="img-fluid"
+                            height="40">
                     </a>
                 </div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <svg width="24" height="24" viewBox="0 0 24 24">
+                    <svg width="24" height="40" viewBox="0 0 24 24">
                         <use xlink:href="#menu"></use>
                     </svg>
                 </button>
@@ -233,7 +234,7 @@
             <div class="col-sm-6 offset-sm-2 offset-md-0 col-lg-4">
                 <div class="search-bar row bg-light p-2 rounded-4">
                     <div class="col-md-4 d-none d-md-block">
-                        <select name="category" class="form-select border-0 bg-transparent">
+                        <select name="category" class="form-select border-0 bg-transparent ">
                             <option>All Categories</option>
                             <option>Groceries</option>
                             <option>Drinks</option>
@@ -262,7 +263,7 @@
                         <a href="{{ route('index') }}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a href="{{route('aboutus')}}" class="nav-link">About Us</a>
+                        <a href="{{ route('aboutus') }}" class="nav-link">About Us</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
@@ -354,7 +355,8 @@
                                                 <div class="flex-grow-1 overflow-hidden">
                                                     <span
                                                         class="fw-semibold d-block text-truncate">{{ auth()->user()->name }}</span>
-                                                    <small class="text-muted d-block text-truncate">Admin</small>
+                                                    <small
+                                                        class="text-muted d-block text-truncate">{{ Auth::user()->role }}</small>
                                                 </div>
                                             </div>
                                         </a>

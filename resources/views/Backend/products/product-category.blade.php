@@ -1,4 +1,3 @@
-
 @extends('backend.layouts.main')
 
 @section('title', 'Product Category')
@@ -15,13 +14,14 @@
                 <div class="modal fade" id="addcategory" tabindex="-1" aria-labelledby="addcategoryLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="{{ route('admin.product-category.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.product-category.store') }}" method="POST"
+                                enctype="multipart/form-data">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="addcategoryLabel">Add Category</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body" >
+                                <div class="modal-body">
 
                                     @csrf
 
@@ -34,7 +34,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-3">
-                                        <label for="" class="form-label"><span class="text-danger"></span>Image:</label> <!-- Product image label -->
+                                        <label for="" class="form-label"><span
+                                                class="text-danger"></span>Image:</label> <!-- Product image label -->
                                         <input type="file" class="form-control" name="image" id="Image"
                                             value="{{ old('Image') }}" /> <!-- Product image input -->
                                         @error('Image')
@@ -59,6 +60,7 @@
                                     <th scope="col">S.N</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Image</th>
+                                    <th scope="col">Description</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -69,8 +71,10 @@
                                         <td scope="row">{{ $loop->iteration }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td><img src="{{ asset('storage/' . $category->image) }}" alt=""
-                                            width="50px" height="50px"></td>
+                                                width="50px" height="50px"></td>
+                                        <td>{{ $category->description }}</td>
                                         <td>
+
                                             <!-- Button trigger modal to edit a category -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#exampleModal{{ $category->id }}">
@@ -113,20 +117,34 @@
                                                                     <div class="row">
                                                                         <!-- Product Image Upload -->
                                                                         <div class="col-md-6">
-                                                                            <label for="" class="form-label">Image:</label>
-                                                                            <input type="file" class="form-control" name="image" id="image"
+                                                                            <label for=""
+                                                                                class="form-label">Image:</label>
+                                                                            <input type="file" class="form-control"
+                                                                                name="image" id="image"
                                                                                 value="{{ old('image') }}" />
                                                                             @error('image')
-                                                                                <div class="text-danger">{{ $message }}</div>
+                                                                                <div class="text-danger">{{ $message }}
+                                                                                </div>
                                                                             @enderror
                                                                         </div>
                                                                         <!-- Current Product Image Display -->
                                                                         <div class="col-md-6">
-                                                                            <label for="" class="form-label">Current Image:</label>
-                                                                            <img src="{{ asset('storage/' . $category->image) }}" alt="" width="50px"
+                                                                            <label for=""
+                                                                                class="form-label">Current Image:</label>
+                                                                            <img src="{{ asset('storage/' . $category->image) }}"
+                                                                                alt="" width="50px"
                                                                                 height="50px">
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="description{{ $category->id }}"
+                                                                        class="form-label">Description</label>
+                                                                    <textarea class="form-control" name="description" id="description{{ $category->id }}" rows="3">{{ old('description', $category->description) }}</textarea>
+                                                                    @error('description')
+                                                                        <small id="descriptionHelpId"
+                                                                            class="form-text text-danger">{{ $message }}</small>
+                                                                    @enderror
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">

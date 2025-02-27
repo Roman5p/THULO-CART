@@ -7,12 +7,12 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->as('admin.')->middleware('auth')->group(function () {
+Route::prefix('admin')->as('admin.')->middleware(['auth', 'admin'])->group(function () {
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     Route::resource('products', ProductController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class);    
 
 
     Route::prefix('product-category')->as('product-category.')->group(function () {
