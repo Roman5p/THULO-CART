@@ -19,7 +19,7 @@ class AdminMiddleware
         if (Auth()->user() && Auth::user()->role !== 'admin') {
             return $next($request);
         }
-        return redirect()->route('index');
+        return redirect()->route('index')->with('error', 'You do not have permission to access this page.');
 
     }
 }
