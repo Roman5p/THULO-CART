@@ -53,7 +53,7 @@
                                         <div class="text-end text-md-start">
                                             <del class="text-muted">Rs. {{ number_format($cart->product->price, 2) }}</del>
                                             <div class="fw-bold text-dark">Rs.
-                                                {{ number_format($cart->product->actual_amount, 2) }}</div>
+                                                {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}</div>
                                         </div>
                                     </div>
 

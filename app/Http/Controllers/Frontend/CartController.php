@@ -31,6 +31,7 @@ class CartController extends Controller
         if ($cart) {
             $cart->quantity += $quantity;
             $cart->save();
+            return redirect()->route('index')->with('success', 'Product quantity updated successfully');
         } else {
 
             $cart = new Cart();
