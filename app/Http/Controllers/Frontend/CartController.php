@@ -12,29 +12,39 @@ class CartController extends Controller
 {
 
 
-    public function getCarts(){
+    public function getCarts()
+    {
 
         $carts = Cart::where('user_id', auth()->id())->get();
-
+        $discount = 0;
+       
         return view('frontend.cart', compact('carts'));
 
     }
 
-    public function addtoCart($pid, $quantity=1){
+    public function addtoCart($pid, $quantity = 1)
+    {
         $user_id = auth()->id();
         Product::findOrFail($pid);
 
-        $cart = new Cart();
-        $cart->user_id = $user_id;
-        $cart->product_id = $pid;
-        $cart->quantity = $quantity;
-        $cart->save();
+        $cart = Cart::where('user_id', auth()->id())->where('product_id', $pid)->first();
+        if ($cart) {
+            $cart->quantity += $quantity;
+            $cart->save();
+        } else {
 
-        return redirect ()->route('index')->with ('success', 'Product added to cart successfully');
+            $cart = new Cart();
+            $cart->user_id = $user_id;
+            $cart->product_id = $pid;
+            $cart->quantity = $quantity;
+            $cart->save();
 
+            return redirect()->route('index')->with('success', 'Product added to cart successfully');
+        }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $cart = Cart::findOrFail($id);
         $cart->delete();
 
