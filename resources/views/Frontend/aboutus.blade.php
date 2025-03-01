@@ -17,7 +17,7 @@
                         <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
                             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
                         <p class="lead mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
                     </div>
                 </div>
             </div>
