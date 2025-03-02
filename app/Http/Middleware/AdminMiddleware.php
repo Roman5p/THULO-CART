@@ -15,19 +15,14 @@ class AdminMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    // {
-    //     if (Auth()->check() && Auth::user()->role !== 'admin') {
-    //         return $next($request);
-    //     }
-    //     return redirect()->route('index')->with('error', 'You do not have permission to access this page.');
-
-    // }
-
     {
-        if (!Auth::check() || Auth::user()->role !== 'admin') {
-            return redirect()->route('index')->with('error', 'You do not have permission to access this page.');
+        // Check if the user is authenticated and has the 'admin' role
+        if (Auth()->check() && Auth::user()->role === 'admin') {
+            // Allow the request to proceed
+            return $next($request);
         }
-        return $next($request);
-
+        // Redirect to the index route with an error message if the user is not an admin
+        return redirect()->route('index')->with('error', 'You do not have permission to access this page.');
     }
+
 }
