@@ -266,6 +266,9 @@
                     <li class="nav-item active">
                         <a href="{{ route('aboutus') }}" class="nav-link">About Us</a>
                     </li>
+                    <li class="nav-item active">
+                        <a href="{{ route('contact') }}" class="nav-link">Contact</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
                             data-bs-toggle="dropdown" aria-expanded="false">Pages</a>

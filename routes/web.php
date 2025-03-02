@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\CartController;
 Route::get('/', [HomeController::class,'index'])->name('index');
 Route::get('/product-details/{id}', [HomeController::class, 'productDetails'])->name('productDetails');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
+Route::get('/contactus', [HomeController::class, 'contact'])->name('contact');
 
 //Carts
 

@@ -36,4 +36,9 @@ class HomeController extends Controller
         $carts = Cart::where('user_id', auth()->id())->get();
         return view('frontend.aboutus', compact('carts'));
     }
+    public function contact()
+    {
+        $carts = Cart::where('user_id', auth()->id())->get();
+        return view('frontend.contact', compact('carts'));
+    }
 }
