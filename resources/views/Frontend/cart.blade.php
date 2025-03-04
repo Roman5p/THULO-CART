@@ -1,6 +1,6 @@
 @extends('frontend.layouts.main')
 
-@section('title', 'Index')
+@section('title', 'Cart Page')
 
 @section('main-section')
 
@@ -30,8 +30,8 @@
                                     <!-- Product Details -->
                                     <div class="col-md-4 col-8">
                                         <h6 class="mb-1 fw-semibold text-dark">{{ $cart->product->name }}</h6>
-                                        <span class="badge bg-success-subtle text-success rounded-pill mt-1">
-                                            {{ $cart->product->discount_amount }}% OFF
+                                        <span class="badge bg-success-subtle text-success rounded-pill mt-1">Rs.
+                                            {{ $cart->product->discount_amount }} OFF
                                         </span>
                                     </div>
 
@@ -51,9 +51,8 @@
                                     <!-- Price -->
                                     <div class="col-md-2 col-4">
                                         <div class="text-end text-md-start">
-                                            <del class="text-muted">Rs. {{ number_format($cart->product->price, 2) }}</del>
-                                            <div class="fw-bold text-dark">Rs.
-                                                {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}</div>
+                                            <del class="text-muted">Rs. {{ number_format($cart->product->price * $cart->quantity, 2) }}</del>
+                                            <div class="fw-bold text-dark">Rs. {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}</div>
                                         </div>
                                     </div>
 
@@ -84,11 +83,11 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Subtotal</span>
-                            <span>Rs. </span>
+                            <span>Rs. {{number_format($carts->sum(function($cart){return $cart->product->price * $cart->quantity;}),2)}}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Discount</span>
-                            <span class="text-success">-Rs. </span>
+                            <span class="text-success">-Rs. {{ number_format($carts->sum(function($cart) { return $cart->product->discount_amount * $cart->quantity; }), 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Shipping</span>
@@ -97,7 +96,7 @@
                         <hr>
                         <div class="d-flex justify-content-between mb-4">
                             <span class="fw-bold">Total</span>
-                            <span class="fw-bold">Rs.</span>
+                            <span class="fw-bold">Rs.{{number_format($carts->sum(function($cart){return $cart->product->actual_amount * $cart->quantity;}),2)}}</span>
                         </div>
 
                         <!-- Promo Code -->
@@ -108,9 +107,9 @@
                             </div>
                         </div>
 
-                        <button class="btn btn-primary checkout-btn w-100 mb-3">
+                        <a href="{{ route('checkout') }}" class="btn btn-primary checkout-btn w-100 mb-3">
                             Proceed to Checkout
-                        </button>
+                        </a>
 
                         <div class="d-flex justify-content-center gap-2">
                             <i class="bi bi-shield-check text-success"></i>

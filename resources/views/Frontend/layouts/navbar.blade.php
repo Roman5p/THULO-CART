@@ -25,7 +25,8 @@
                         <div class="d-flex align-items-center">
                             <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">Rs.
                                 {{ number_format($cart->product->actual_amount ?? 0, 2) }}</span>
-                            <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">Qty: {{ $cart->quantity }}</span>
+                            <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">Qty:
+                                {{ $cart->quantity }}</span>
                             <form action="{{ route('deleteCart', $cart->id) }}" method="POST" class="m-0">
                                 @csrf
                                 @method('DELETE')
@@ -40,7 +41,8 @@
 
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (NPR)</span>
-                    <strong>Rs. {{ $carts->sum(function ($cart) { return $cart->product->actual_amount * $cart->quantity; }) }}</strong>
+                    <strong>Rs.
+                        {{ $carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}) }}</strong>
                 </li>
             </ul>
             <a href="{{ route('getcarts') }}" class="w-100 btn btn-primary btn-lg">Continue to checkout</a>

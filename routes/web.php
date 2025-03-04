@@ -13,6 +13,7 @@ Route::get('/', [HomeController::class,'index'])->name('index');
 Route::get('/product-details/{id}', [HomeController::class, 'productDetails'])->name('productDetails');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/contactus', [HomeController::class, 'contact'])->name('contact');
+Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
 
 //Carts
 

@@ -15,9 +15,13 @@ class CartController extends Controller
     public function getCarts()
     {
 
+        
+
         $carts = Cart::where('user_id', auth()->id())->get();
         $discount = 0;
        
+        
+
         return view('frontend.cart', compact('carts'));
 
     }
