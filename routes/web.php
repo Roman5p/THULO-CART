@@ -14,6 +14,7 @@ Route::get('/product-details/{id}', [HomeController::class, 'productDetails'])->
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/contactus', [HomeController::class, 'contact'])->name('contact');
 Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
+Route::get('/payment', [HomeController::class, 'payment'])->name('payment');
 
 //Carts
 

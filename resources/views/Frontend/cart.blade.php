@@ -4,6 +4,19 @@
 
 @section('main-section')
 
+<div class="bg-primary">
+    <div class="container py-4">
+      <!-- Breadcrumb -->
+      <nav class="d-flex">
+        <h6 class="mb-0">
+          <a href="{{route('index')}}" class="text-white-50 text-decoration-none">Home</a>
+          <span class="text-white-50 mx-2"> > </span>
+          <a href="{{route('getcarts')}}" class="text-white-50 text-decoration-none">Shopping cart</a>
+      </nav>
+      <!-- Breadcrumb -->
+    </div>
+  </div>
+
     <div class="cart-wrapper">
         <div class="container">
             <div class="row g-4">

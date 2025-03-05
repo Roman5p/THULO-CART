@@ -4,37 +4,25 @@
 
 @section('main-section')
 
-    {{-- <header>
-   
-          <div class="">
-            <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="me-1 border rounded py-1 px-3 nav-link" target="_blank"> <i class="fas fa-user-alt me-2"></i>Sign in </a>
-          </div>
-          <!-- right elements -->
-        </div>
-      </div>
-    </div>
-    <!-- Jumbotron -->
-  
-    <!-- Heading -->
     <div class="bg-primary">
       <div class="container py-4">
         <!-- Breadcrumb -->
         <nav class="d-flex">
           <h6 class="mb-0">
-            <a href="" class="text-white-50">Home</a>
+            <a href="{{route('index')}}" class="text-white-50 text-decoration-none">Home</a>
             <span class="text-white-50 mx-2"> > </span>
-            <a href="" class="text-white-50">2. Shopping cart</a>
+            <a href="{{route('getcarts')}}" class="text-white-50 text-decoration-none">Shopping cart</a>
             <span class="text-white-50 mx-2"> > </span>
-            <a href="" class="text-white"><u>3. Order info</u></a>
+            <a href="{{route('checkout')}}" class="text-white-50 text-decoration-none">Checkout</a>
+            {{-- <span class="text-white-50 mx-2"> > </span>
+            <a href="" class="text-white text-decoration-none">3. Order info</a>
             <span class="text-white-50 mx-2"> > </span>
-            <a href="" class="text-white-50">4. Payment</a>
+            <a href="" class="text-white-50 text-decoration-none">4. Payment</a> --}}
           </h6>
         </nav>
         <!-- Breadcrumb -->
       </div>
     </div>
-    <!-- Heading -->
-  </header> --}}
 
     <section class="bg-light py-5">
         <div class="container">
@@ -152,7 +140,19 @@
                                         <input type="text" id="typeText" placeholder="Type here" class="form-control" />
                                     </div>
                                 </div>
-
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">Number</p>
+                                    <div class="form-outline">
+                                        <input type="number" id="typeText" placeholder="Type here" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">Landmark</p>
+                                    <div class="form-outline">
+                                        <input type="text" id="typeText" placeholder="Type here"
+                                            class="form-control" />
+                                    </div>
+                                </div>
                                 <div class="col-sm-4 mb-3">
                                     <p class="mb-0">State</p>
                                     <select class="form-select">
@@ -161,15 +161,6 @@
                                         <option value="3">Samarqand</option>
                                     </select>
                                 </div>
-
-                                <div class="col-sm-4 mb-3">
-                                    <p class="mb-0">House</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="typeText" placeholder="Type here"
-                                            class="form-control" />
-                                    </div>
-                                </div>
-
                                 <div class="col-sm-4 col-6 mb-3">
                                     <p class="mb-0">Postal code</p>
                                     <div class="form-outline">
@@ -178,7 +169,7 @@
                                 </div>
 
                                 <div class="col-sm-4 col-6 mb-3">
-                                    <p class="mb-0">Zip</p>
+                                    <p class="mb-0">Street Number:</p>
                                     <div class="form-outline">
                                         <input type="text" id="typeText" class="form-control" />
                                     </div>
