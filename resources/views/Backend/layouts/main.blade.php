@@ -1,58 +1,69 @@
-  <html
-  lang="en"
-  class="light-style layout-menu-fixed"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
->
-  <head>
+<html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default"
+    data-assets-path="../assets/" data-template="vertical-menu-template-free">
+
+<head>
     @include('backend.layouts.header')
     @stack('header')
-  </head>
+</head>
 
-  <body>
+<body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
-      <div class="layout-container">
-        <!-- Menu -->
+        <div class="layout-container">
+            <!-- Menu -->
+            @include('backend.layouts.sidebar')
+            <!-- / Menu -->
 
-        @include('backend.layouts.sidebar')
-        <!-- / Menu -->
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                @include('backend.layouts.navbar')
+                <!-- / Navbar -->
 
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
+                <!-- Toaster Notification -->
+                @if (session('success') || session('error'))
+                    <div class="toaster-notification alert {{ session('success') ? 'alert-success' : 'alert-danger' }}"
+                        role="alert">
+                        {{ session('success') ?? session('error') }}
+                    </div>
+                @endif
 
-          @include('backend.layouts.navbar')
+                <!-- Content wrapper -->
+                <main>
+                    @yield('main-section')
+                </main>
+                <!-- / Content -->
 
-          <!-- / Navbar -->
+                <!-- Footer -->
+                @include('backend.layouts.footer')
+                <!-- / Footer -->
 
-          <!-- Content wrapper -->
-          <main>
-            @yield('main-section')
-        </main>
-            <!-- / Content -->
-
-            <!-- Footer -->
-           @include('backend.layouts.footer')
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
-          <!-- Content wrapper -->
+                <div class="content-backdrop fade"></div>
+            </div>
+            <!-- Content wrapper -->
         </div>
-        <!-- / Layout page -->
-      </div>
 
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
 
-
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
     @include('backend.layouts.footer-script')
-  </body>
+
+    <!-- JavaScript for auto-hide -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toaster = document.querySelector('.toaster-notification');
+            if (toaster) {
+                setTimeout(() => {
+                    toaster.style.transition = 'opacity 0.5s';
+                    toaster.style.opacity = '0';
+                    setTimeout(() => toaster.remove(), 500); // Remove after fade-out
+                }, 3000); // Hide after 3 seconds
+            }
+        });
+    </script>
+</body>
+
 </html>

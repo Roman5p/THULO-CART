@@ -5,7 +5,7 @@
         </a>
     </div>
 
-    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+    <div class="navbar-nav-right d-flex align-items-center"  id="navbar-collapse">
         <!-- Search -->
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
@@ -41,6 +41,12 @@
                     </li>
                     <li>
                         <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{route('index')}}">
+                            <i class="bx bx-user me-2"></i>
+                            <span class="align-middle">Frontend</span>
+                        </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">
