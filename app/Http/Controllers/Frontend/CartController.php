@@ -18,7 +18,7 @@ class CartController extends Controller
         
 
         $carts = Cart::where('user_id', auth()->id())->get();
-        $discount = 0;
+       
        
         
 
