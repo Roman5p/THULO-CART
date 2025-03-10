@@ -96,11 +96,11 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Subtotal</span>
-                            <span>Rs. {{number_format($carts->sum(function($cart){return $cart->product->price * $cart->quantity;}),2)}}</span>
+                            <span>Rs. {{number_format($total_cost,2)}}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Discount</span>
-                            <span class="text-success">-Rs. {{ number_format($carts->sum(function($cart) { return $cart->product->discount_amount * $cart->quantity; }), 2) }}</span>
+                            <span class="text-success">-Rs. {{ number_format($discount, 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Shipping</span>
@@ -109,7 +109,7 @@
                         <hr>
                         <div class="d-flex justify-content-between mb-4">
                             <span class="fw-bold">Total</span>
-                            <span class="fw-bold">Rs.{{number_format($carts->sum(function($cart){return $cart->product->actual_amount * $cart->quantity;}),2)}}</span>
+                            <span class="fw-bold">Rs.{{number_format($cost,2)}}</span>
                         </div>
 
                         <!-- Promo Code -->
