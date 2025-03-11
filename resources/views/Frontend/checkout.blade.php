@@ -53,7 +53,6 @@
                                     </div>
                                 </div>
 
-
                                 <div class="col-6 mb-3">
                                     <p class="mb-0">Phone</p>
                                     <div class="form-outline">
@@ -126,20 +125,20 @@
                                 <div class="col-sm-8 mb-3">
                                     <p class="mb-0">Address</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" placeholder="Type here" class="form-control" />
+                                        <input type="text" id="address" name="address" class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mb-3">
                                     <p class="mb-0">Number</p>
                                     <div class="form-outline">
-                                        <input type="number" id="typeText" placeholder="Type here"
+                                        <input type="number" id="number" name="number"
                                             class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mb-3">
                                     <p class="mb-0">Landmark</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" placeholder="Type here"
+                                        <input type="text" id="landmark" name="landmark"
                                             class="form-control" />
                                     </div>
                                 </div>
@@ -159,14 +158,14 @@
                                 <div class="col-sm-4 col-6 mb-3">
                                     <p class="mb-0">Postal code</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" class="form-control" />
+                                        <input type="text" id="postal_code" name="postal_code" class="form-control" />
                                     </div>
                                 </div>
 
                                 <div class="col-sm-4 col-6 mb-3">
                                     <p class="mb-0">Street Number:</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" value="" class="form-control" />
+                                        <input type="text" id="street_number" name="street_number" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -176,12 +175,6 @@
                                 <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
                             </div>
 
-                            <div class="mb-3">
-                                <p class="mb-0">Message to seller</p>
-                                <div class="form-outline">
-                                    <textarea class="form-control" id="textAreaExample1" rows="2"></textarea>
-                                </div>
-                            </div>
 
                             <div class="float-end">
                                 <button class="btn btn-light border">Cancel</button>
