@@ -5,23 +5,19 @@
 @section('main-section')
 
     <div class="bg-primary">
-      <div class="container py-4">
-        <!-- Breadcrumb -->
-        <nav class="d-flex">
-          <h6 class="mb-0">
-            <a href="{{route('index')}}" class="text-white-50 text-decoration-none">Home</a>
-            <span class="text-white-50 mx-2"> > </span>
-            <a href="{{route('getcarts')}}" class="text-white-50 text-decoration-none">Shopping cart</a>
-            <span class="text-white-50 mx-2"> > </span>
-            <a href="{{route('checkout')}}" class="text-white-50 text-decoration-none">Checkout</a>
-            {{-- <span class="text-white-50 mx-2"> > </span>
-            <a href="" class="text-white text-decoration-none">3. Order info</a>
-            <span class="text-white-50 mx-2"> > </span>
-            <a href="" class="text-white-50 text-decoration-none">4. Payment</a> --}}
-          </h6>
-        </nav>
-        <!-- Breadcrumb -->
-      </div>
+        <div class="container py-4">
+            <!-- Breadcrumb -->
+            <nav class="d-flex">
+                <h6 class="mb-0">
+                    <a href="{{ route('index') }}" class="text-white-50 text-decoration-none">Home</a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{{ route('getcarts') }}" class="text-white-50 text-decoration-none">Shopping cart</a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{{ route('checkout') }}" class="text-white-50 text-decoration-none">Checkout</a>
+                </h6>
+            </nav>
+            <!-- Breadcrumb -->
+        </div>
     </div>
 
     <section class="bg-light py-5">
@@ -43,10 +39,7 @@
                                 </div>
                             </div>
                         </div>
-
                     @endguest
-
-
                     <!-- Checkout -->
                     <div class="card shadow-0 border">
                         <div class="p-4">
@@ -55,7 +48,8 @@
                                 <div class="col-6 mb-3">
                                     <p class="mb-0">First name</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" value="{{ Auth::user()->name }}" class="form-control" />
+                                        <input type="text" id="typeText" value="{{ Auth::user()->name }}"
+                                            class="form-control" />
                                     </div>
                                 </div>
 
@@ -63,7 +57,8 @@
                                 <div class="col-6 mb-3">
                                     <p class="mb-0">Phone</p>
                                     <div class="form-outline">
-                                        <input type="tel" id="typePhone" value="{{ Auth::user()->contact }} " class="form-control" />
+                                        <input type="tel" id="typePhone" value="{{ Auth::user()->contact }} "
+                                            class="form-control" />
                                     </div>
                                 </div>
 
@@ -137,7 +132,8 @@
                                 <div class="col-sm-4 mb-3">
                                     <p class="mb-0">Number</p>
                                     <div class="form-outline">
-                                        <input type="number" id="typeText" placeholder="Type here" class="form-control" />
+                                        <input type="number" id="typeText" placeholder="Type here"
+                                            class="form-control" />
                                     </div>
                                 </div>
                                 <div class="col-sm-4 mb-3">
@@ -170,7 +166,7 @@
                                 <div class="col-sm-4 col-6 mb-3">
                                     <p class="mb-0">Street Number:</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" class="form-control" />
+                                        <input type="text" id="typeText" value="" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -189,7 +185,7 @@
 
                             <div class="float-end">
                                 <button class="btn btn-light border">Cancel</button>
-                                <button class="btn btn-success shadow-0 border">Continue</button>
+                                <button class="btn btn-success shadow-0 border" onclick="window.location.href='{{ route('payment') }}'">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -261,37 +257,6 @@
                                 <p class="text-muted mb-0">Your cart is empty.</p>
                             </div>
                         @endforelse
-                        <!-- Product Cards -->
-                        {{-- 
-                        <!-- Product Details -->
-                        <div class="col-md-4 col-8">
-                            <h6 class="mb-1 fw-semibold text-dark">{{ $cart->product->name }}</h6>
-                            <span class="badge bg-success-subtle text-success rounded-pill mt-1">Rs.
-                                {{ $cart->product->discount_amount }} OFF
-                            </span>
-                        </div>
-                        <!-- Quantity Controls -->
-                        <div class="col-md-3 col-6">
-                            <div class="input-group input-group-sm w-75">
-                                <button class="btn btn-outline-secondary" type="button"
-                                    onclick="updateQuantity('{{ $cart->id }}', -1)">-</button>
-                                <input type="number" class="form-control text-center quantity-input"
-                                    value="{{ $cart->quantity }}" min="1" data-cart-id="{{ $cart->id }}"
-                                    readonly>
-                                <button class="btn btn-outline-secondary" type="button"
-                                    onclick="updateQuantity('{{ $cart->id }}', 1)">+</button>
-                            </div>
-                        </div>
-                        <!-- Price -->
-                        <div class="col-md-2 col-4">
-                            <div class="text-end text-md-start">
-                                <del class="text-muted">Rs.
-                                    {{ number_format($cart->product->price * $cart->quantity, 2) }}</del>
-                                <div class="fw-bold text-dark">Rs.
-
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
             </div>

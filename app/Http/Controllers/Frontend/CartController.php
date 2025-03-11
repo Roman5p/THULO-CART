@@ -74,6 +74,8 @@ class CartController extends Controller
         return view('frontend.checkout', compact('carts', 'total_cost', 'discount', 'cost', 'total_quantity'));
     }
 
+    
+
     public function delete($id)
     {
         $cart = Cart::findOrFail($id);
