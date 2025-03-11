@@ -55,28 +55,22 @@
                                 <div class="col-6 mb-3">
                                     <p class="mb-0">First name</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" placeholder="Type here" class="form-control" />
+                                        <input type="text" id="typeText" value="{{ Auth::user()->name }}" class="form-control" />
                                     </div>
                                 </div>
 
-                                <div class="col-6">
-                                    <p class="mb-0">Last name</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="typeText" placeholder="Type here" class="form-control" />
-                                    </div>
-                                </div>
 
                                 <div class="col-6 mb-3">
                                     <p class="mb-0">Phone</p>
                                     <div class="form-outline">
-                                        <input type="tel" id="typePhone" value="+48 " class="form-control" />
+                                        <input type="tel" id="typePhone" value="{{ Auth::user()->contact }} " class="form-control" />
                                     </div>
                                 </div>
 
                                 <div class="col-6 mb-3">
                                     <p class="mb-0">Email</p>
                                     <div class="form-outline">
-                                        <input type="email" id="typeEmail" placeholder="example@gmail.com"
+                                        <input type="email" id="typeEmail" value="{{ Auth::user()->email }}"
                                             class="form-control" />
                                     </div>
                                 </div>
@@ -156,9 +150,14 @@
                                 <div class="col-sm-4 mb-3">
                                     <p class="mb-0">State</p>
                                     <select class="form-select">
-                                        <option value="1">New York</option>
-                                        <option value="2">Moscow</option>
-                                        <option value="3">Samarqand</option>
+                                        <option value="" selected disabled>Select State</option>
+                                        <option value="1">Province No. 1</option>
+                                        <option value="2">Province No. 2</option>
+                                        <option value="3">Bagmati Province</option>
+                                        <option value="4">Gandaki Province</option>
+                                        <option value="5">Lumbini Province</option>
+                                        <option value="6">Karnali Province</option>
+                                        <option value="7">Sudurpashchim Province</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4 col-6 mb-3">
