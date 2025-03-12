@@ -51,7 +51,37 @@ class HomeController extends Controller
         return view('frontend.checkout', compact('carts', 'shippingInfo'));
     }
 
+    public function storeCheckout(Request $request){
+        $user_id = auth()->id();
 
+        $shippingInfo = null;
+        $request->validate(
+            [
+                'address' => 'required | max:250',
+                'number' => 'required | numeric',
+                'landmark' => 'required',
+                'postalcode' => 'required | numeric',
+                'street_no' => 'required | numeric',
+                'state' => 'required',
+                'is_permanent' => 'required | boolean'
+
+            
+            ]);
+
+        if($request->is_permanent){
+            $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent',true)->first();   
+        }
+
+        if($shippingInfo){
+            $shippingInfo->address = $request->address;
+            $shippingInfo->number = $request->number;
+            $shippingInfo->landmark = $request->landmark;
+            $shippingInfo->postalcode = $request->postalcode;
+            $shippingInfo->street_no = $request->street_no;
+            $shippingInfo->state = $request->state;
+            $shippingInfo->is_permanent = $request->is_permanent;
+            $shippingInfo->save();
+        }else{
 
     public function payment()
     {
