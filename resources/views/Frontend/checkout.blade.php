@@ -23,6 +23,7 @@
     <section class="bg-light py-5">
         <div class="container">
             <div class="row">
+                <!-- Checkout Form (Left Side) -->
                 <div class="col-xl-8 col-lg-8 mb-4">
                     @guest
                         <div class="card mb-4 border shadow-0">
@@ -43,36 +44,95 @@
                     <!-- Checkout -->
                     <div class="card shadow-0 border">
                         <div class="p-4">
-                            <h5 class="card-title mb-3">{{ Auth::user()->name }}'s checkout</h5>
+                            <h5 class="card-title mb-3">Checkout</h5>
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <p class="mb-0">First name</p>
+                                    <p class="mb-0">Address</p>
                                     <div class="form-outline">
-                                        <input type="text" id="typeText" value="{{ Auth::user()->name }}"
-                                            class="form-control" />
+                                        <input type="text" id="address"
+                                            value="{{ old('address', $shippingInfo?->address) }}" name="address"
+                                            placeholder="Type here" class="form-control" />
                                     </div>
+                                    @error('address')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="col-6">
+                                    <p class="mb-0">Number</p>
+                                    <div class="form-outline">
+                                        <input type="text" id="number"
+                                            value="{{ old('number', $shippingInfo?->number) }}" name="number"
+                                            placeholder="Type here" class="form-control" />
+                                    </div>
+                                    @error('number')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="col-6 mb-3">
-                                    <p class="mb-0">Phone</p>
+                                    <p class="mb-0">Landmark</p>
                                     <div class="form-outline">
-                                        <input type="tel" id="typePhone" value="{{ Auth::user()->contact }} "
-                                            class="form-control" />
+                                        <input type="text" id="landmark"
+                                            value="{{ old('landmark', $shippingInfo?->landmark) }}" name="landmark"
+                                            value="" class="form-control" />
                                     </div>
+                                    @error('landmark')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="col-6 mb-3">
-                                    <p class="mb-0">Email</p>
+                                    <p class="mb-0">Postal Code</p>
                                     <div class="form-outline">
-                                        <input type="email" id="typeEmail" value="{{ Auth::user()->email }}"
+                                        <input type="number" id="postalcode"
+                                            value="{{ old('postalcode', $shippingInfo?->postalcode) }}" name="postalcode"
+                                            placeholder="" class="form-control" />
+                                    </div>
+                                    @error('postalcode')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Street Number</p>
+                                    <div class="form-outline">
+                                        <input type="number" id="street_no"
+                                            value="{{ old('street_no', $shippingInfo?->street_no) }}" name="street_no"
                                             class="form-control" />
                                     </div>
                                 </div>
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">State</p>
+                                    <div class="form-outline">
+                                        <div class="mb-3">
+                                            <select class="form-select form-select-lg" name="state" id="">
+                                                <option value="province_no_1" @selected(old('state', 'province_no_1') == 'province_no_1')>Province No. 1</option>
+                                                <option value="province_no_2" @selected(old('state', 'province_no_2') == 'province_no_2')>Province No. 2</option>
+                                                <option value="bagmati" @selected(old('state', 'bagmati') == 'bagmati')>Bagmati</option>
+                                                <option value="gandaki" @selected(old('state', 'gandaki') == 'gandaki')>Gandaki</option>
+                                                <option value="lumbini" @selected(old('state', 'lumbini') == 'lumbini')>Lumbini</option>
+                                                <option value="karnali" @selected(old('state', 'karnali') == 'karnali')>Karnali</option>
+                                                <option value="sudurpaschim" @selected(old('state', 'sudurpaschim') == 'sudurpaschim')>Sudurpaschim</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                @error('state')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                                <label class="form-check-label" for="flexCheckDefault">Keep me up to date on news</label>
+                                <input class="form-check-input" type="hidden" value="0" name="is_permanent" />
+                                <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"
+                                    name="is_permanent" />
+                                <label class="form-check-label" for="flexCheckDefault">Is Permanent Address</label>
+                            </div>
+
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary my-2">
+                                    Checkout
+                                </button>
                             </div>
 
                             <hr class="my-4" />
@@ -81,7 +141,6 @@
 
                             <div class="row mb-3">
                                 <div class="col-lg-4 mb-3">
-                                    <!-- Default checked radio -->
                                     <div class="form-check h-100 border rounded-3">
                                         <div class="p-3">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -94,7 +153,6 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-3">
-                                    <!-- Default radio -->
                                     <div class="form-check h-100 border rounded-3">
                                         <div class="p-3">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -107,7 +165,6 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-3">
-                                    <!-- Default radio -->
                                     <div class="form-check h-100 border rounded-3">
                                         <div class="p-3">
                                             <input class="form-check-input" type="radio" name="flexRadioDefault"
@@ -120,69 +177,13 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-sm-8 mb-3">
-                                    <p class="mb-0">Address</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="address" name="address" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 mb-3">
-                                    <p class="mb-0">Number</p>
-                                    <div class="form-outline">
-                                        <input type="number" id="number" name="number"
-                                            class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 mb-3">
-                                    <p class="mb-0">Landmark</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="landmark" name="landmark"
-                                            class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 mb-3">
-                                    <p class="mb-0">State</p>
-                                    <select class="form-select">
-                                        <option value="" selected disabled>Select State</option>
-                                        <option value="1">Province No. 1</option>
-                                        <option value="2">Province No. 2</option>
-                                        <option value="3">Bagmati Province</option>
-                                        <option value="4">Gandaki Province</option>
-                                        <option value="5">Lumbini Province</option>
-                                        <option value="6">Karnali Province</option>
-                                        <option value="7">Sudurpashchim Province</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-4 col-6 mb-3">
-                                    <p class="mb-0">Postal code</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="postal_code" name="postal_code" class="form-control" />
-                                    </div>
-                                </div>
-
-                                <div class="col-sm-4 col-6 mb-3">
-                                    <p class="mb-0">Street Number:</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="street_number" name="street_number" class="form-control" />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-check mb-3">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
-                                <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
-                            </div>
-                            <div class="float-end">
-                                <button class="btn btn-light border">Cancel</button>
-                                <button class="btn btn-success shadow-0 border" onclick="window.location.href='{{ route('payment') }}'">Continue</button>
-                            </div>
                         </div>
                     </div>
                     <!-- Checkout -->
                 </div>
-                <div class="col-lg-4">
+
+                <!-- Order Summary (Right Side) -->
+                <div class="col-xl-4 col-lg-4 mb-4">
                     <div class="summary-card p-4 shadow-sm">
                         <h5 class="mb-4">Order Summary</h5>
 

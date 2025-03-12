@@ -7,6 +7,7 @@ use App\Models\Carousel;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\product;
+use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
 
 
@@ -16,19 +17,19 @@ class HomeController extends Controller
     {
         $carousels = Carousel::all();
         $categories = Category::all();
-        $carts= Cart::where('user_id', auth()->id())->get();
+        $carts = Cart::where('user_id', auth()->id())->get();
         $featureProducts = Product::where('is_feature', true)->limit(9)->get();
         $sellingProducts = Product::where('is_selling', true)->limit(10)->get();
         $popularProducts = Product::where('is_popular', true)->limit(9)->get();
         $newProducts = Product::where('is_new', true)->limit(9)->get();
-        return view('Frontend.index', compact('carousels','featureProducts','sellingProducts','popularProducts','newProducts', 'categories','carts'));
+        return view('Frontend.index', compact('carousels', 'featureProducts', 'sellingProducts', 'popularProducts', 'newProducts', 'categories', 'carts'));
     }
 
     public function productDetails($id)
     {
         $product = Product::findOrFail($id);
-        $carts= Cart::where('user_id', auth()->id())->get();
-        return view('frontend.product-details', compact('product','carts'));
+        $carts = Cart::where('user_id', auth()->id())->get();
+        return view('frontend.product-details', compact('product', 'carts'));
     }
 
     public function aboutus()
@@ -44,9 +45,13 @@ class HomeController extends Controller
 
     public function checkout()
     {
+        $user_id = auth()->id();
+        $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent',true)->first();
         $carts = Cart::where('user_id', auth()->id())->get();
-        return view('frontend.checkout', compact('carts'));
+        return view('frontend.checkout', compact('carts', 'shippingInfo'));
     }
+
+
 
     public function payment()
     {
