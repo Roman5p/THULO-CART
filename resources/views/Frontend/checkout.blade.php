@@ -174,8 +174,6 @@
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1" />
                                 <label class="form-check-label" for="flexCheckDefault1">Save this address</label>
                             </div>
-
-
                             <div class="float-end">
                                 <button class="btn btn-light border">Cancel</button>
                                 <button class="btn btn-success shadow-0 border" onclick="window.location.href='{{ route('payment') }}'">Continue</button>
