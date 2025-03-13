@@ -54,6 +54,12 @@ class HomeController extends Controller
     public function storeCheckout(Request $request){
         $user_id = auth()->id();
 
+        $carts = Cart::where('user_id', $user_id)->get();
+
+        $order = new Order();
+        $order->user_id = $user_id;
+        
+
         $shippingInfo = null;
         $request->validate(
             [
@@ -81,7 +87,9 @@ class HomeController extends Controller
             $shippingInfo->state = $request->state;
             $shippingInfo->is_permanent = $request->is_permanent;
             $shippingInfo->save();
-        }else{
+        }
+        
+    }
 
     public function payment()
     {

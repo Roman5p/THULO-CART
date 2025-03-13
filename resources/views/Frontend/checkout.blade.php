@@ -51,7 +51,7 @@
                                     <div class="form-outline">
                                         <input type="text" id="address"
                                             value="{{ old('address', $shippingInfo?->address) }}" name="address"
-                                            placeholder="Type here" class="form-control" />
+                                            class="form-control" />
                                     </div>
                                     @error('address')
                                         <div class="text-danger">{{ $message }}</div>
@@ -63,7 +63,7 @@
                                     <div class="form-outline">
                                         <input type="text" id="number"
                                             value="{{ old('number', $shippingInfo?->number) }}" name="number"
-                                            placeholder="Type here" class="form-control" />
+                                            class="form-control" />
                                     </div>
                                     @error('number')
                                         <div class="text-danger">{{ $message }}</div>
@@ -106,13 +106,18 @@
                                     <div class="form-outline">
                                         <div class="mb-3">
                                             <select class="form-select form-select-lg" name="state" id="">
-                                                <option value="province_no_1" @selected(old('state', 'province_no_1') == 'province_no_1')>Province No. 1</option>
-                                                <option value="province_no_2" @selected(old('state', 'province_no_2') == 'province_no_2')>Province No. 2</option>
-                                                <option value="bagmati" @selected(old('state', 'bagmati') == 'bagmati')>Bagmati</option>
-                                                <option value="gandaki" @selected(old('state', 'gandaki') == 'gandaki')>Gandaki</option>
-                                                <option value="lumbini" @selected(old('state', 'lumbini') == 'lumbini')>Lumbini</option>
-                                                <option value="karnali" @selected(old('state', 'karnali') == 'karnali')>Karnali</option>
-                                                <option value="sudurpaschim" @selected(old('state', 'sudurpaschim') == 'sudurpaschim')>Sudurpaschim</option>
+                                                <option value="" @selected(!old('state'))>Please select a state
+                                                </option>
+                                                <option value="province_no_1" @selected(old('state') == 'province_no_1')>Province No. 1
+                                                </option>
+                                                <option value="province_no_2" @selected(old('state') == 'province_no_2')>Province No. 2
+                                                </option>
+                                                <option value="bagmati" @selected(old('state') == 'bagmati')>Bagmati</option>
+                                                <option value="gandaki" @selected(old('state') == 'gandaki')>Gandaki</option>
+                                                <option value="lumbini" @selected(old('state') == 'lumbini')>Lumbini</option>
+                                                <option value="karnali" @selected(old('state') == 'karnali')>Karnali</option>
+                                                <option value="sudurpaschim" @selected(old('state') == 'sudurpaschim')>Sudurpaschim
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -133,49 +138,6 @@
                                 <button type="submit" class="btn btn-primary my-2">
                                     Checkout
                                 </button>
-                            </div>
-
-                            <hr class="my-4" />
-
-                            <h5 class="card-title mb-3">Shipping info</h5>
-
-                            <div class="row mb-3">
-                                <div class="col-lg-4 mb-3">
-                                    <div class="form-check h-100 border rounded-3">
-                                        <div class="p-3">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1" checked />
-                                            <label class="form-check-label" for="flexRadioDefault1">
-                                                Express delivery <br />
-                                                <small class="text-muted">3-4 days via Fedex </small>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-3">
-                                    <div class="form-check h-100 border rounded-3">
-                                        <div class="p-3">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" />
-                                            <label class="form-check-label" for="flexRadioDefault2">
-                                                Post office <br />
-                                                <small class="text-muted">20-30 days via post </small>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 mb-3">
-                                    <div class="form-check h-100 border rounded-3">
-                                        <div class="p-3">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault3" />
-                                            <label class="form-check-label" for="flexRadioDefault3">
-                                                Self pick-up <br />
-                                                <small class="text-muted">Come to our shop </small>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
