@@ -169,8 +169,7 @@
                             our systems.
                         </p>
                         <p class="text-muted">
-                            © 2025 {{ env('APP_NAME') }}. All Rights Reserved. <a href="#">Terms of Use</a> | <a
-                                href="#">Terms of Sale</a> | <a href="#">Privacy Policy</a>
+                            © 2025 {{ env('APP_NAME') }}. All Rights Reserved.
                         </p>
                     </div>
                 </div>
