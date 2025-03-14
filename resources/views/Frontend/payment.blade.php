@@ -108,7 +108,7 @@
                             </div>
                             <div class="form-check mb-3">
                                 <input class="form-check-input"
-                                    style="background-color: orangered; border-color: orangered;" type="checkbox"
+                                    style="" type="checkbox"
                                     id="saveCard">
                                 <label class="form-check-label" for="saveCard">
                                     Save Card
