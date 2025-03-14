@@ -4,18 +4,18 @@
 
 @section('main-section')
 
-<div class="bg-primary">
-    <div class="container py-4">
-      <!-- Breadcrumb -->
-      <nav class="d-flex">
-        <h6 class="mb-0">
-          <a href="{{route('index')}}" class="text-white-50 text-decoration-none">Home</a>
-          <span class="text-white-50 mx-2"> > </span>
-          <a href="{{route('getcarts')}}" class="text-white-50 text-decoration-none">Shopping cart</a>
-      </nav>
-      <!-- Breadcrumb -->
+    <div class="bg-primary">
+        <div class="container py-4">
+            <!-- Breadcrumb -->
+            <nav class="d-flex">
+                <h6 class="mb-0">
+                    <a href="{{ route('index') }}" class="text-white-50 text-decoration-none">Home</a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{{ route('getcarts') }}" class="text-white-50 text-decoration-none">Shopping cart</a>
+            </nav>
+            <!-- Breadcrumb -->
+        </div>
     </div>
-  </div>
 
     <div class="cart-wrapper">
         <div class="container">
@@ -64,8 +64,11 @@
                                     <!-- Price -->
                                     <div class="col-md-2 col-4">
                                         <div class="text-end text-md-start">
-                                            <del class="text-muted">Rs. {{ number_format($cart->product->price * $cart->quantity, 2) }}</del>
-                                            <div class="fw-bold text-dark">Rs. {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}</div>
+                                            <del class="text-muted">Rs.
+                                                {{ number_format($cart->product->price * $cart->quantity, 2) }}</del>
+                                            <div class="fw-bold text-dark">Rs.
+                                                {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}
+                                            </div>
                                         </div>
                                     </div>
 
@@ -96,7 +99,7 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Subtotal</span>
-                            <span>Rs. {{number_format($total_cost,2)}}</span>
+                            <span>Rs. {{ number_format($total_cost, 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Discount</span>
@@ -109,7 +112,7 @@
                         <hr>
                         <div class="d-flex justify-content-between mb-4">
                             <span class="fw-bold">Total</span>
-                            <span class="fw-bold">Rs.{{number_format($cost,2)}}</span>
+                            <span class="fw-bold">Rs.{{ number_format($cost, 2) }}</span>
                         </div>
 
                         <!-- Promo Code -->
@@ -133,5 +136,7 @@
             </div>
         </div>
     </div>
-
+@endsection
+@section('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

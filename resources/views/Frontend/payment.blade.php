@@ -1,6 +1,6 @@
 @extends('frontend.layouts.main')
 
-@section('title', 'Checkout Page')
+@section('title', 'Payment Page')
 
 @section('main-section')
 
@@ -151,7 +151,7 @@
 
             <!-- Right Column - Order Summary -->
             <div class="col-md-4">
-                <div class="card card-custom sticky-top" style="top: 20px;">
+                <div class="card card-custom sticky-top" style="top: 20px; z-index: 900;">
                     <div class="card-body">
                         <h5 class="card-title">Order Summary</h5>
                         <p>Subtotal:
@@ -176,7 +176,8 @@
             </div>
         </div>
     </div>
-
+@endsection
+@section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('frontend/assets/js/payment.js') }}"></script>
 @endsection
