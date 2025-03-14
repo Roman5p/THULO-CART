@@ -151,23 +151,23 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Subtotal</span>
-                            <span>Rs.
+                            <span>रु
                                 {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}),2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Discount</span>
-                            <span class="text-success">-Rs.
+                            <span class="text-success">-रु
                                 {{ number_format($carts->sum(function ($cart) {return $cart->product->discount_amount * $cart->quantity;}),2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Shipping</span>
-                            <span>Rs.</span>
+                            <span>रु</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between mb-4">
                             <span class="fw-bold">Total</span>
                             <span
-                                class="fw-bold">Rs.{{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}),2) }}</span>
+                                class="fw-bold">रु{{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}),2) }}</span>
                         </div>
 
                         <!-- Promo Code -->
@@ -192,7 +192,7 @@
                                         alt="{{ $cart->product->name }}" class="img-fluid rounded-3"
                                         style="object-fit: cover; max-height: 100px; width: 100px;">
                                 </div>
-                                <span class="badge bg-success-subtle text-success rounded-pill mt-0">Rs.
+                                <span class="badge bg-success-subtle text-success rounded-pill mt-0">रु
                                     {{ $cart->product->discount_amount }} OFF
                                 </span>
 
@@ -200,9 +200,9 @@
                                     <a href="{{ route('productDetails', $cart->product->id) }}" class="nav-link">
                                         {{ $cart->product->name }}
                                     </a>
-                                    <del class="text-muted">Rs.
+                                    <del class="text-muted">रु
                                         {{ number_format($cart->product->price * $cart->quantity, 2) }} </del>
-                                    <div class="price text-muted">Total:
+                                    <div class="price text-muted"> Total:
                                         {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}</div>
                                 </div>
                             </div>

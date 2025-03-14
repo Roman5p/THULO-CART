@@ -23,7 +23,7 @@
                                 {{ optional($cart->product)->sku ?? 'N/A' }})</small> --}}
                         </div>
                         <div class="d-flex align-items-center">
-                            <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">Rs.
+                            <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">रु
                                 {{ number_format($cart->product->actual_amount ?? 0, 2) }}</span>
                             <span class="badge bg-light text-dark border rounded-pill px-3 py-2 me-3">Qty:
                                 {{ $cart->quantity }}</span>
@@ -41,7 +41,7 @@
 
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total (NPR)</span>
-                    <strong>Rs.
+                    <strong>रु
                         {{ $carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}) }}</strong>
                 </li>
             </ul>
@@ -275,11 +275,11 @@
                         <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
                             data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                         <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
-                            <li><a href="index.html" class="dropdown-item">About Us </a></li>
+                            <li><a href="{{route('aboutus')}}" class="dropdown-item">About Us </a></li>
                             <li><a href="index.html" class="dropdown-item">Shop </a></li>
                             <li><a href="index.html" class="dropdown-item">Single Product </a></li>
-                            <li><a href="index.html" class="dropdown-item">Cart </a></li>
-                            <li><a href="index.html" class="dropdown-item">Checkout </a></li>
+                            <li><a href="" class="dropdown-item">Cart </a></li>
+                            <li><a href="" class="dropdown-item">Checkout </a></li>
                             <li><a href="index.html" class="dropdown-item">Blog </a></li>
                             <li><a href="index.html" class="dropdown-item">Single Post </a></li>
                             <li><a href="index.html" class="dropdown-item">Styles </a></li>

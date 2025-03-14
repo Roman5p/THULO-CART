@@ -43,7 +43,7 @@
                                     <!-- Product Details -->
                                     <div class="col-md-4 col-8">
                                         <h6 class="mb-1 fw-semibold text-dark">{{ $cart->product->name }}</h6>
-                                        <span class="badge bg-success-subtle text-success rounded-pill mt-1">Rs.
+                                        <span class="badge bg-success-subtle text-success rounded-pill mt-1">रु
                                             {{ $cart->product->discount_amount }} OFF
                                         </span>
                                     </div>
@@ -64,9 +64,9 @@
                                     <!-- Price -->
                                     <div class="col-md-2 col-4">
                                         <div class="text-end text-md-start">
-                                            <del class="text-muted">Rs.
+                                            <del class="text-muted">रु
                                                 {{ number_format($cart->product->price * $cart->quantity, 2) }}</del>
-                                            <div class="fw-bold text-dark">Rs.
+                                            <div class="fw-bold text-dark">रु
                                                 {{ number_format($cart->product->actual_amount * $cart->quantity, 2) }}
                                             </div>
                                         </div>
@@ -99,20 +99,20 @@
 
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Subtotal</span>
-                            <span>Rs. {{ number_format($total_cost, 2) }}</span>
+                            <span>रु {{ number_format($total_cost, 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Discount</span>
-                            <span class="text-success">-Rs. {{ number_format($discount, 2) }}</span>
+                            <span class="text-success">-रु {{ number_format($discount, 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
                             <span class="text-muted">Shipping</span>
-                            <span>Rs.</span>
+                            <span>रु</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between mb-4">
                             <span class="fw-bold">Total</span>
-                            <span class="fw-bold">Rs.{{ number_format($cost, 2) }}</span>
+                            <span class="fw-bold">रु{{ number_format($cost, 2) }}</span>
                         </div>
 
                         <!-- Promo Code -->
