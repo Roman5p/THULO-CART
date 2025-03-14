@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\product;
 use App\Models\ShippingAddress;
 use Illuminate\Http\Request;
@@ -88,8 +89,18 @@ class HomeController extends Controller
             $shippingInfo->is_permanent = $request->is_permanent;
             $shippingInfo->save();
         }
-        
+
+        foreach($carts as $cart){
+            $cart->delete();
+        }
+
+        return redirect('getConfirm', $order->id)->with('success','Checkout successful');
     }
+
+    public function getConfirm($oid){
+        $order = Order::find($oid);
+        return view('frontend.confirm', compact('order', 'carts'));
+}
 
     public function payment()
     {
