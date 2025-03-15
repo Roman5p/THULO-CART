@@ -89,6 +89,29 @@ class HomeController extends Controller
             $shippingInfo->is_permanent = $request->is_permanent;
             $shippingInfo->save();
         }
+    
+        else{
+            $shippingInfo = new ShippingAddress();
+            $shippingInfo->user_id = $user_id;
+            $shippingInfo->address = $request->address;
+            $shippingInfo->number = $request->number;
+            $shippingInfo->landmark = $request->landmark;
+            $shippingInfo->postalcode = $request->postalcode;
+            $shippingInfo->street_no = $request->street_no;
+            $shippingInfo->state = $request->state;
+            $shippingInfo->is_permanent = $request->is_permanent;
+            $shippingInfo->save();
+        }
+    $shippingInfo = new ShippingAddress();
+    $shippingInfo->address = $request->address;
+    $shippingInfo->number = $request->number;
+    $shippingInfo->landmark = $request->landmark;
+    $shippingInfo->postalcode = $request->postalcode;
+    $shippingInfo->street_no = $request->street_no;
+    $shippingInfo->state = $request->state;
+    $shippingInfo->order_id = $order->id;   
+    $shippingInfo->save();
+
 
         foreach($carts as $cart){
             $cart->delete();

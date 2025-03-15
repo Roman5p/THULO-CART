@@ -32,5 +32,7 @@ Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.up
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/confirm',[HomeController::class,'getconfirm'])->name('confirm');
+
 require __DIR__.'/auth.php';
 require __DIR__ . '/admin.php';

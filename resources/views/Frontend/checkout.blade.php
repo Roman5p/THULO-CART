@@ -45,100 +45,86 @@
                     <div class="card shadow-0 border">
                         <div class="p-4">
                             <h5 class="card-title mb-3">Checkout</h5>
-                            <div class="row">
-                                <div class="col-6 mb-3">
-                                    <p class="mb-0">Address</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="address"
-                                            value="{{ old('address', $shippingInfo?->address) }}" name="address"
-                                            class="form-control" />
+                            <form action="{{ route('checkout') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-6 mb-3">
+                                        <p class="mb-0">Address</p>
+                                        <div class="form-outline">
+                                            <input type="text" id="address" value="{{ old('address', $shippingInfo?->address) }}" name="address" class="form-control" />
+                                        </div>
+                                        @error('address')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    @error('address')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
 
-                                <div class="col-6">
-                                    <p class="mb-0">Number</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="number"
-                                            value="{{ old('number', $shippingInfo?->number) }}" name="number"
-                                            class="form-control" />
+                                    <div class="col-6 mb-3">
+                                        <p class="mb-0">Number</p>
+                                        <div class="form-outline">
+                                            <input type="text" id="number" value="{{ old('number', $shippingInfo?->number) }}" name="number" class="form-control" />
+                                        </div>
+                                        @error('number')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    @error('number')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
 
-                                <div class="col-6 mb-3">
-                                    <p class="mb-0">Landmark</p>
-                                    <div class="form-outline">
-                                        <input type="text" id="landmark"
-                                            value="{{ old('landmark', $shippingInfo?->landmark) }}" name="landmark"
-                                            value="" class="form-control" />
+                                    <div class="col-6 mb-3">
+                                        <p class="mb-0">Landmark</p>
+                                        <div class="form-outline">
+                                            <input type="text" id="landmark" value="{{ old('landmark', $shippingInfo?->landmark) }}" name="landmark" class="form-control" />
+                                        </div>
+                                        @error('landmark')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    @error('landmark')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
 
-                                <div class="col-6 mb-3">
-                                    <p class="mb-0">Postal Code</p>
-                                    <div class="form-outline">
-                                        <input type="number" id="postalcode"
-                                            value="{{ old('postalcode', $shippingInfo?->postalcode) }}" name="postalcode"
-                                            placeholder="" class="form-control" />
+                                    <div class="col-6 mb-3">
+                                        <p class="mb-0">Postal Code</p>
+                                        <div class="form-outline">
+                                            <input type="number" id="postalcode" value="{{ old('postalcode', $shippingInfo?->postalcode) }}" name="postalcode" class="form-control" />
+                                        </div>
+                                        @error('postalcode')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                    @error('postalcode')
-                                        <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <p class="mb-0">Street Number</p>
-                                    <div class="form-outline">
-                                        <input type="number" id="street_no"
-                                            value="{{ old('street_no', $shippingInfo?->street_no) }}" name="street_no"
-                                            class="form-control" />
+
+                                    <div class="col-6 mb-3">
+                                        <p class="mb-0">Street Number</p>
+                                        <div class="form-outline">
+                                            <input type="number" id="street_no" value="{{ old('street_no', $shippingInfo?->street_no) }}" name="street_no" class="form-control" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <p class="mb-0">State</p>
-                                    <div class="form-outline">
-                                        <div class="mb-3">
-                                            <select class="form-select form-select-lg" name="state" id="">
-                                                <option value="" @selected(!old('state'))>Please select a state
-                                                </option>
-                                                <option value="province_no_1" @selected(old('state') == 'province_no_1')>Province No. 1
-                                                </option>
-                                                <option value="province_no_2" @selected(old('state') == 'province_no_2')>Province No. 2
-                                                </option>
+
+                                    <div class="col-6 mb-3">
+                                        <p class="mb-0">State</p>
+                                        <div class="form-outline">
+                                            <select class="form-select form-select-lg" name="state">
+                                                <option value="" @selected(!old('state'))>Please select a state</option>
+                                                <option value="province_no_1" @selected(old('state') == 'province_no_1')>Province No. 1</option>
+                                                <option value="province_no_2" @selected(old('state') == 'province_no_2')>Province No. 2</option>
                                                 <option value="bagmati" @selected(old('state') == 'bagmati')>Bagmati</option>
                                                 <option value="gandaki" @selected(old('state') == 'gandaki')>Gandaki</option>
                                                 <option value="lumbini" @selected(old('state') == 'lumbini')>Lumbini</option>
                                                 <option value="karnali" @selected(old('state') == 'karnali')>Karnali</option>
-                                                <option value="sudurpaschim" @selected(old('state') == 'sudurpaschim')>Sudurpaschim
-                                                </option>
+                                                <option value="sudurpaschim" @selected(old('state') == 'sudurpaschim')>Sudurpaschim</option>
                                             </select>
                                         </div>
+                                        @error('state')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-                                @error('state')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="hidden" value="0" name="is_permanent" />
-                                <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"
-                                    name="is_permanent" />
-                                <label class="form-check-label" for="flexCheckDefault">Is Permanent Address</label>
-                            </div>
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="hidden" value="0" name="is_permanent" />
+                                    <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="is_permanent" />
+                                    <label class="form-check-label" for="flexCheckDefault">Is Permanent Address</label>
+                                </div>
 
-                            <div class="row">
-                                <button type="submit" class="btn btn-primary my-2">
-                                    Checkout
-                                </button>
-                            </div>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary my-2">Checkout</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <!-- Checkout -->
