@@ -51,7 +51,9 @@
                                     <div class="col-6 mb-3">
                                         <p class="mb-0">Address</p>
                                         <div class="form-outline">
-                                            <input type="text" id="address" value="{{ old('address', $shippingInfo?->address) }}" name="address" class="form-control" />
+                                            <input type="text" id="address"
+                                                value="{{ old('address', $shippingInfo?->address) }}" name="address"
+                                                class="form-control" />
                                         </div>
                                         @error('address')
                                             <div class="text-danger">{{ $message }}</div>
@@ -61,7 +63,9 @@
                                     <div class="col-6 mb-3">
                                         <p class="mb-0">Number</p>
                                         <div class="form-outline">
-                                            <input type="text" id="number" value="{{ old('number', $shippingInfo?->number) }}" name="number" class="form-control" />
+                                            <input type="text" id="number"
+                                                value="{{ old('number', $shippingInfo?->number) }}" name="number"
+                                                class="form-control" />
                                         </div>
                                         @error('number')
                                             <div class="text-danger">{{ $message }}</div>
@@ -71,7 +75,9 @@
                                     <div class="col-6 mb-3">
                                         <p class="mb-0">Landmark</p>
                                         <div class="form-outline">
-                                            <input type="text" id="landmark" value="{{ old('landmark', $shippingInfo?->landmark) }}" name="landmark" class="form-control" />
+                                            <input type="text" id="landmark"
+                                                value="{{ old('landmark', $shippingInfo?->landmark) }}" name="landmark"
+                                                class="form-control" />
                                         </div>
                                         @error('landmark')
                                             <div class="text-danger">{{ $message }}</div>
@@ -81,7 +87,9 @@
                                     <div class="col-6 mb-3">
                                         <p class="mb-0">Postal Code</p>
                                         <div class="form-outline">
-                                            <input type="number" id="postalcode" value="{{ old('postalcode', $shippingInfo?->postalcode) }}" name="postalcode" class="form-control" />
+                                            <input type="number" id="postalcode"
+                                                value="{{ old('postalcode', $shippingInfo?->postalcode) }}"
+                                                name="postalcode" class="form-control" />
                                         </div>
                                         @error('postalcode')
                                             <div class="text-danger">{{ $message }}</div>
@@ -91,7 +99,9 @@
                                     <div class="col-6 mb-3">
                                         <p class="mb-0">Street Number</p>
                                         <div class="form-outline">
-                                            <input type="number" id="street_no" value="{{ old('street_no', $shippingInfo?->street_no) }}" name="street_no" class="form-control" />
+                                            <input type="number" id="street_no"
+                                                value="{{ old('street_no', $shippingInfo?->street_no) }}" name="street_no"
+                                                class="form-control" />
                                         </div>
                                     </div>
 
@@ -99,14 +109,18 @@
                                         <p class="mb-0">State</p>
                                         <div class="form-outline">
                                             <select class="form-select form-select-lg" name="state">
-                                                <option value="" @selected(!old('state'))>Please select a state</option>
-                                                <option value="province_no_1" @selected(old('state') == 'province_no_1')>Province No. 1</option>
-                                                <option value="province_no_2" @selected(old('state') == 'province_no_2')>Province No. 2</option>
+                                                <option value="" @selected(!old('state'))>Please select a state
+                                                </option>
+                                                <option value="province_no_1" @selected(old('state') == 'province_no_1')>Province No. 1
+                                                </option>
+                                                <option value="province_no_2" @selected(old('state') == 'province_no_2')>Province No. 2
+                                                </option>
                                                 <option value="bagmati" @selected(old('state') == 'bagmati')>Bagmati</option>
                                                 <option value="gandaki" @selected(old('state') == 'gandaki')>Gandaki</option>
                                                 <option value="lumbini" @selected(old('state') == 'lumbini')>Lumbini</option>
                                                 <option value="karnali" @selected(old('state') == 'karnali')>Karnali</option>
-                                                <option value="sudurpaschim" @selected(old('state') == 'sudurpaschim')>Sudurpaschim</option>
+                                                <option value="sudurpaschim" @selected(old('state') == 'sudurpaschim')>Sudurpaschim
+                                                </option>
                                             </select>
                                         </div>
                                         @error('state')
@@ -117,16 +131,17 @@
 
                                 <div class="form-check mb-3">
                                     <input class="form-check-input" type="hidden" value="0" name="is_permanent" />
-                                    <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" name="is_permanent" />
+                                    <input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault"
+                                        name="is_permanent" />
                                     <label class="form-check-label" for="flexCheckDefault">Is Permanent Address</label>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-8">
-                                        <button type="submit" class="btn btn-primary w-100 my-2">Checkout</button>
-                                    </div>
                                     <div class="col-4">
                                         <a href="{{ route('getcarts') }}" class="btn btn-secondary w-100 my-2">Cancel</a>
+                                    </div>
+                                    <div class="col-8">
+                                        <button type="submit" class="btn btn-primary w-100 my-2">Checkout</button>
                                     </div>
                                 </div>
                             </form>
