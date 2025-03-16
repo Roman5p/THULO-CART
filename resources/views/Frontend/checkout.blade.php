@@ -122,7 +122,12 @@
                                 </div>
 
                                 <div class="row">
-                                    <button type="submit" class="btn btn-primary my-2">Checkout</button>
+                                    <div class="col-8">
+                                        <button type="submit" class="btn btn-primary w-100 my-2">Checkout</button>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="{{ route('getcarts') }}" class="btn btn-secondary w-100 my-2">Cancel</a>
+                                    </div>
                                 </div>
                             </form>
                         </div>
