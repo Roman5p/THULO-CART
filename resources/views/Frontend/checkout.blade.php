@@ -45,7 +45,7 @@
                     <div class="card shadow-0 border">
                         <div class="p-4">
                             <h5 class="card-title mb-3">Checkout</h5>
-                            <form action="{{ route('checkout') }}" method="POST">
+                            <form action="{{ route('checkout.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-6 mb-3">

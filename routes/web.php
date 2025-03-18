@@ -14,6 +14,7 @@ Route::get('/product-details/{id}', [HomeController::class, 'productDetails'])->
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/contactus', [HomeController::class, 'contact'])->name('contact');
 Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
+Route::get('/checkout/store',[HomeController::class,'storeCheckout'])->name('checkout.store');
 Route::get('/payment', [HomeController::class, 'payment'])->name('payment');
 
 //Carts
@@ -32,7 +33,7 @@ Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.up
 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/confirm',[HomeController::class,'getconfirm'])->name('confirm');
+Route::get('/confirm/{id}',[HomeController::class,'getConfirm'])->name('getConfirm');
 
 require __DIR__.'/auth.php';
 require __DIR__ . '/admin.php';
