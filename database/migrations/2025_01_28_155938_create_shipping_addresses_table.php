@@ -17,12 +17,13 @@ return new class extends Migration
             $table->string('address'); // Address field
             $table->string('number'); // Number field
             $table->string('landmark')->nullable(); // Landmark field, nullable
-            $table->integer('pincode'); // Pincode field
+            $table->integer('postalcode'); // Pincode field
             $table->string('street_no')->nullable(); // Street number field, nullable
             $table->string('state'); // State field
             $table->boolean('is_permanent')->default(false); // Is permanent address, default false
             $table->unsignedBigInteger('user_id'); // Foreign key to users table
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Define foreign key constraint
+            $table->string('order_id')->nullable(); // Order ID field, nullable
             $table->timestamps(); // Timestamps for created_at and updated_at
         });
     }

@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order_Item extends Model
 {
+    protected $table = 'order_items';
     protected $fillable = [
         'quantity',
         'order_id',
         'product_id',
+        'order_id',
     ];
 }

@@ -109,17 +109,17 @@
                                         <p class="mb-0">State</p>
                                         <div class="form-outline">
                                             <select class="form-select form-select-lg" name="state">
-                                                <option value="" @selected(!old('state'))>Please select a state
+                                                <option value="" @selected(!old('state', $shippingInfo?->state))>Please select a state
                                                 </option>
-                                                <option value="province_no_1" @selected(old('state') == 'province_no_1')>Province No. 1
+                                                <option value="province_no_1" @selected(old('state', $shippingInfo?->state) == 'province_no_1')>Province No. 1
                                                 </option>
-                                                <option value="province_no_2" @selected(old('state') == 'province_no_2')>Province No. 2
+                                                <option value="province_no_2" @selected(old('state', $shippingInfo?->state) == 'province_no_2')>Province No. 2
                                                 </option>
-                                                <option value="bagmati" @selected(old('state') == 'bagmati')>Bagmati</option>
-                                                <option value="gandaki" @selected(old('state') == 'gandaki')>Gandaki</option>
-                                                <option value="lumbini" @selected(old('state') == 'lumbini')>Lumbini</option>
-                                                <option value="karnali" @selected(old('state') == 'karnali')>Karnali</option>
-                                                <option value="sudurpaschim" @selected(old('state') == 'sudurpaschim')>Sudurpaschim
+                                                <option value="bagmati" @selected(old('state', $shippingInfo?->state) == 'bagmati')>Bagmati</option>
+                                                <option value="gandaki" @selected(old('state', $shippingInfo?->state) == 'gandaki')>Gandaki</option>
+                                                <option value="lumbini" @selected(old('state', $shippingInfo?->state) == 'lumbini')>Lumbini</option>
+                                                <option value="karnali" @selected(old('state', $shippingInfo?->state) == 'karnali')>Karnali</option>
+                                                <option value="sudurpaschim" @selected(old('state', $shippingInfo?->state) == 'sudurpaschim')>Sudurpaschim
                                                 </option>
                                             </select>
                                         </div>

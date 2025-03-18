@@ -178,17 +178,18 @@ class HomeController extends Controller
     {
         // Find order by ID
         $order = Order::find($oid);
+        $carts = Cart::where('user_id', auth()->id())->get();
         // Return confirmation view with order details
         return view('frontend.confirm', compact('order', 'carts'));
     }
 
     // Display payment page
-    public function payment()
-    {
-        // Get user's cart items
-        $carts = Cart::where('user_id', auth()->id())->get();
-        // Return payment view with cart data
-        return view('frontend.payment', compact('carts'));
-    }
+    // public function payment()
+    // {
+    //     // Get user's cart items
+    //     $carts = Cart::where('user_id', auth()->id())->get();
+    //     // Return payment view with cart data
+    //     return view('frontend.payment', compact('carts'));
+    // }
 }
 

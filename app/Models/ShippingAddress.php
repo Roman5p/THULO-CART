@@ -12,7 +12,7 @@ class ShippingAddress extends Model
         'address',
         'number',
         'landmark',
-        'pincode',
+        'postalcode',
         'street_no',
         'state',
         'is_permanent',
