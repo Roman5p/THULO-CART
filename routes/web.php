@@ -14,7 +14,7 @@ Route::get('/product-details/{id}', [HomeController::class, 'productDetails'])->
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/contactus', [HomeController::class, 'contact'])->name('contact');
 Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
-Route::get('/checkout/store',[HomeController::class,'storeCheckout'])->name('checkout.store');
+Route::post('/checkout/store',[HomeController::class,'storeCheckout'])->name('checkout.store');
 Route::get('/payment', [HomeController::class, 'payment'])->name('payment');
 
 //Carts

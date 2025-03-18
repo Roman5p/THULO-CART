@@ -9,7 +9,9 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\product;
 use App\Models\ShippingAddress;
+use App\Models\Order_Item;
 use Illuminate\Http\Request;
+
 
 class HomeController extends Controller
 {
@@ -87,8 +89,27 @@ class HomeController extends Controller
         // Create new order instance
         $order = new Order();
         $order->user_id = $user_id;
+        $order->status = 'pending';
+        $order->total_cost = $carts->sum(function ($cart) {
+            return $cart->product->price * $cart->quantity;
+        });
+        $order->total_quantity = $carts->sum('quantity');
+        $order->save();
+
+        foreach($carts as $cart){
+            $orderItem = new Order_Item();
+            $orderItem->quantity = $cart->quantity;
+            $orderItem->product_id = $cart->product_id;
+            $orderItem->order_id = $order->id;
+            $orderItem->save();
+
+        }
         
+
+        
+        $shippingInfo = null;
         // Validate shipping information from request
+
         $request->validate([
             'address' => 'required|max:250',
             'number' => 'required|numeric',
@@ -99,7 +120,7 @@ class HomeController extends Controller
             'is_permanent' => 'required|boolean'
         ]);
 
-        $shippingInfo = null;
+        
         // Check if user wants to save this as permanent address
         if($request->is_permanent){
             // Get existing permanent shipping address if any
@@ -140,6 +161,7 @@ class HomeController extends Controller
         $shippingInfo->street_no = $request->street_no;
         $shippingInfo->state = $request->state;
         $shippingInfo->order_id = $order->id;   
+        $shippingInfo->user_id = $user_id;
         $shippingInfo->save();
 
         // Clear user's cart after successful checkout
@@ -148,7 +170,7 @@ class HomeController extends Controller
         }
 
         // Redirect to confirmation page with success message
-        return redirect('getConfirm', $order->id)->with('success','Checkout successful');
+        return redirect()->route('getConfirm', $order->id)->with('success','Checkout successful');
     }
 
     // Show order confirmation page
