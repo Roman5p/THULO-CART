@@ -191,3 +191,4 @@ class HomeController extends Controller
         return view('frontend.payment', compact('carts'));
     }
 }
+
