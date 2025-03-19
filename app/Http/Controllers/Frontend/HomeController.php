@@ -168,8 +168,9 @@ class HomeController extends Controller
 
 
         // Redirect to confirmation page with success message
-        return redirect()->route('getConfirm', $order->id)->with('success', 'Checkout successful');
-
+        // return redirect()->route('getConfirm', $order->id)->with('success', 'Checkout successful');
+        return redirect()->route('getConfirm', $order->id);
+        
         foreach ($carts as $cart) {
             $cart->delete();
         }

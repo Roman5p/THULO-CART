@@ -160,29 +160,63 @@
             <div class="bill-section no-print payment-method">
                 <h6 class="mb-3">Select Payment Method</h6>
                 <div class="d-flex flex-column gap-2">
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="esewa" value="esewa">
                         <label class="form-check-label" for="esewa">Esewa</label>
+                        <img src="{{ asset('frontend/assets/images/esewa.png') }}" alt="Esewa" height="20">
                     </div>
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="khalti" value="khalti">
                         <label class="form-check-label" for="khalti">Khalti</label>
+                        <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti" height="20">
                     </div>
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="card" value="card">
                         <label class="form-check-label" for="card">Cards (Visa/MasterCard)</label>
+                        <img src="{{ asset('frontend/assets/images/credit.png') }}" alt="Cards" height="20">
                     </div>
-                    <div class="form-check">
+                    <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
                         <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
+                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="Cards" height="20">
+                    
                     </div>
                 </div>
             </div>
 
             <!-- Confirmation Button -->
             <div class="bill-section no-print text-center">
-                <button class="btn btn-success confirm-btn" onclick="confirmOrder()">Confirm Order</button>
+                <button class="btn btn-success confirm-btn" onclick="redirectToPayment()">Confirm Order</button>
             </div>
+
+            <script>
+                function redirectToPayment() {
+                    const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked');
+                    if (!selectedPaymentMethod) {
+                        alert('Please select a payment method.');
+                        return;
+                    }
+
+                    const paymentMethod = selectedPaymentMethod.value;
+
+                    switch (paymentMethod) {
+                        case 'esewa':
+                            window.location.href = "#";
+                            break;
+                        case 'khalti':
+                            window.location.href = "#";
+                            break;
+                        case 'card':
+                            window.location.href = "#";
+                            break;
+                        case 'cod':
+                            window.location.href = "#";
+                            break;
+                        default:
+                            alert('Invalid payment method selected.');
+                    }
+                }
+            </script>
         </div>
     </div>
 
