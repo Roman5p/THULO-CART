@@ -71,6 +71,12 @@
             <div data-i18n="Carousel">Carousel</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-carousel"></i>
+            <div data-i18n="Carousel">Order List</div>
+            </a>
         </li>
+        
     </ul>
 </aside>
