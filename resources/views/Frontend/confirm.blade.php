@@ -4,178 +4,188 @@
 
 @section('main-section')
 
-    <!-- Include custom CSS -->
-    <link href="{{ asset('css/payment.css') }}" rel="stylesheet">
+    <style>
+        .bill-container {
+            max-width: 900px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
+        .bill-header {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-bottom: 1px solid #dee2e6;
+        }
 
-    <div class="bg-primary">
-        <div class="container py-4">
-            <!-- Breadcrumb -->
-            <nav class="d-flex">
-                <h6 class="mb-0">
-                    <a href="{{ route('index') }}" class="text-white-50 text-decoration-none">Home</a>
-                    <span class="text-white-50 mx-2"> > </span>
-                    <a href="{{ route('getcarts') }}" class="text-white-50 text-decoration-none">Shopping cart</a>
-                    <span class="text-white-50 mx-2"> > </span>
-                    <a href="{{ route('checkout') }}" class="text-white-50 text-decoration-none">Checkout</a>
-                    <span class="text-white-50 mx-2"> > </span>
-                    <a href="{{ route('payment') }}" class="text-white-50 text-decoration-none">Payment</a>
-                </h6>
-            </nav>
-            <!-- Breadcrumb -->
-        </div>
-    </div>
+        .bill-section {
+            padding: 1.5rem;
+        }
 
-    <div class="container mt-4">
-        <div class="row">
-            <!-- Left Column - Payment Method -->
-            <div class="col-md-8">
-                <h5 class="card-title mb-3">Select Payment Method</h5>
-                <div class="card card-custom mb-4">
-                    <div class="card-body">
-                        <div class="row row-cols-1 row-cols-md-5 g-3">
-                            <div class="col">
-                                <div class="payment-option text-center" data-payment="credit-card">
-                                    <img src="{{ asset('frontend/assets/images/credit.png') }}" alt="Credit/Debit Card"
-                                        class="img-fluid" style="width: 30px; height: auto;">
-                                    <p class="mb-0 mt-2 text-muted">Credit/Debit Card</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="payment-option text-center" data-payment="ime-pay">
-                                    <img src="{{ asset('frontend/assets/images/imepay.avif') }}" alt="IME Pay"
-                                        class="img-fluid" style="width: 30px; height: auto;">
-                                    <p class="mb-0 mt-2 text-muted">IME Pay Mobile Wallet</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="payment-option text-center" data-payment="cash-on-delivery">
-                                    <img src="{{ asset('frontend/assets/images/cash.png') }}" alt="Cash on Delivery"
-                                        class="img-fluid" style="width: 30px; height: auto;">
-                                    <p class="mb-0 mt-2 text-muted">Cash on Delivery</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="payment-option text-center" data-payment="esewa">
-                                    <img src="{{ asset('frontend/assets/images/esewa.jpeg') }}" alt="eSewa Mobile Wallet"
-                                        class="img-fluid" style="width: 30px; height: auto;">
-                                    <p class="mb-0 mt-2 text-muted">eSewa Mobile Wallet</p>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="payment-option text-center" data-payment="khalti">
-                                    <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti Mobile Wallet"
-                                        class="img-fluid" style="width: 30px; height: auto;">
-                                    <p class="mb-0 mt-2 text-muted">Khalti Mobile Wallet</p>
-                                </div>
-                            </div>
-                        </div>
+        .table-bill {
+            margin-bottom: 0;
+        }
 
-                        <!-- Payment Method Details Sections -->
-                        <div id="credit-card-details" class="mt-4" style="display: none;">
-                            <div class="mb-3">
-                                <img src="{{ asset('frontend/assets/images/Visa.png') }}" alt="Visa" class="me-2">
-                                <img src="{{ asset('frontend/assets/images/mastercard.png') }}" alt="Master Card"
-                                    class="me-2">
+        .total-section {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-top: 1px solid #dee2e6;
+        }
 
-                            </div>
-                            <div class="mb-3">
-                                <label for="cardNumber" class="form-label"><span class="text-danger">*</span> Card
-                                    number</label>
-                                <input type="text" class="form-control" id="cardNumber" placeholder="Card number"
-                                    required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="cardName" class="form-label"><span class="text-danger">*</span> Name on
-                                    card</label>
-                                <input type="text" class="form-control" id="cardName" placeholder="Name on card"
-                                    required>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="expiryDate" class="form-label"><span class="text-danger">*</span> Expiry
-                                        date</label>
-                                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YYYY"
-                                        required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="cvv" class="form-label"><span class="text-danger">*</span> CVV <i
-                                            class="bi bi-question-circle" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Card Verification Value"></i></label>
-                                    <input type="text" class="form-control" id="cvv" placeholder="CVV"
-                                        required>
-                                </div>
-                            </div>
-                            <div class="form-check mb-3">
-                                <input class="form-check-input"
-                                    style="" type="checkbox"
-                                    id="saveCard">
-                                <label class="form-check-label" for="saveCard">
-                                    Save Card
-                                    <span class="text-muted">We will save this card for your convenience. If required, you
-                                        can remove the card in the "Payment Options" section in the "Account" menu.</span>
-                                </label>
-                            </div>
-                            <button class="btn btn-primary w-100" id="payNow">Pay Now</button>
-                        </div>
+        .payment-method {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 1rem;
+        }
 
-                        <div id="ime-pay-details" class="mt-4" style="display: none;">
-                            <p class="text-center">Please use the IME Pay app to complete your payment. Scan the QR code or
-                                enter your IME Pay credentials.</p>
-                            <a href="https://www.imepay.com.np/" class="btn btn-primary w-100 mt-3">Proceed with IME
-                                Pay</a>
-                        </div>
+        .confirm-btn {
+            max-width: 300px;
+        }
 
-                        <div id="cash-on-delivery-details" class="mt-4" style="display: none;">
-                            <p class="text-center">Cash on Delivery selected. Payment will be collected upon delivery.</p>
-                            <button class="btn btn-primary w-100 mt-3">Confirm Cash on Delivery</button>
-                        </div>
+        @media print {
+            .no-print {
+                display: none;
+            }
 
-                        <div id="esewa-details" class="mt-4" style="display: none;">
-                            <p class="text-center">Please use the eSewa app to complete your payment. Scan the QR code or
-                                enter your eSewa credentials.</p>
-                            <a href="https://esewa.com.np/" class="btn btn-primary w-100 mt-3">Proceed with eSewa</a>
+            .bill-container {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
 
-                        </div>
-
-                        <div id="khalti-details" class="mt-4" style="display: none;">
-                            <p class="text-center">Please use the Khalti app to complete your payment. Scan the QR code or
-                                enter your Khalti credentials.</p>
-                            <a href="https://khalti.com/" class="btn btn-primary w-100 mt-3">Proceed with
-                                Khalti</a>
-
-                        </div>
+    <div class="container py-4">
+        <div class="bill-container mx-auto">
+            <!-- Header -->
+            <div class="bill-header">
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="h4 mb-0">Invoice</h2>
+                        <p class="mb-0 text-muted">Invoice #: <span id="invoiceNum">[INV-XXXXXX]</span></p>
+                    </div>
+                    <div class="col-6 text-end">
+                        <h5><img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo" height="50"></h5>
+                        <p class="mb-0 text-muted">contact@thulocart.com.np</p>
+                        <p class="mb-0 text-muted">+977 (987) 654-3210</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column - Order Summary -->
-            <div class="col-md-4">
-                <div class="card card-custom sticky-top" style="top: 20px; z-index: 900;">
-                    <div class="card-body">
-                        <h5 class="card-title">Order Summary</h5>
-                        <p>Subtotal:
-                            {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}),2) }}
-                        </p>
-                        <p>Shipping Fee: <span class="text-success">FREE</span></p>
+            <!-- Customer Info -->
+            <div class="bill-section">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted">Bill To:</h6>
+                        <div id="userAddress">
+                            {{ Auth::user()->name }}<br>
+                            {{ Auth::user()->email }}<br>
+                            [Street Address]<br>
+                            [City, State, ZIP]<br>
+                            [Country]<br>
+                        </div>
+                    </div>
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
+                        <p><strong>Date:</strong> {{ now()->format('F d, Y') }}</p>
+                        <p><strong>Time:</strong> {{ now()->timezone('Asia/Kathmandu')->format('h:i A') }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Details Table -->
+            <div class="bill-section">
+                <table class="table table-bill">
+                    <thead class="table-light">
+
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Product Name</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Price Each</th>
+                            <th scope="col">Subtotal</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($carts as $cart)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $cart->product->name }}</td>
+                                <td>{{ $cart->quantity }}</td>
+                                <td>रू {{ number_format($cart->product->price, 2) }}</td>
+                                <td>रू {{ number_format($cart->quantity * $cart->product->price, 2) }}</td>
+                                <td>
+                                    <!-- Start: Check if discount exists -->
+                                    @if ($cart->product->discount_amount)
+                                        रू {{ number_format($cart->product->discount_amount * $cart->quantity, 2) }}
+                                    @else
+                                        रू 0.00
+                                    @endif
+                                    <!-- End: Check if discount exists -->
+                                </td>
+                                <td>रू
+                                    {{ number_format($cart->quantity * $cart->product->price - ($cart->product->discount_amount * $cart->quantity ?? 0), 2) }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Total Section -->
+            <div class="total-section">
+                <div class="row justify-content-end">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="d-flex justify-content-between">
+                            <span>Subtotal:</span>
+                            <span id="subtotal">रू
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}),2) }}</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Total Discount:</span>
+                            <span id="discount">रू
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->discount_amount * $cart->quantity;}),2) }}</span>
+                        </div>
                         <hr>
-                        <p>Total incl. VAT:
-                            <strong>{{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}),2) }}</strong>
-                        </p>
-                        <button class="btn btn-primary w-100">PLACE ORDER</button>
-                        <p class="text-muted mt-2">
-                            Security and Privacy: Our checkout is safe and secure. Your personal and payment information
-                            is securely transmitted via 128-bit encryption. We do not store any payment card information on
-                            our systems.
-                        </p>
-                        <p class="text-muted">
-                            © 2025 {{ env('APP_NAME') }}. All Rights Reserved.
-                        </p>
+                        <div class="d-flex justify-content-between fw-bold">
+                            <span>Grand Total:</span>
+                            <span id="totalAmount">रू
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}),2) }}</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Payment Method Selection -->
+            <div class="bill-section no-print payment-method">
+                <h6 class="mb-3">Select Payment Method</h6>
+                <div class="d-flex flex-column gap-2">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payment" id="esewa" value="esewa">
+                        <label class="form-check-label" for="esewa">Esewa</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payment" id="khalti" value="khalti">
+                        <label class="form-check-label" for="khalti">Khalti</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payment" id="card" value="card">
+                        <label class="form-check-label" for="card">Cards (Visa/MasterCard)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
+                        <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirmation Button -->
+            <div class="bill-section no-print text-center">
+                <button class="btn btn-success confirm-btn" onclick="confirmOrder()">Confirm Order</button>
+            </div>
         </div>
     </div>
+
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

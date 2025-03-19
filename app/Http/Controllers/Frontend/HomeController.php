@@ -71,7 +71,7 @@ class HomeController extends Controller
         // Get authenticated user's ID
         $user_id = auth()->id();
         // Fetch user's permanent shipping address if exists
-        $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent',true)->first();
+        $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent', true)->first();
         // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
         // Return checkout view with cart and shipping data
@@ -96,7 +96,7 @@ class HomeController extends Controller
         $order->total_quantity = $carts->sum('quantity');
         $order->save();
 
-        foreach($carts as $cart){
+        foreach ($carts as $cart) {
             $orderItem = new Order_Item();
             $orderItem->quantity = $cart->quantity;
             $orderItem->product_id = $cart->product_id;
@@ -104,9 +104,9 @@ class HomeController extends Controller
             $orderItem->save();
 
         }
-        
 
-        
+
+
         $shippingInfo = null;
         // Validate shipping information from request
 
@@ -120,15 +120,15 @@ class HomeController extends Controller
             'is_permanent' => 'required|boolean'
         ]);
 
-        
+
         // Check if user wants to save this as permanent address
-        if($request->is_permanent){
+        if ($request->is_permanent) {
             // Get existing permanent shipping address if any
-            $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent',true)->first();   
+            $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent', true)->first();
         }
 
         // Update existing shipping info if it exists
-        if($shippingInfo){
+        if ($shippingInfo) {
             $shippingInfo->address = $request->address;
             $shippingInfo->number = $request->number;
             $shippingInfo->landmark = $request->landmark;
@@ -139,7 +139,7 @@ class HomeController extends Controller
             $shippingInfo->save();
         }
         // Create new shipping info if none exists
-        else{
+        else {
             $shippingInfo = new ShippingAddress();
             $shippingInfo->user_id = $user_id;
             $shippingInfo->address = $request->address;
@@ -160,17 +160,19 @@ class HomeController extends Controller
         $shippingInfo->postalcode = $request->postalcode;
         $shippingInfo->street_no = $request->street_no;
         $shippingInfo->state = $request->state;
-        $shippingInfo->order_id = $order->id;   
+        $shippingInfo->order_id = $order->id;
         $shippingInfo->user_id = $user_id;
         $shippingInfo->save();
 
         // Clear user's cart after successful checkout
-        foreach($carts as $cart){
-            $cart->delete();
-        }
+
 
         // Redirect to confirmation page with success message
-        return redirect()->route('getConfirm', $order->id)->with('success','Checkout successful');
+        return redirect()->route('getConfirm', $order->id)->with('success', 'Checkout successful');
+
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
     }
 
     // Show order confirmation page
