@@ -15,15 +15,21 @@
                     <div class="col-md-6">
                         <h5 class="card-title">Customer Information</h5>
                         <p class="mb-1"><strong>Name:</strong> {{ $order->user?->name ?? 'N/A' }}</p>
-                        <p class="mb-1"><strong>Address:</strong> {{ $order->shipping_addresses ?? 'Not provided' }}</p>
+                        <p class="mb-1"><strong>Email:</strong> {{ $order->user?->email ?? 'N/A' }}</p>
+                        <p class="mb-1"><strong>Phone:</strong> {{ $order->user?->contact ?? 'N/A' }}</p>
+                        <p class="mb-1"><strong>Address:</strong> {{ $order->user?->shipping_addresses ?? 'Not provided' }}</p>
+
                     </div>
                     <div class="col-md-6 text-md-end">
                         <h5 class="card-title">Order Summary</h5>
                         <p class="mb-1"><strong>Total Quantity:</strong> {{ $order->total_quantity }}</p>
                         <p class="mb-1"><strong>Total Price:</strong> Rs. {{ number_format($order->total_cost, 2) }}</p>
+                        <p class="mb-1"><strong>Status:</strong> {{ $order->status }}</p>
+                        <p class="mb-1"><strong>Payment Method:</strong> {{ $order->payment_method ?? 'Not specified' }}
+                        </p>
+
                     </div>
                 </div>
-
                 <!-- Product List -->
                 <h5 class="mb-3">Products:</h5>
                 <div class="row">
@@ -45,6 +51,7 @@
                                                     Price: Rs. {{ number_format($item->product->price, 2) }}
                                                 </small>
                                             </p>
+
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +62,7 @@
 
                 <!-- Action Buttons -->
                 <div class="mt-4 text-end">
-                    <a href="" class="btn btn-secondary">Back to Orders</a>
+                    <a href="{{ route('admin.orders.index') }}" class="btn btn-secondary">Back to Orders</a>
                     <form action="{{ route('admin.orders.destroy', $order->id) }}" method="POST" class="d-inline-block">
                         @csrf
                         @method('DELETE')
