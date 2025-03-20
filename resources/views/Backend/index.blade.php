@@ -6,41 +6,38 @@
 
 @section('main-section')
     {{-- Starts the main section of the page --}}
-    <div class="content-wrapper">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Dashboard / </span> Order's</h4>
-            <h1>Order's</h1>
-            <div class="row">
-                <div class="col">
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row">
+            <div class="col mb-4 order-0">
+                <div class="card">
+                    <div class="d-flex align-items-end row">
+                        <div class="col-sm-7">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                                <p class="mb-4">
+                                    You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
+                                    your profile.
+                                </p>
 
-                    <div class="card mb-4">
-                        <h5 class="card-header">Order's List</h5>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">S.N</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Address</th>
-                                            <th scope="cole">Product</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-
-                                    </tbody>
-                                </table>
+                                <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 text-center text-sm-left">
+                            <div class="card-body pb-0 px-0 px-md-4">
+                                <img src="{{ asset('backend/assets/img/illustrations/man-with-laptop-light.png') }}"
+                                    height="140" alt="View Badge User"
+                                    data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                                    data-app-light-img="illustrations/man-with-laptop-light.png" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Total Revenue -->
+
         </div>
+
     </div>
 @endsection
 {{-- Ends the main section --}}
