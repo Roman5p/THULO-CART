@@ -41,7 +41,52 @@
                                                     {{ $order->status }}
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-primary" href="">View</a>
+
+
+                                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                        data-bs-target="#orderModal{{ $order->id }}">
+                                                        View
+                                                    </button> --}}
+
+                                                    <!-- Modal -->
+                                                    {{-- <div class="modal fade" id="orderModal{{ $order->id }}"
+                                                        tabindex="-1" aria-labelledby="orderModalLabel{{ $order->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title"
+                                                                        id="orderModalLabel{{ $order->id }}">Order
+                                                                        Details</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <p><strong>Customer Name:</strong>
+                                                                        {{ $order?->user?->name }}</p>
+                                                                    <p><strong>Total Quantity:</strong>
+                                                                        {{ $order->total_quantity }}</p>
+                                                                    <p><strong>Total Cost:</strong> Rs.
+                                                                        {{ number_format($order->total_cost, 2) }}</p>
+                                                                    <p><strong>Products:</strong></p>
+                                                                    <ul>
+                                                                        @foreach ($order->orderItems as $item)
+                                                                            <li>{{ $item?->product?->name }} (Quantity:
+                                                                                {{ $item->quantity }})</li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                    <p><strong>Status:</strong> {{ $order->status }}</p>
+                                                                    <p><strong>Address:</strong> {{ $order?->user?->shipping_address }}</p>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> --}}
+                                                    <a class="btn btn-primary"
+                                                        href="{{ route('admin.orders.show', $order->id) }}">View</a>
                                                     {{-- <a class="btn btn-primary" href="">Edit</a> --}}
                                                     <form action="{{ route('admin.orders.destroy', $order->id) }}"
                                                         method="POST" style="display:inline;">
@@ -58,7 +103,8 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
                                 <div>
-                                    Showing {{ $orders->firstItem() }} to {{ $orders->lastItem() }} of {{ $orders->total() }} results
+                                    Showing {{ $orders->firstItem() }} to {{ $orders->lastItem() }} of
+                                    {{ $orders->total() }} results
                                 </div>
                                 <div>
                                     {{ $orders->links() }}
