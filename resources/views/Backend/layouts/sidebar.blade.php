@@ -72,9 +72,9 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-carousel"></i>
-            <div data-i18n="Carousel">Order List</div>
+            <a href="{{route('admin.orders.index')}}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div data-i18n="Analytics">Order List</div>
             </a>
         </li>
         

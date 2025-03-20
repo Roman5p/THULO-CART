@@ -10,7 +10,20 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::orderBy('created_at','desc')->paginate(10); // Get all orders from database
+        $orders = Order::with('orderItems','user')->orderBy('created_at','desc')->paginate(10); // Get all orders from database
         return view('backend.orders.index', compact('orders'));
+    }
+
+    public function show($id)
+    {
+        $order = Order::with('orderItems.product')->find($id); // Get order by id
+        return view('backend.orders.show', compact('order'));
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::find($id); // Get order by id
+        $order->delete(); // Delete order
+        return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully');
     }
 }

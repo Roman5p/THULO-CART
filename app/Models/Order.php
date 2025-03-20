@@ -12,4 +12,13 @@ class Order extends Model
         'total_cost',
         'total_quantity',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function orderItems()  // Add this relationship
+    {
+        return $this->hasMany(Order_Item::class, 'order_id');
+    }
 }

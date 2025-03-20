@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Category;
+use App\Models\Order_Item;
 
 class product extends Model
 {
@@ -26,5 +28,9 @@ class product extends Model
         return $this->belongsTo(Category::class, 'category_id','id');
     }
     
+    public function orderItems()
+    {
+        return $this->hasMany(Order_Item::class);
+    }
 }
 

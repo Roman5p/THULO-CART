@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\OrderController;
 use Illuminate\Support\Facades\Route;
 
 // Admin routes group with prefix 'admin', named routes prefixed with 'admin.', 
@@ -58,6 +59,13 @@ Route::prefix('admin')->as('admin.')->middleware(['auth', 'admin'])->group(funct
         Route::put('/edit/{id}', [UserController::class, 'update'])->name('update');
         // DELETE route to remove a user by ID
         Route::delete('/delete/{id}', [UserController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('/orders')->as('orders.')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::get('/{id}', [OrderController::class, 'show'])->name('show');
+        Route::put('/{id}', [OrderController::class, 'update'])->name('update');
+        Route::delete('/{id}', [OrderController::class, 'destroy'])->name('destroy');
     });
 });
     
