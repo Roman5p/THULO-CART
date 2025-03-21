@@ -79,6 +79,7 @@
                         <div id="userAddress">
                             {{ Auth::user()->name }}<br>
                             {{ Auth::user()->email }}<br>
+                            {{ Auth::user()->contact }}<br>
                             [Street Address]<br>
                             [City, State, ZIP]<br>
                             [Country]<br>
@@ -178,8 +179,9 @@
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
                         <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
-                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="Cards" height="20">
-                    
+                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="Cards"
+                            height="20">
+
                     </div>
                 </div>
             </div>

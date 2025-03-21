@@ -21,4 +21,9 @@ class Order extends Model
     {
         return $this->hasMany(Order_Item::class, 'order_id');
     }
+
+    public function shippingAddress()  // Add this relationship
+    {
+        return $this->hasOne(ShippingAddress::class, 'order_id');
+    }
 }

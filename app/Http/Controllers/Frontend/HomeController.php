@@ -184,6 +184,8 @@ class HomeController extends Controller
         return view('frontend.confirm', compact('order', 'carts'));
     }
 
+    
+
     // Display payment page
     // public function payment()
     // {
