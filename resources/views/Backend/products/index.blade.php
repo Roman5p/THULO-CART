@@ -69,16 +69,34 @@
                                                 <td>{{ $product->is_popular ? 'Yes' : 'No' }}</td>
                                                 <td>{{ $product->is_new ? 'Yes' : 'No' }}</td>
                                                 <td>
-                                                    <div class="d-flex gap-1 align-items-center">
-                                                        <a class="btn btn-sm btn-primary px-2 py-1"
-                                                            href="{{ route('admin.products.edit', $product->id) }}">Edit</a>
+                                                    <div class="d-flex gap-2 align-items-center">
+                                                        <a href="{{ route('admin.products.edit', $product->id) }}"
+                                                            class="text-primary" title="Edit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" fill="currentColor"
+                                                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.5 1.5a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 0-.707l1.5-1.5a.5.5 0 0 1 .707 0l1.5 1.5z" />
+                                                                <path
+                                                                    d="M1 13.5V16h2.5l9.354-9.354-2.5-2.5L1 13.5zm1.207-.793 8.647-8.647 1.086 1.086-8.647 8.647H2.207z" />
+                                                            </svg>
+                                                        </a>
                                                         <form action="{{ route('admin.products.destroy', $product->id) }}"
                                                             method="post" onsubmit="return confirm('Are you sure?')"
                                                             class="m-0">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit"
-                                                                class="btn btn-sm btn-danger px-2 py-1">Delete</button>
+                                                            <button type="submit" class="btn p-0 text-danger"
+                                                                title="Delete">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                    height="20" fill="currentColor" class="bi bi-trash3"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M6.5 1.5A1.5 1.5 0 0 1 8 0h2a1.5 1.5 0 0 1 1.5 1.5H14a.5.5 0 0 1 0 1h-1v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V2.5H2a.5.5 0 0 1 0-1h1.5zM5 2.5v11a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V2.5H5z" />
+                                                                    <path
+                                                                        d="M7.5 5a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0v-6a.5.5 0 0 1 .5-.5z" />
+                                                                </svg>
+                                                            </button>
                                                         </form>
                                                     </div>
 
