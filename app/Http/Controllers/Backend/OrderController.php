@@ -14,9 +14,10 @@ class OrderController extends Controller
         return view('backend.orders.index', compact('orders'));
     }
 
-    public function show($id)
+    public function details($id)
     {
-        $order = Order::with('orderItems.product')->find($id); // Get order by id
+        $order = Order::find($id); // Get order by id
+        $order->load('orderItems');
         return view('backend.orders.show', compact('order'));
     }
 
