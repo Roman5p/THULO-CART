@@ -25,7 +25,6 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id); // Get order by id
         $order->update(["status" => "shipped"]); // Update order status to ready
-       
         return redirect()->route('admin.orders.index')->with('success', 'Order status updated to shipped');
     }
 
