@@ -38,7 +38,9 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                    {{ $order->status }}
+                                                   
+                                                   <span class="badge {{ $order->status == 'pending' ? 'bg-warning' : ($order->status == 'shipped' ? 'bg-primary' : 'bg-success') }}">{{ $order->status }}</span>
+                                                    
                                                 </td>
                                                 <td>
 
@@ -99,7 +101,7 @@
                                                         method="post" class="d-inline-block">
                                                         @method('PUT')
                                                         @csrf
-                                                        <button type="submit" class="btn btn-primary">
+                                                        <button type="submit" class="btn btn-success">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor" class="bi bi-check2"
                                                                 viewBox="0 0 16 16">

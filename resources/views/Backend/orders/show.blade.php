@@ -45,11 +45,11 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h6 class="card-title">{{ $order->name }}</h6>
+                                            <h6 class="card-title">{{ $item->product->name }}</h6>
                                             <p class="card-text">
                                                 <small class="text-muted">
-                                                    Quantity: {{ $order->quantity }}<br>
-                                                    Price: Rs. {{ number_format($order->total_cost, 2) }}
+                                                    Quantity: {{ $item->quantity }}<br>
+                                                    Price: Rs. {{ number_format($item->product->actual_amount, 2) }}
                                                 </small>
                                             </p>
 
