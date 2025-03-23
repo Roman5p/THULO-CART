@@ -21,6 +21,14 @@ class OrderController extends Controller
         return view('backend.orders.show', compact('order'));
     }
 
+    public function statusReady($id)
+    {
+        $order = Order::findOrFail($id); // Get order by id
+        $order->update(["status" => "shipped"]); // Update order status to ready
+       
+        return redirect()->route('admin.orders.index')->with('success', 'Order status updated to shipped');
+    }
+
     public function destroy($id)
     {
         $order = Order::find($id); // Get order by id
