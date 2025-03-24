@@ -381,6 +381,12 @@
                                     </li>
                                     <li>
                                         <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                            <i class="bi bi-box-seam"></i>
+                                            <span class="align-middle">Orders</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
                                             <i class="bi bi-gear fs-5"></i>
                                             <span class="align-middle">Settings</span>
                                         </a>
