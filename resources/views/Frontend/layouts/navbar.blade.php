@@ -275,7 +275,7 @@
                         <a class="nav-link dropdown-toggle pe-3" role="button" id="pages"
                             data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
                         <ul class="dropdown-menu border-0 p-3 rounded-0 shadow" aria-labelledby="pages">
-                            <li><a href="{{route('aboutus')}}" class="dropdown-item">About Us </a></li>
+                            <li><a href="{{ route('aboutus') }}" class="dropdown-item">About Us </a></li>
                             <li><a href="index.html" class="dropdown-item">Shop </a></li>
                             <li><a href="index.html" class="dropdown-item">Single Product </a></li>
                             <li><a href="" class="dropdown-item">Cart </a></li>
@@ -318,9 +318,10 @@
                         </a>
                     </li> --}}
                     @guest
+                        <!-- Login and Register Links -->
                         <li>
-                            <a href="{{ route('login') }}"
-                                class="p-2 mx-1 text-decoration-none d-flex align-items-center gap-2">
+                            <a href="#" class="p-2 mx-1 text-decoration-none d-flex align-items-center gap-2"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <svg width="24" height="24">
                                     <use xlink:href="#user"></use>
                                 </svg>
@@ -328,14 +329,99 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('register') }}"
-                                class="p-2 mx-1 text-decoration-none d-flex align-items-center gap-2">
+                            <a href="#" class="p-2 mx-1 text-decoration-none d-flex align-items-center gap-2"
+                                data-bs-toggle="modal" data-bs-target="#registerModal">
                                 <svg width="24" height="24">
                                     <use xlink:href="#user"></use>
                                 </svg>
                                 <span>Register</span>
                             </a>
                         </li>
+
+                        <!-- Login Modal -->
+                        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0" style="background: rgba(255, 255, 255, 0.9);">
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title text-primary" id="loginModalLabel">Login</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('login') }}" method="POST">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="loginEmail" class="form-label text-dark">Email address</label>
+                                                <input type="email" class="form-control border-0 bg-light rounded-3"
+                                                    id="loginEmail" name="email" placeholder="Enter email" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="loginPassword" class="form-label text-dark">Password</label>
+                                                <input type="password" class="form-control border-0 bg-light rounded-3"
+                                                    id="loginPassword" name="password" placeholder="Enter password" required>
+                                            </div>
+                                            <div class="mb-3 form-check">
+                                                <input type="checkbox" class="form-check-input" id="rememberMe">
+                                                <label class="form-check-label text-dark" for="rememberMe">Remember me</label>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100 rounded-3">Login</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <small class="text-dark">Don't have an account? <a href="{{route('register')}}" data-bs-toggle="modal"
+                                                data-bs-target="#registerModal" data-bs-dismiss="modal"
+                                                class="text-primary">Register here</a></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Register Modal -->
+                        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content border-0" style="background: rgba(255, 255, 255, 0.9);">
+                                    <div class="modal-header border-0">
+                                        <h5 class="modal-title text-primary" id="registerModalLabel">Register</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('register') }}" method="POST">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="registerName" class="form-label text-dark">Full Name</label>
+                                                <input type="text" class="form-control border-0 bg-light rounded-3"
+                                                    id="registerName" name="name" placeholder="Enter your name" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="registerEmail" class="form-label text-dark">Email address</label>
+                                                <input type="email" class="form-control border-0 bg-light rounded-3"
+                                                    id="registerEmail" name="email" placeholder="Enter email" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="registerPassword" class="form-label text-dark">Password</label>
+                                                <input type="password" class="form-control border-0 bg-light rounded-3"
+                                                    id="registerPassword" name="password" placeholder="Enter password" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="registerPasswordConfirmation" class="form-label text-dark">Confirm
+                                                    Password</label>
+                                                <input type="password" class="form-control border-0 bg-light rounded-3"
+                                                    id="registerPasswordConfirmation" name="password_confirmation"
+                                                    placeholder="Confirm password" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary w-100 rounded-3">Register</button>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer border-0">
+                                        <small class="text-dark">Already have an account? <a href="{{route('login')}}" data-bs-toggle="modal"
+                                            data-bs-target="#loginModal" data-bs-dismiss="modal">Login here</a></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @else
                         <li class="d-flex align-items-center gap-1">
                             <div class="dropdown">
@@ -374,13 +460,14 @@
 
                                     <!-- Menu Items -->
                                     <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="">
                                             <i class="bi bi-person fs-5"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2"
+                                            href="{{ route('myorder') }}">
                                             <i class="bi bi-box-seam"></i>
                                             <span class="align-middle">Orders</span>
                                         </a>

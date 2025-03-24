@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Frontend\CartController;
 
 // Route::get('/', function () {
@@ -17,6 +18,8 @@ Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
 Route::post('/checkout/store',[HomeController::class,'storeCheckout'])->name('checkout.store');
 Route::get('/confirm/{id}',[HomeController::class,'getConfirm'])->name('getConfirm');
 Route::get('/payment', [HomeController::class, 'payment'])->name('payment');
+Route::get('/myorder', [HomeController::class, 'myorder'])->name('myorder');
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
 //Carts
 

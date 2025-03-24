@@ -56,6 +56,7 @@ class HomeController extends Controller
         return view('frontend.aboutus', compact('carts'));
     }
 
+
     // Display the Contact page
     public function contact()
     {
@@ -64,6 +65,16 @@ class HomeController extends Controller
         // Return contact view with cart data
         return view('frontend.contact', compact('carts'));
     }
+
+    public function myorder()
+    {
+        // Get user's cart items
+        $carts = Cart::where('user_id', auth()->id())->get();
+        // Return contact view with cart data
+        return view('frontend.myorder', compact('carts'));
+    }
+
+
 
     // Show checkout page with shipping information
     public function checkout()
