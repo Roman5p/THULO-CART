@@ -10,20 +10,26 @@
             border: 1px solid #dee2e6;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
 
         .bill-header {
             background-color: #f8f9fa;
-            padding: 1.5rem;
+            padding: 1rem;
             border-bottom: 1px solid #dee2e6;
         }
 
         .bill-section {
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .table-bill {
             margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        .table-bill th, .table-bill td {
+            vertical-align: middle;
         }
 
         .total-section {
@@ -39,7 +45,76 @@
         }
 
         .confirm-btn {
+            width: 100%;
             max-width: 300px;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .bill-header h2.h4 {
+                font-size: 1.25rem;
+            }
+
+            .bill-header img {
+                height: 40px;
+            }
+
+            .bill-section {
+                padding: 0.75rem;
+            }
+
+            .table-bill {
+                font-size: 0.8rem;
+            }
+
+            .table-bill th, .table-bill td {
+                padding: 0.5rem;
+            }
+
+            .total-section {
+                font-size: 0.9rem;
+            }
+
+            .payment-method .form-check {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .bill-header {
+                padding: 0.75rem;
+                text-align: center;
+            }
+
+            .bill-header .col-6 {
+                width: 100%;
+                margin-bottom: 0.5rem;
+            }
+
+            .bill-header .text-end {
+                text-align: center !important;
+            }
+
+            .bill-section .col-md-6 {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .total-section .col-md-6 {
+                width: 100%;
+            }
+
+            .confirm-btn {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .payment-method img {
+                height: 16px;
+            }
         }
 
         @media print {
@@ -54,11 +129,11 @@
         }
     </style>
 
-    <div class="container py-4">
-        <div class="bill-container mx-auto">
+    <div class="container py-3 py-md-4">
+        <div class="bill-container">
             <!-- Header -->
             <div class="bill-header">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-6">
                         <h2 class="h4 mb-0">Invoice</h2>
                         <p class="mb-0 text-muted">Invoice #: <span id="invoiceNum">[INV-XXXXXX]</span></p>
@@ -94,43 +169,42 @@
 
             <!-- Product Details Table -->
             <div class="bill-section">
-                <table class="table table-bill">
-                    <thead class="table-light">
-
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Product Name</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Price Each</th>
-                            <th scope="col">Subtotal</th>
-                            <th scope="col">Discount</th>
-                            <th scope="col">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($carts as $cart)
+                <div class="table-responsive">
+                    <table class="table table-bill">
+                        <thead class="table-light">
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $cart->product->name }}</td>
-                                <td>{{ $cart->quantity }}</td>
-                                <td>रू {{ number_format($cart->product->price, 2) }}</td>
-                                <td>रू {{ number_format($cart->quantity * $cart->product->price, 2) }}</td>
-                                <td>
-                                    <!-- Start: Check if discount exists -->
-                                    @if ($cart->product->discount_amount)
-                                        रू {{ number_format($cart->product->discount_amount * $cart->quantity, 2) }}
-                                    @else
-                                        रू 0.00
-                                    @endif
-                                    <!-- End: Check if discount exists -->
-                                </td>
-                                <td>रू
-                                    {{ number_format($cart->quantity * $cart->product->price - ($cart->product->discount_amount * $cart->quantity ?? 0), 2) }}
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Price Each</th>
+                                <th scope="col">Subtotal</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Total</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($carts as $cart)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $cart->product->name }}</td>
+                                    <td>{{ $cart->quantity }}</td>
+                                    <td>रू {{ number_format($cart->product->price, 2) }}</td>
+                                    <td>रू {{ number_format($cart->quantity * $cart->product->price, 2) }}</td>
+                                    <td>
+                                        @if ($cart->product->discount_amount)
+                                            रू {{ number_format($cart->product->discount_amount * $cart->quantity, 2) }}
+                                        @else
+                                            रू 0.00
+                                        @endif
+                                    </td>
+                                    <td>रू
+                                        {{ number_format($cart->quantity * $cart->product->price - ($cart->product->discount_amount * $cart->quantity ?? 0), 2) }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <!-- Total Section -->
@@ -140,18 +214,18 @@
                         <div class="d-flex justify-content-between">
                             <span>Subtotal:</span>
                             <span id="subtotal">रू
-                                {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}),2) }}</span>
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}), 2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Total Discount:</span>
                             <span id="discount">रू
-                                {{ number_format($carts->sum(function ($cart) {return $cart->product->discount_amount * $cart->quantity;}),2) }}</span>
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->discount_amount * $cart->quantity;}), 2) }}</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold">
                             <span>Grand Total:</span>
                             <span id="totalAmount">रू
-                                {{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}),2) }}</span>
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}), 2) }}</span>
                         </div>
                     </div>
                 </div>
@@ -179,16 +253,14 @@
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
                         <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
-                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="Cards"
-                            height="20">
-
+                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="COD" height="20">
                     </div>
                 </div>
             </div>
 
             <!-- Confirmation Button -->
             <div class="bill-section no-print text-center">
-                <button class="btn btn-success confirm-btn" onclick="redirectToPayment()">Confirm Order</button>
+                <button class="btn btn-primary confirm-btn" onclick="redirectToPayment()">Confirm Order</button>
             </div>
 
             <script>
@@ -223,6 +295,7 @@
     </div>
 
 @endsection
+
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('frontend/assets/js/payment.js') }}"></script>
