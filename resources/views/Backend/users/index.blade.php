@@ -40,7 +40,7 @@
                                                 <td>{{ $user->role }}</td>
                                                 <td>{{ $user->contact }}</td>
                                                 <td>
-                                                    <a name="" id="" class="btn btn-primary"
+                                                    <a name="" id="" class="btn btn-outline-primary"
                                                         href="{{ route('admin.users.edit', $user->id) }}" role="button">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-pencil"
@@ -54,7 +54,7 @@
                                                         class="d-inline-block">
                                                         @csrf
                                                         @method('delete')
-                                                        <button type="submit" class="btn btn-danger">
+                                                        <button type="submit" class="btn btn-outline-danger">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor" class="bi bi-trash"
                                                                 viewBox="0 0 16 16">

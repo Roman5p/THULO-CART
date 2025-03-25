@@ -71,10 +71,10 @@
                                                 <td>
                                                     <div class="d-flex gap-2 align-items-center">
                                                         <a href="{{ route('admin.products.edit', $product->id) }}"
-                                                            class="text-primary" title="Edit">
+                                                            class="btn btn-outline-success btn-sm text-primary" title="Edit">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                                 height="20" fill="currentColor"
-                                                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                class="bi bi-pen" viewBox="0 0 16 16">
                                                                 <path
                                                                     d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.5 1.5a.5.5 0 0 1-.707 0l-1.5-1.5a.5.5 0 0 1 0-.707l1.5-1.5a.5.5 0 0 1 .707 0l1.5 1.5z" />
                                                                 <path
@@ -86,7 +86,7 @@
                                                             class="m-0">
                                                             @csrf
                                                             @method('delete')
-                                                            <button type="submit" class="btn p-0 text-danger"
+                                                            <button type="submit" class="btn btn-outline-primary btn-sm p-0 text-danger"
                                                                 title="Delete">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20"
                                                                     height="20" fill="currentColor" class="bi bi-trash3"

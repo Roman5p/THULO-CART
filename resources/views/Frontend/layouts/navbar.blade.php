@@ -501,7 +501,6 @@
                                 <svg width="24" height="24">
                                     <use xlink:href="#shopping-bag"></use>
                                 </svg>
-                                <span>Cart</span>
                                 <span class="badge bg-primary rounded-pill">{{ $carts->count() }}</span>
                             </a>
                         </li>

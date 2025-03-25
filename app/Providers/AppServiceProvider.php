@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Cart;
+// use Auth;
+use Illuminate\Support\Facades;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Pagination\PaginationServiceProvider;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrap();
+        Paginator::useBootstrapFive();
+        Facades\View::composer('*', function (View $view) {
+            if (auth()->check()) {
+                $item = Cart::where('user_id', auth()->id())->get();
+            } else {
+                $carts = null;
+            }
+            $view->with('carts', $item);
+        });
     }
 }

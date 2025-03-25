@@ -33,7 +33,7 @@ class HomeController extends Controller
         // Get new products (limited to 9)
         $newProducts = Product::where('is_new', true)->limit(9)->get();
         // Return the homepage view with all collected data
-        return view('Frontend.index', compact('carousels', 'featureProducts', 'sellingProducts', 'popularProducts', 'newProducts', 'categories', 'carts'));
+        return view('Frontend.index', compact('carousels', 'featureProducts', 'sellingProducts', 'popularProducts', 'newProducts', 'categories','carts'));
     }
 
     // Show details of a specific product
@@ -181,7 +181,7 @@ class HomeController extends Controller
         // Redirect to confirmation page with success message
         // return redirect()->route('getConfirm', $order->id)->with('success', 'Checkout successful');
         return redirect()->route('getConfirm', $order->id);
-        
+
 
     }
 
@@ -195,7 +195,7 @@ class HomeController extends Controller
         return view('frontend.confirm', compact('order', 'carts'));
     }
 
-    
+
 
     // Display payment page
     // public function payment()
