@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             } else {
                 $carts = null;
             }
-            $view->with('carts', $item);
+            // $view->with('carts', $item);
         });
     }
 }

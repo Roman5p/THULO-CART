@@ -8,19 +8,22 @@
             <!-- Product Images -->
             <div class="col-md-6 mb-4">
                 <div class="d-flex justify-content-between">
-                    <img src="{{ asset('storage/' . $product->image) }}" alt="Thumbnail 1" class="thumbnail rounded active img-fluid" style="max-width: 100%; height: auto; object-fit: cover;"
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="Thumbnail 1"
+                        class="thumbnail rounded active img-fluid" style="max-width: 100%; height: auto; object-fit: cover;"
                         onclick="changeImage(event, this.src)">
                 </div>
             </div>
 
             <!-- Product Details -->
             <div class="col-md-6">
-                <h2 class="mb-3">{{$product->name}}</h2>
+                <h2 class="mb-3">{{ $product->name }}</h2>
                 <p class="text-muted mb-4">SKU: </p>
-                <p class="text-muted mb-4">Category: {{$product->category->name}}</p>
+                <p class="text-muted mb-4">Category: {{ $product->category->name }}</p>
                 <div class="mb-3">
-                    <span class="h4 me-2">Rs.{{$product->price}}</span>
-                    <span class="text-muted"><s>Rs.{{$product->actual_amount}}</s></span>
+                    <span class="h4 me-2">Rs.{{ $product->actual_amount }}</span>
+                    <span class="text-muted"><s>Rs.{{ $product->price }}</s></span>
+                    <span class="text-success ms-2">Save Rs.{{ $product->actual_amount - $product->price }}</span>
+
                 </div>
                 <div class="mb-3">
                     <i class="bi bi-star-fill text-warning"></i>
@@ -42,7 +45,7 @@
                     </div>
                 </div> --}}
                 <div class="mb-4">
-                    <label for="quantity" class="form-label">Quantity: {{$product->quantity}}</label>
+                    <label for="quantity" class="form-label">Quantity: {{ $product->quantity }}</label>
                     <input type="number" class="form-control" id="quantity" value="1" min="1"
                         style="width: 80px;">
                 </div>
