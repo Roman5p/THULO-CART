@@ -191,10 +191,15 @@ class HomeController extends Controller
         // Find order by ID
         $order = Order::find($oid);
         $carts = Cart::where('user_id', auth()->id())->get();
+
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
         // Return confirmation view with order details
         return view('frontend.confirm', compact('order', 'carts'));
     }
 
+        
 
 
     // Display payment page

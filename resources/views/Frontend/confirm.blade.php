@@ -28,7 +28,8 @@
             font-size: 0.9rem;
         }
 
-        .table-bill th, .table-bill td {
+        .table-bill th,
+        .table-bill td {
             vertical-align: middle;
         }
 
@@ -69,7 +70,8 @@
                 font-size: 0.8rem;
             }
 
-            .table-bill th, .table-bill td {
+            .table-bill th,
+            .table-bill td {
                 padding: 0.5rem;
             }
 
@@ -214,18 +216,18 @@
                         <div class="d-flex justify-content-between">
                             <span>Subtotal:</span>
                             <span id="subtotal">रू
-                                {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}), 2) }}</span>
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->price * $cart->quantity;}),2) }}</span>
                         </div>
                         <div class="d-flex justify-content-between">
                             <span>Total Discount:</span>
                             <span id="discount">रू
-                                {{ number_format($carts->sum(function ($cart) {return $cart->product->discount_amount * $cart->quantity;}), 2) }}</span>
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->discount_amount * $cart->quantity;}),2) }}</span>
                         </div>
                         <hr>
                         <div class="d-flex justify-content-between fw-bold">
                             <span>Grand Total:</span>
                             <span id="totalAmount">रू
-                                {{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}), 2) }}</span>
+                                {{ number_format($carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}),2) }}</span>
                         </div>
                     </div>
                 </div>
@@ -235,37 +237,80 @@
             <div class="bill-section no-print payment-method">
                 <h6 class="mb-3">Select Payment Method</h6>
                 <div class="d-flex flex-column gap-2">
+                    <!-- eSewa -->
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="esewa" value="esewa">
                         <label class="form-check-label" for="esewa">Esewa</label>
                         <img src="{{ asset('frontend/assets/images/esewa.png') }}" alt="Esewa" height="20">
+                        @php
+                            $esewa_transaction_uuid = Illuminate\Support\Str::orderedUuid()->toString();
+                            $esewa_message = "total_amount=110,transaction_uuid={$esewa_transaction_uuid},product_code=EPAYTEST";
+                            $esewa_secret = '8gBm/:&EnhH.1/q';
+                            $esewa_s = hash_hmac('sha256', $esewa_message, $esewa_secret, true);
+                            $esewa_value = base64_encode($esewa_s);
+                        @endphp
+                        <form id="esewa-payment-form" action="https://rc-epay.esewa.com.np/api/epay/main/v2/form"
+                            method="POST">
+                            <input type="text" id="esewa_amount" name="amount" value="100" required hidden>
+                            <input type="text" id="esewa_tax_amount" name="tax_amount" value="10" required hidden>
+                            <input type="text" id="esewa_total_amount" name="total_amount" value="110" required
+                                hidden>
+                            <input type="text" id="esewa_transaction_uuid" name="transaction_uuid"
+                                value="{{ $esewa_transaction_uuid }}" required hidden>
+                            <input type="text" id="esewa_product_code" name="product_code" value="EPAYTEST" required
+                                hidden>
+                            <input type="text" id="esewa_product_service_charge" name="product_service_charge"
+                                value="0" required hidden>
+                            <input type="text" id="esewa_product_delivery_charge" name="product_delivery_charge"
+                                value="0" required hidden>
+                            <input type="text" id="esewa_success_url" name="success_url"
+                                value="https://developer.esewa.com.np/success" required hidden>
+                            <input type="text" id="esewa_failure_url" name="failure_url"
+                                value="https://developer.esewa.com.np/failure" required hidden>
+                            <input type="text" id="esewa_signed_field_names" name="signed_field_names"
+                                value="total_amount,transaction_uuid,product_code" required hidden>
+                            <input type="text" id="esewa_signature" name="signature" value="{{ $esewa_value }}"
+                                required hidden>
+                        </form>
                     </div>
+
+                    <!-- Khalti -->
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="khalti" value="khalti">
                         <label class="form-check-label" for="khalti">Khalti</label>
                         <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti" height="20">
                     </div>
-                    <div class="form-check d-flex align-items-center gap-2">
+
+                    <!-- Card -->
+                    {{-- <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="card" value="card">
                         <label class="form-check-label" for="card">Cards (Visa/MasterCard)</label>
                         <img src="{{ asset('frontend/assets/images/credit.png') }}" alt="Cards" height="20">
+                        <!-- Add card form here if needed -->
                     </div>
+
+                    <!-- Cash on Delivery -->
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="cod" value="cod">
                         <label class="form-check-label" for="cod">Cash on Delivery (COD)</label>
-                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="COD" height="20">
-                    </div>
+                        <img src="{{ asset('frontend/assets/images/cash-on-delivery.webp') }}" alt="COD"
+                            height="20">
+                        <!-- Add COD form or logic here if needed -->
+                    </div> --}}
+                </div>
+
+                <!-- Confirm Order Button -->
+                <div class="bill-section no-print text-center mt-3">
+                    <button class="btn btn-primary confirm-btn" type="button" onclick="submitPaymentForm()">Confirm
+                        Order</button>
                 </div>
             </div>
 
-            <!-- Confirmation Button -->
-            <div class="bill-section no-print text-center">
-                <button class="btn btn-primary confirm-btn" onclick="redirectToPayment()">Confirm Order</button>
-            </div>
-
             <script>
-                function redirectToPayment() {
+                function submitPaymentForm() {
+                    // Check if a payment method is selected
                     const selectedPaymentMethod = document.querySelector('input[name="payment"]:checked');
+
                     if (!selectedPaymentMethod) {
                         alert('Please select a payment method.');
                         return;
@@ -273,21 +318,24 @@
 
                     const paymentMethod = selectedPaymentMethod.value;
 
+                    // Handle form submission based on payment method
                     switch (paymentMethod) {
                         case 'esewa':
-                            window.location.href = "#";
+                            document.getElementById('esewa-payment-form').submit();
                             break;
                         case 'khalti':
-                            window.location.href = "#";
+                            document.getElementById('khalti-payment-form').submit();
                             break;
-                        case 'card':
-                            window.location.href = "#";
-                            break;
-                        case 'cod':
-                            window.location.href = "#";
-                            break;
+                            // case 'card':
+                            //     alert('Card payment processing is not implemented yet.');
+                            //     // Add card payment logic here (e.g., redirect or form submission)
+                            //     break;
+                            // case 'cod':
+                            //     alert('Cash on Delivery selected. Proceed with order confirmation.');
+                            //     // Add COD logic here (e.g., redirect to order confirmation)
+                            //     break;
                         default:
-                            alert('Invalid payment method selected.');
+                            alert('Unsupported payment method selected.');
                     }
                 }
             </script>
