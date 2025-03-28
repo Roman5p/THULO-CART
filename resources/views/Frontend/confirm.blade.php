@@ -264,9 +264,9 @@
                             <input type="text" id="esewa_product_delivery_charge" name="product_delivery_charge"
                                 value="0" required hidden>
                             <input type="text" id="esewa_success_url" name="success_url"
-                                value="https://developer.esewa.com.np/success" required hidden>
+                                value="{{route('payment.success')}}" required hidden>
                             <input type="text" id="esewa_failure_url" name="failure_url"
-                                value="https://developer.esewa.com.np/failure" required hidden>
+                                value="{{route('payment.failure')}}" required hidden>
                             <input type="text" id="esewa_signed_field_names" name="signed_field_names"
                                 value="total_amount,transaction_uuid,product_code" required hidden>
                             <input type="text" id="esewa_signature" name="signature" value="{{ $esewa_value }}"

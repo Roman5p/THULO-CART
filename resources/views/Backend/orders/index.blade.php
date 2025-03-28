@@ -131,10 +131,10 @@
                                 </table>
                             </div>
                             <div class="d-flex justify-content-between align-items-center mt-3">
-                                <div>
+                                {{-- <div>
                                     Showing {{ $orders->firstItem() }} to {{ $orders->lastItem() }} of
                                     {{ $orders->total() }} results
-                                </div>
+                                </div> --}}
                                 <div>
                                     {{ $orders->links() }}
                                 </div>

@@ -1,7 +1,6 @@
 <footer class="py-5">
     <div class="container-lg">
         <div class="row">
-
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer-menu">
                     <img src="{{ asset('frontend/assets/images/logo.png') }}" width="240" height="70" alt="logo">
@@ -46,7 +45,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-2 col-sm-6">
                 <div class="footer-menu">
                     <h5 class="widget-title">THULO🛒CART</h5>
@@ -176,3 +174,5 @@
         }
     }
 </script>
+
+

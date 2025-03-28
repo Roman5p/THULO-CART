@@ -11,7 +11,7 @@ use App\Models\product;
 use App\Models\ShippingAddress;
 use App\Models\Order_Item;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -66,13 +66,13 @@ class HomeController extends Controller
         return view('frontend.contact', compact('carts'));
     }
 
-    public function myorder()
-    {
-        // Get user's cart items
-        $carts = Cart::where('user_id', auth()->id())->get();
-        // Return contact view with cart data
-        return view('frontend.myorder', compact('carts'));
-    }
+    // public function myorder()
+    // {
+    //     // Get user's cart items
+    //     $carts = Cart::where('user_id', auth()->id())->get();
+    //     // Return contact view with cart data
+    //     return view('frontend.myorder', compact('carts'));
+    // }
 
 
 
@@ -201,12 +201,14 @@ class HomeController extends Controller
 
     // Show order details page
 
-    public function userdashboard()
+    public function myorder()
     {
+        $user_id = Auth::id();
+        $orders = Order::where('user_id', $user_id)->get();
         // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
         // Return contact view with cart data
-        return view('frontend.myorder', compact('carts'));
+        return view('frontend.myorder', compact('orders','carts'));
     }   
 
     public function success(request $request)
