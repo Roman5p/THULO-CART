@@ -31,13 +31,16 @@ Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('del
 // return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+// Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+// Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+// Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
-
+Route::get('/confirm/{id}', [HomeController::class, 'getConfirm'])->name('getConfirm');
+Route::get('/payment/success', [HomeController::class, 'success'])->name('payment.success');
+Route::get('/payment/failure', [HomeController::class, 'failurePage'])->name('payment.failure');
+Route::get('/user/orders', [HomeController::class, 'userdashboard'])->name('user.dashboard');
 
 require __DIR__.'/auth.php';
 require __DIR__ . '/admin.php';

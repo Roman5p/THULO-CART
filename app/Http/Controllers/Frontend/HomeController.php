@@ -206,7 +206,7 @@ class HomeController extends Controller
         // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
         // Return contact view with cart data
-        return view('frontend.userdashboard', compact('carts'));
+        return view('frontend.myorder', compact('carts'));
     }   
 
     public function success(request $request)
