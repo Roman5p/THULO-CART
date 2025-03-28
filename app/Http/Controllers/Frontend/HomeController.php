@@ -199,6 +199,31 @@ class HomeController extends Controller
         return view('frontend.confirm', compact('order', 'carts'));
     }
 
+    // Show order details page
+
+    public function userdashboard()
+    {
+        // Get user's cart items
+        $carts = Cart::where('user_id', auth()->id())->get();
+        // Return contact view with cart data
+        return view('frontend.userdashboard', compact('carts'));
+    }   
+
+    public function success(request $request)
+    {
+        // Get user's cart items
+        $carts = Cart::where('user_id', auth()->id())->get();
+        // Return contact view with cart data
+        return view('frontend.success', compact('carts'));
+    }
+
+    public function failurePage(){
+        // Get user's cart items
+        $carts = Cart::where('user_id', auth()->id())->get();
+        // Return contact view with cart data
+        return view('frontend.failure', compact('carts'));
+    }
+
         
 
 
