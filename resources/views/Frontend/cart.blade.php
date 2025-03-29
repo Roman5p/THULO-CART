@@ -86,6 +86,7 @@
                             </div>
                         @empty
                             <div class="card shadow-sm border-0 p-3 text-center">
+                                <i class="bi bi-cart-x fs-1 text-muted"></i>
                                 <p class="text-muted mb-0">Your cart is empty.</p>
                             </div>
                         @endforelse

@@ -19,7 +19,7 @@ Route::post('/checkout/store',[HomeController::class,'storeCheckout'])->name('ch
 Route::get('/confirm/{id}',[HomeController::class,'getConfirm'])->name('getConfirm');
 Route::get('/payment', [HomeController::class, 'payment'])->name('payment');
 
-Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+
 
 //Carts
 
@@ -41,6 +41,7 @@ Route::get('/confirm/{id}', [HomeController::class, 'getConfirm'])->name('getCon
 Route::get('/payment/success', [HomeController::class, 'success'])->name('payment.success');
 Route::get('/payment/failure', [HomeController::class, 'failurePage'])->name('payment.failure');
 Route::get('/user/orders', [HomeController::class, 'myorder'])->name('myorder');
+Route::get('/user/profile', [HomeController::class, 'profile'])->name('user.profile');
 
 require __DIR__.'/auth.php';
 require __DIR__ . '/admin.php';
