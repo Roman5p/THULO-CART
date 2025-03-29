@@ -168,9 +168,10 @@
                                                                 <!-- Action Buttons -->
                                                                 <div class="mt-4 text-end">
                                                                     <a href="{{ route('myorder') }}"
-                                                                        class="btn btn-outline-secondary me-2">Back to
-                                                                        Orders</a>
-
+                                                                        class="btn btn-outline-secondary me-2 d-flex align-items-center justify-content-center gap-1">
+                                                                        <i class="fa-solid fa-arrow-left"></i>
+                                                                        <span>Back to Orders</span>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>
