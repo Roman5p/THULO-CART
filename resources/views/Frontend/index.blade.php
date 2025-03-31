@@ -217,7 +217,7 @@
                                             <del>Rs.{{ $product->price }}</del>
                                             <span class="text-dark fw-semibold">Rs.{{ $product->actual_amount }}</span>
                                             <span
-                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">{{ $product->discount_amount }}%
+                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs. {{ $product->discount_amount }}
                                                 OFF</span>
                                         </div>
                                         <div class="button-area p-3 pt-0">
@@ -368,7 +368,7 @@
                                             <del>Rs.{{ $product->price }}</del>
                                             <span class="text-dark fw-semibold">Rs.{{ $product->actual_amount }}</span>
                                             <span
-                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">{{ $product->discount_amount }}%
+                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs. {{ $product->discount_amount }}
                                                 OFF</span>
                                         </div>
                                         <div class="button-area p-3 pt-0">
@@ -599,7 +599,7 @@
                                             <del>Rs.{{ $product->price }}</del>
                                             <span class="text-dark fw-semibold">Rs.{{ $product->actual_amount }}</span>
                                             <span
-                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">{{ $product->discount_amount }}%
+                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs. {{ $product->discount_amount }}
                                                 OFF</span>
                                         </div>
                                         <div class="button-area p-3 pt-0">
