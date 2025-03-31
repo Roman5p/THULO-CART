@@ -23,24 +23,12 @@
                 @else
                     <!-- Table Heading -->
                     <div class="row fw-bold border-bottom pb-2 mb-3">
-                        <div class="col-md-2 col-6 text-center text-md-start">
-                            <i class="fa-solid fa-hashtag me-1"></i> Order ID
-                        </div>
-                        <div class="col-md-2 col-6 text-center text-md-start">
-                            <i class="fa-solid fa-calendar-alt me-1"></i> Date
-                        </div>
-                        <div class="col-md-3 col-12 text-center text-md-start">
-                            <i class="fa-solid fa-boxes me-1"></i> Items
-                        </div>
-                        <div class="col-md-2 col-6 text-center text-md-start">
-                            <i class="fa-solid fa-money-bill-wave me-1"></i> Total
-                        </div>
-                        <div class="col-md-2 col-6 text-center text-md-start">
-                            <i class="fa-solid fa-info-circle me-1"></i> Status
-                        </div>
-                        <div class="col-md-1 col-12 text-center text-md-end">
-                            <i class="fa-solid fa-cogs me-1"></i> Action
-                        </div>
+                        <div class="col-md-2 col-6 text-center text-md-start">Order ID</div>
+                        <div class="col-md-2 col-6 text-center text-md-start">Date</div>
+                        <div class="col-md-3 col-12 text-center text-md-start">Items</div>
+                        <div class="col-md-2 col-6 text-center text-md-start">Total</div>
+                        <div class="col-md-2 col-6 text-center text-md-start">Status</div>
+                        <div class="col-md-1 col-12 text-center text-md-end">Action</div>
                     </div>
 
                     @foreach ($orders as $order)
