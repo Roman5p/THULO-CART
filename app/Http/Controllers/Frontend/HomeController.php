@@ -116,8 +116,6 @@ class HomeController extends Controller
 
         }
 
-
-
         $shippingInfo = null;
         // Validate shipping information from request
 

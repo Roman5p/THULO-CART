@@ -568,7 +568,8 @@
                                 <div class="product-item swiper-slide">
                                     <figure>
                                         <a href="{{ route('productDetails', $product->id) }}" title="">
-                                            <img src="{{ asset('storage/' . $product->image) }}"
+                                            <img src="{{ asset("storage/{$product->image}") }}" 
+                                                style="width: 160px; height: 160px; object-fit: cover;" 
                                                 alt="{{ $product->title }}"
                                                 style="width: 160px; height: 160px; object-fit: cover;" class="tab-image">
                                         </a>
