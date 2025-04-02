@@ -44,7 +44,15 @@
                     <!-- Checkout -->
                     <div class="card shadow-0 border">
                         <div class="p-4">
-                            <h5 class="card-title mb-3">Checkout</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="card-title">Checkout</h5>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-outline-warning btn-sm" id="resetAddress"
+                                        onclick="resetForm()" title="Reset Address">
+                                        <i class="bi bi-arrow-clockwise me-1"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
                             <form action="{{ route('checkout.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
@@ -137,6 +145,7 @@
                                 </div>
 
                                 <div class="row">
+
                                     <div class="col-4">
                                         <a href="{{ route('getcarts') }}" class="btn btn-secondary w-100 my-2">Cancel</a>
                                     </div>
@@ -223,6 +232,15 @@
             </div>
         </div>
     </section>
+    <script>
+        function resetForm() {
+            document.querySelectorAll('#address, #number, #landmark, #postalcode, #street_no').forEach(input => {
+                input.value = '';
+            });
+            document.querySelector('select[name="state"]').selectedIndex = 0;
+            document.querySelector('input[name="is_permanent"]').checked = false;
+        }
+    </script>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -33,7 +33,7 @@ class HomeController extends Controller
         // Get new products (limited to 9)
         $newProducts = Product::where('is_new', true)->limit(9)->get();
         // Return the homepage view with all collected data
-        return view('Frontend.index', compact('carousels', 'featureProducts', 'sellingProducts', 'popularProducts', 'newProducts', 'categories','carts'));
+        return view('Frontend.index', compact('carousels', 'featureProducts', 'sellingProducts', 'popularProducts', 'newProducts', 'categories', 'carts'));
     }
 
     // Show details of a specific product
@@ -92,28 +92,30 @@ class HomeController extends Controller
     // Process checkout and store order information
     public function storeCheckout(Request $request)
     {
-        // Get authenticated user's ID
+        // Get the ID of the currently authenticated user
         $user_id = auth()->id();
-        // Get user's cart items
+
+        // Retrieve all cart items associated with the authenticated user
         $carts = Cart::where('user_id', $user_id)->get();
 
-        // Create new order instance
+        // Create a new order instance for the checkout
         $order = new Order();
-        $order->user_id = $user_id;
-        $order->status = 'pending';
+        $order->user_id = $user_id;              // Assign the user ID to the order
+        $order->status = 'pending';              // Set initial order status as pending
         $order->total_cost = $carts->sum(function ($cart) {
+            // Calculate total cost by multiplying each product's price by its quantity
             return $cart->product->price * $cart->quantity;
         });
-        $order->total_quantity = $carts->sum('quantity');
-        $order->save();
+        $order->total_quantity = $carts->sum('quantity');  // Sum up total quantity of all items
+        $order->save();                           // Save the order to the database
 
+        // Iterate through each cart item to create order items
         foreach ($carts as $cart) {
-            $orderItem = new Order_Item();
-            $orderItem->quantity = $cart->quantity;
-            $orderItem->product_id = $cart->product_id;
-            $orderItem->order_id = $order->id;
-            $orderItem->save();
-
+            $orderItem = new Order_Item();        // Create new order item instance
+            $orderItem->quantity = $cart->quantity;     // Set quantity from cart
+            $orderItem->product_id = $cart->product_id; // Link to the product
+            $orderItem->order_id = $order->id;         // Associate with the created order
+            $orderItem->save();                  // Save the order item to the database
         }
 
         $shippingInfo = null;
@@ -173,7 +175,6 @@ class HomeController extends Controller
         $shippingInfo->user_id = $user_id;
         $shippingInfo->save();
 
-        // Clear user's cart after successful checkout
 
 
         // Redirect to confirmation page with success message
@@ -189,6 +190,8 @@ class HomeController extends Controller
         // Find order by ID
         $order = Order::find($oid);
         $carts = Cart::where('user_id', auth()->id())->get();
+
+        // Clear user's cart after successful checkout
 
         foreach ($carts as $cart) {
             $cart->delete();
@@ -206,8 +209,8 @@ class HomeController extends Controller
         // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
         // Return contact view with cart data
-        return view('frontend.myorder', compact('orders','carts'));
-    }   
+        return view('frontend.myorder', compact('orders', 'carts'));
+    }
 
     public function success(request $request)
     {
@@ -217,14 +220,15 @@ class HomeController extends Controller
         return view('frontend.success', compact('carts'));
     }
 
-    public function failurePage(){
+    public function failurePage()
+    {
         // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
         // Return contact view with cart data
         return view('frontend.failure', compact('carts'));
     }
 
-        
+
 
 
     // Display payment page
