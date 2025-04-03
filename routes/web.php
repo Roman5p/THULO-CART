@@ -43,5 +43,8 @@ Route::get('/payment/failure', [HomeController::class, 'failurePage'])->name('pa
 Route::get('/user/orders', [HomeController::class, 'myorder'])->name('myorder');
 Route::get('/user/profile', [HomeController::class, 'profile'])->name('user.profile');
 
+Route::post('/profile/update', [HomeController::class, 'updatePhoto'])->name('profile.update');
+
+
 require __DIR__.'/auth.php';
 require __DIR__ . '/admin.php';

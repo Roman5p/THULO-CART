@@ -157,9 +157,14 @@
                             {{ Auth::user()->name }}<br>
                             {{ Auth::user()->email }}<br>
                             {{ Auth::user()->contact }}<br>
-                            [Street Address]<br>
-                            [City, State, ZIP]<br>
-                            [Country]<br>
+                            <p>
+                                {{ Auth::user()->shippingAddress->first()->address ?? 'Not Provided' }},
+                                {{ Auth::user()->shippingAddress->first()->number ?? '' }},
+                                {{ Auth::user()->shippingAddress->first()->landmark ?? '' }},
+                                {{ Auth::user()->shippingAddress->first()->street_no ?? 'N/A' }},
+                                {{ Auth::user()->shippingAddress->first()->postal_code ?? 'N/A' }},
+                                {{ Auth::user()->shippingAddress->first()->state ?? '' }}
+                            </p>
                         </div>
                     </div>
                     <div class="col-md-6 text-md-end mt-3 mt-md-0">
@@ -264,9 +269,9 @@
                             <input type="text" id="esewa_product_delivery_charge" name="product_delivery_charge"
                                 value="0" required hidden>
                             <input type="text" id="esewa_success_url" name="success_url"
-                                value="{{route('payment.success')}}" required hidden>
+                                value="{{ route('payment.success') }}" required hidden>
                             <input type="text" id="esewa_failure_url" name="failure_url"
-                                value="{{route('payment.failure')}}" required hidden>
+                                value="{{ route('payment.failure') }}" required hidden>
                             <input type="text" id="esewa_signed_field_names" name="signed_field_names"
                                 value="total_amount,transaction_uuid,product_code" required hidden>
                             <input type="text" id="esewa_signature" name="signature" value="{{ $esewa_value }}"

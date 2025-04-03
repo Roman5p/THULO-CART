@@ -12,6 +12,8 @@ use App\Models\ShippingAddress;
 use App\Models\Order_Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Storage;
 
 class HomeController extends Controller
 {
@@ -76,7 +78,52 @@ class HomeController extends Controller
         return view('frontend.profile', compact('orders', 'carts'));
     }
 
+    public function updatePhoto(Request $request)
+    {
+        // Validate the request
+        $request->validate([
+            'name' => 'nullable|string|max:255', // Optional name update
+            'password' => 'nullable|string|min:8|confirmed', // Optional password update with confirmation
+            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:4096', // Required photo, matching admin max size
+        ]);
 
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Update name if provided
+        if ($request->filled('name')) {
+            $user->name = $request->name;
+        }
+
+        // Update password if provided
+        if ($request->filled('password')) {
+            $user->password = bcrypt($request->password);
+        }
+
+        // Handle the file upload
+        if ($request->hasFile('profile_photo')) {
+            // Delete the old photo if it exists
+            if ($user->profile && Storage::disk('public')->exists($user->profile)) {
+                Storage::disk('public')->delete($user->profile);
+            }
+
+            // Store the new photo in 'users' directory under 'public' disk
+            $user->profile = $request->file('profile_photo')->store('users', 'public');
+        }
+
+        // Save all changes
+        $user->save();
+
+        // Fetch orders and carts
+        $orders = Order::where('user_id', auth()->id())->get();
+        $carts = Cart::where('user_id', auth()->id())->get();
+
+        // Return to profile view
+        return view('frontend.profile', compact('orders', 'carts'))
+            ->with('success', 'Profile updated successfully!');
+    }
+
+    
 
     // Show checkout page with shipping information
     public function checkout()

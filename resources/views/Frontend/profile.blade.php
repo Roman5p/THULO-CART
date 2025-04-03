@@ -12,17 +12,22 @@
             <div class="card-body p-4">
                 <div class="d-flex flex-column flex-md-row align-items-center mb-4">
                     <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="Profile Picture"
-                        class="rounded-circle object-fit-cover border border-3 border-primary mb-3 mb-md-0 me-md-3 profile-img" width="100"
-                        height="100">
+                        class="rounded-circle object-fit-cover border border-3 border-primary mb-3 mb-md-0 me-md-3 profile-img"
+                        width="100" height="100">
                     <div class="text-center text-md-start">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="file" name="profile_photo" class="form-control mb-2" accept="image/*">
+                            <input type="file" name="profile_photo" class="form-control mb-2" accept="image/*" required>
                             <button type="submit" class="btn btn-sm btn-primary shadow-sm">Change Photo</button>
                         </form>
                     </div>
                 </div>
-                <h5 class="mb-0 text-primary text-center text-md-start">{{ Auth::user()->name }}</h5>
+                <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                    <h5 class="mb-0 text-primary text-center text-md-start me-2">{{ Auth::user()->name }}</h5>
+                    <a href="#" class="text-decoration-none text-primary" data-bs-toggle="modal"
+                        data-bs-target="#changeNameModal">
+                    </a>
+                </div>
                 <small class="text-muted text-center text-md-start d-block">{{ Auth::user()->role }}</small>
                 <hr>
                 <div class="row">
@@ -45,7 +50,8 @@
                 <hr>
                 <div class="d-flex justify-content-center flex-column flex-md-row gap-3">
                     <a href="{{ route('myorder') }}" class="btn btn-primary shadow-sm">View My Orders</a>
-                    <a href="" class="btn btn-warning shadow-sm">Change Password</a>
+                    <a href="#" class="btn btn-warning shadow-sm" data-bs-toggle="modal"
+                        data-bs-target="#changePasswordModal">Change Password</a>
                 </div>
             </div>
         </div>
@@ -55,13 +61,16 @@
             .card-body {
                 padding: 1.5rem;
             }
+
             .d-flex.flex-column.flex-md-row {
                 flex-direction: column !important;
             }
+
             .me-md-3 {
                 margin-right: 0 !important;
             }
         }
+
         .btn-warning {
             color: #fff;
         }
