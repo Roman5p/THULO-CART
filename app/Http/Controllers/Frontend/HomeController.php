@@ -66,13 +66,15 @@ class HomeController extends Controller
         return view('frontend.contact', compact('carts'));
     }
 
-    // public function myorder()
-    // {
-    //     // Get user's cart items
-    //     $carts = Cart::where('user_id', auth()->id())->get();
-    //     // Return contact view with cart data
-    //     return view('frontend.myorder', compact('carts'));
-    // }
+    public function profile()
+    {
+        $user_id = Auth::id();
+        $orders = Order::where('user_id', $user_id)->get();
+        // Get user's cart items
+        $carts = Cart::where('user_id', auth()->id())->get();
+        // Return contact view with cart data
+        return view('frontend.profile', compact('orders', 'carts'));
+    }
 
 
 

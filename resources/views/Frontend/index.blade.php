@@ -217,7 +217,8 @@
                                             <del>Rs.{{ $product->price }}</del>
                                             <span class="text-dark fw-semibold">Rs.{{ $product->actual_amount }}</span>
                                             <span
-                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs. {{ $product->discount_amount }}
+                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs.
+                                                {{ $product->discount_amount }}
                                                 OFF</span>
                                         </div>
                                         <div class="button-area p-3 pt-0">
@@ -368,7 +369,8 @@
                                             <del>Rs.{{ $product->price }}</del>
                                             <span class="text-dark fw-semibold">Rs.{{ $product->actual_amount }}</span>
                                             <span
-                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs. {{ $product->discount_amount }}
+                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs.
+                                                {{ $product->discount_amount }}
                                                 OFF</span>
                                         </div>
                                         <div class="button-area p-3 pt-0">
@@ -568,8 +570,8 @@
                                 <div class="product-item swiper-slide">
                                     <figure>
                                         <a href="{{ route('productDetails', $product->id) }}" title="">
-                                            <img src="{{ asset("storage/{$product->image}") }}" 
-                                                style="width: 160px; height: 160px; object-fit: cover;" 
+                                            <img src="{{ asset("storage/{$product->image}") }}"
+                                                style="width: 160px; height: 160px; object-fit: cover;"
                                                 alt="{{ $product->title }}"
                                                 style="width: 160px; height: 160px; object-fit: cover;" class="tab-image">
                                         </a>
@@ -600,7 +602,8 @@
                                             <del>Rs.{{ $product->price }}</del>
                                             <span class="text-dark fw-semibold">Rs.{{ $product->actual_amount }}</span>
                                             <span
-                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs. {{ $product->discount_amount }}
+                                                class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">Rs.
+                                                {{ $product->discount_amount }}
                                                 OFF</span>
                                         </div>
                                         <div class="button-area p-3 pt-0">
@@ -862,6 +865,7 @@
         </div>
     </section>
 @endsection
+
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

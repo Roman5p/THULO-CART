@@ -460,7 +460,7 @@
 
                                     <!-- Menu Items -->
                                     <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="">
+                                        <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="{{route('user.profile')}}">
                                             <i class="bi bi-person fs-5"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
