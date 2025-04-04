@@ -284,6 +284,7 @@
                         <input class="form-check-input" type="radio" name="payment" id="khalti" value="khalti">
                         <label class="form-check-label" for="khalti"></label>Khalti
                         <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti" height="30">
+                        
                     </div>
 
                     <!-- Card -->

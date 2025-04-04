@@ -17,8 +17,15 @@
                         <p class="mb-1"><strong>Name:</strong> {{ $order->user?->name ?? 'N/A' }}</p>
                         <p class="mb-1"><strong>Email:</strong> {{ $order->user?->email ?? 'N/A' }}</p>
                         <p class="mb-1"><strong>Phone:</strong> {{ $order->user?->contact ?? 'N/A' }}</p>
-                        <p class="mb-1"><strong>Address:</strong>
-                            {{ $order->user?->shipping_addresses ?? 'Not provided' }}</p>
+                        <p class="mb-1"><strong>Address:</strong></p>
+                            <p>
+                                {{ Auth::user()->shippingAddress->first()->address ?? 'Not Provided' }},
+                                {{ Auth::user()->shippingAddress->first()->number ?? '' }},
+                                {{ Auth::user()->shippingAddress->first()->landmark ?? '' }},
+                                {{ Auth::user()->shippingAddress->first()->street_no ?? 'N/A' }},
+                                {{ Auth::user()->shippingAddress->first()->postal_code ?? 'N/A' }},
+                                {{ Auth::user()->shippingAddress->first()->state ?? '' }}
+                            </p>
 
                     </div>
                     <div class="col-md-6 text-md-end">
