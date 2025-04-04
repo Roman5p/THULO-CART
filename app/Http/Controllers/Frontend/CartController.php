@@ -48,8 +48,7 @@ class CartController extends Controller  // CartController class extending base 
         Product::findOrFail($pid);  // Verify product exists, throws 404 if not found
 
         // Check if product already exists in user's cart
-        $cart = Cart::where('user_id', auth()->id())->where('product_id', $pid)->first();
-        
+8        
         if ($cart) {
             // If item exists, increment quantity
             $cart->quantity += $quantity;

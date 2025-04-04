@@ -245,8 +245,8 @@
                     <!-- eSewa -->
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="esewa" value="esewa">
-                        <label class="form-check-label" for="esewa">Esewa</label>
-                        <img src="{{ asset('frontend/assets/images/esewa.png') }}" alt="Esewa" height="20">
+                        <label class="form-check-label" for="esewa">eSewa</label>
+                        <img src="{{ asset('frontend/assets/images/esewa.png') }}" alt="eSewa" height="30">
                         @php
                             $esewa_transaction_uuid = Illuminate\Support\Str::orderedUuid()->toString();
                             $esewa_message = "total_amount=110,transaction_uuid={$esewa_transaction_uuid},product_code=EPAYTEST";
@@ -282,8 +282,8 @@
                     <!-- Khalti -->
                     <div class="form-check d-flex align-items-center gap-2">
                         <input class="form-check-input" type="radio" name="payment" id="khalti" value="khalti">
-                        <label class="form-check-label" for="khalti">Khalti</label>
-                        <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti" height="20">
+                        <label class="form-check-label" for="khalti"></label>Khalti
+                        <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti" height="30">
                     </div>
 
                     <!-- Card -->

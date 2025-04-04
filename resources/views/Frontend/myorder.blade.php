@@ -10,7 +10,8 @@
             <!-- Search Bar -->
             <div class="d-flex justify-content-end mb-3">
                 <input type="text" class="form-control w-25 me-2" placeholder="Search your orders here">
-                <button class="btn btn-primary">Search Orders</button>
+                <button class="btn btn-primary" id="searchOrdersButton">Search Orders</button>
+
             </div>
 
             <!-- Order Items -->
@@ -117,7 +118,7 @@
                                                                         <h5 class="text-primary">Order Summary</h5>
                                                                         <p class="mb-1"><strong>Total Quantity:</strong>
                                                                             {{ $order->total_quantity }}</p>
-                                                                        
+
                                                                         <p class="mb-1"><strong>Subtotal Price:</strong>
                                                                             ₹{{ number_format($order->total_cost, 2) }}</p>
                                                                         <p class="mb-1"><strong>Status:</strong> <span
@@ -154,7 +155,8 @@
                                                                                                 <small class="text-muted">
                                                                                                     Quantity:
                                                                                                     {{ $item->quantity }}<br>
-                                                                                                    Price: ₹{{ number_format($item->product->actual_amount, 2) }}
+                                                                                                    Price:
+                                                                                                    ₹{{ number_format($item->product->actual_amount, 2) }}
                                                                                                     Subtotal:
                                                                                                     ₹{{ number_format($item->product->actual_amount * $item->quantity, 2) }}
                                                                                                 </small>
