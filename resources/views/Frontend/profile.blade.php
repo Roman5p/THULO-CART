@@ -5,15 +5,16 @@
 @section('main-section')
 
     <div class="container mt-5">
-        <h2 class="mb-4 text-center text-primary">My Profile</h2>
+        <h2 class="mb-4 text-center text-primary fw-bold">My Profile</h2>
         <div class="card shadow-lg border-0 rounded-4">
             <div class="card-header bg-gradient-primary text-white rounded-top-4 text-center">
+                <h4 class="mb-0">Welcome, {{ Auth::user()->name }}</h4>
             </div>
             <div class="card-body p-4">
                 <div class="d-flex flex-column flex-md-row align-items-center mb-4">
                     <img src="{{ asset('storage/' . auth()->user()->profile) }}" alt="Profile Picture"
                         class="rounded-circle object-fit-cover border border-3 border-primary mb-3 mb-md-0 me-md-3 profile-img"
-                        width="100" height="100">
+                        width="120" height="120">
                     <div class="text-center text-md-start">
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
@@ -23,9 +24,10 @@
                     </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-center justify-content-md-start">
-                    <h5 class="mb-0 text-primary text-center text-md-start me-2">{{ Auth::user()->name }}</h5>
+                    <h5 class="mb-0 text-primary text-center text-md-start me-2 fw-bold">{{ Auth::user()->name }}</h5>
                     <a href="#" class="text-decoration-none text-primary" data-bs-toggle="modal"
                         data-bs-target="#changeNameModal">
+                        <i class="bi bi-pencil-square"></i>
                     </a>
                 </div>
                 <small class="text-muted text-center text-md-start d-block">{{ Auth::user()->role }}</small>
@@ -36,7 +38,7 @@
                         <p><strong>Contact Number:</strong> {{ Auth::user()->contact ?? 'Not Provided' }}</p>
                     </div>
                     <div class="col-md-6">
-                        <h5 class="text-primary">Permanent Address:</h5>
+                        <h5 class="text-primary fw-bold">Permanent Address:</h5>
                         <p>
                             {{ Auth::user()->shippingAddress->first()->address ?? 'Not Provided' }},
                             {{ Auth::user()->shippingAddress->first()->number ?? '' }},
@@ -49,14 +51,37 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-center flex-column flex-md-row gap-3">
-                    <a href="{{ route('myorder') }}" class="btn btn-primary shadow-sm">View My Orders</a>
-                    <a href="#" class="btn btn-warning shadow-sm" data-bs-toggle="modal"
+                    <a href="{{ route('myorder') }}" class="btn btn-primary shadow-sm px-4 py-2">View My Orders</a>
+                    <a href="#" class="btn btn-warning shadow-sm px-4 py-2" data-bs-toggle="modal"
                         data-bs-target="#changePasswordModal">Change Password</a>
                 </div>
             </div>
         </div>
     </div>
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            background: #ffffff;
+        }
+
+        .btn-warning {
+            color: #fff;
+            background-color: #ffc107;
+            border-color: #ffc107;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+            border-color: #d39e00;
+        }
+
+        .profile-img {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
         @media (max-width: 768px) {
             .card-body {
                 padding: 1.5rem;
@@ -69,10 +94,6 @@
             .me-md-3 {
                 margin-right: 0 !important;
             }
-        }
-
-        .btn-warning {
-            color: #fff;
         }
     </style>
 
