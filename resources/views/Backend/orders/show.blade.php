@@ -18,22 +18,36 @@
                         <p class="mb-1"><strong>Email:</strong> {{ $order->user?->email ?? 'N/A' }}</p>
                         <p class="mb-1"><strong>Phone:</strong> {{ $order->user?->contact ?? 'N/A' }}</p>
                         <p class="mb-1"><strong>Address:</strong></p>
-                            <p>
-                                {{ Auth::user()->shippingAddress->first()->address ?? 'Not Provided' }},
-                                {{ Auth::user()->shippingAddress->first()->number ?? '' }},
-                                {{ Auth::user()->shippingAddress->first()->landmark ?? '' }},
-                                {{ Auth::user()->shippingAddress->first()->street_no ?? 'N/A' }},
-                                {{ Auth::user()->shippingAddress->first()->postal_code ?? 'N/A' }},
-                                {{ Auth::user()->shippingAddress->first()->state ?? '' }}
-                            </p>
+                        <p>
+                            {{ Auth::user()->shippingAddress->first()->address ?? 'Not Provided' }},
+                            {{ Auth::user()->shippingAddress->first()->number ?? '' }},
+                            {{ Auth::user()->shippingAddress->first()->landmark ?? '' }},
+                            {{ Auth::user()->shippingAddress->first()->street_no ?? 'N/A' }},
+                            {{ Auth::user()->shippingAddress->first()->postal_code ?? 'N/A' }},
+                            {{ Auth::user()->shippingAddress->first()->state ?? '' }}
+                        </p>
 
                     </div>
                     <div class="col-md-6 text-md-end">
                         <h5 class="card-title">Order Summary</h5>
                         <p class="mb-1"><strong>Total Quantity:</strong> {{ $order->total_quantity }}</p>
                         <p class="mb-1"><strong>Total Price:</strong> Rs. {{ number_format($order->total_cost, 2) }}</p>
-                        <p class="mb-1"><strong>Status:</strong> {{ $order->status }}</p>
-                        <p class="mb-1"><strong>Payment Method:</strong> {{ $order->payment_method ?? 'Not specified' }}
+                        <p class="mb-1"><strong>Status:</strong> <span
+                                class="badge 
+                            {{ $order->status === 'pending'
+                                ? 'bg-warning text-dark'
+                                : ($order->status === 'shipped'
+                                    ? 'bg-primary'
+                                    : ($order->status === 'delivered'
+                                        ? 'bg-success'
+                                        : ($order->status === 'cancelled'
+                                            ? 'bg-danger'
+                                            : 'bg-secondary'))) }}">
+                                {{ ucfirst($order->status) }}
+                            </span></p>
+                        <p class="mb-1"><strong>Payment Method:</strong>
+                            {{ $order->payment?->payment_method ?? 'Not specified' }}
+                        </p>
                         </p>
 
                     </div>

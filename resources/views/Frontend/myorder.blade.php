@@ -58,11 +58,21 @@
 
                                     <!-- Status -->
                                     <div class="col-md-2 col-6 text-center text-md-start">
+
                                         <span
                                             class="badge 
-                                            {{ $order->status === 'Completed' ? 'bg-success' : ($order->status === 'Pending' ? 'bg-warning text-dark' : ($order->status === 'Shipped' ? 'bg-primary text-dark' : 'bg-danger')) }}">
-                                            {{ $order->status }}
+                                                {{ $order->status === 'pending'
+                                                    ? 'bg-warning text-dark'
+                                                    : ($order->status === 'shipped'
+                                                        ? 'bg-primary'
+                                                        : ($order->status === 'delivered'
+                                                            ? 'bg-success'
+                                                            : ($order->status === 'cancelled'
+                                                                ? 'bg-danger'
+                                                                : 'bg-secondary'))) }}">
+                                            {{ ucfirst($order->status) }}
                                         </span>
+
                                     </div>
 
                                     <!-- Invoice -->
@@ -122,10 +132,21 @@
                                                                         <p class="mb-1"><strong>Subtotal Price:</strong>
                                                                             ₹{{ number_format($order->total_cost, 2) }}</p>
                                                                         <p class="mb-1"><strong>Status:</strong> <span
-                                                                                class="badge bg-info text-dark">{{ $order->status }}</span>
+                                                                                class="badge 
+                                                                                {{ $order->status === 'pending'
+                                                                                    ? 'bg-warning text-dark'
+                                                                                    : ($order->status === 'shipped'
+                                                                                        ? 'bg-primary'
+                                                                                        : ($order->status === 'delivered'
+                                                                                            ? 'bg-success'
+                                                                                            : ($order->status === 'cancelled'
+                                                                                                ? 'bg-danger'
+                                                                                                : 'bg-secondary'))) }}">
+                                                                                {{ ucfirst($order->status) }}
+                                                                            </span>
                                                                         </p>
                                                                         <p class="mb-1"><strong>Payment Method:</strong>
-                                                                            {{ $order->payment_method ?? 'Not specified' }}
+                                                                            {{ $order->payment?->payment_method ?? 'Not specified' }}
                                                                         </p>
                                                                     </div>
                                                                 </div>
