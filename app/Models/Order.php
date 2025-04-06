@@ -26,4 +26,9 @@ class Order extends Model
     {
         return $this->hasOne(ShippingAddress::class, 'order_id');
     }
+
+    public function payment()  // Add this relationship
+    {
+        return $this->hasOne(Payment::class);
+    }
 }

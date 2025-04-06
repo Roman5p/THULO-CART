@@ -13,4 +13,10 @@ class payment extends Model
         'payment_status',
         'payment_id',
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
 }
