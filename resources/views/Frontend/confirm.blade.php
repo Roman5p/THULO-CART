@@ -247,19 +247,25 @@
                         <input class="form-check-input" type="radio" name="payment" id="esewa" value="esewa">
                         <label class="form-check-label" for="esewa">eSewa</label>
                         <img src="{{ asset('frontend/assets/images/esewa.png') }}" alt="eSewa" height="30">
+                        <!-- Inside the eSewa form section -->
                         @php
                             $esewa_transaction_uuid = Illuminate\Support\Str::orderedUuid()->toString();
-                            $esewa_message = "total_amount=110,transaction_uuid={$esewa_transaction_uuid},product_code=EPAYTEST";
+                            $esewa_message = "total_amount={$carts->sum(function ($cart) {
+    return $cart->product->actual_amount * $cart->quantity;
+})},transaction_uuid={$esewa_transaction_uuid},product_code=EPAYTEST";
                             $esewa_secret = '8gBm/:&EnhH.1/q';
                             $esewa_s = hash_hmac('sha256', $esewa_message, $esewa_secret, true);
                             $esewa_value = base64_encode($esewa_s);
                         @endphp
                         <form id="esewa-payment-form" action="https://rc-epay.esewa.com.np/api/epay/main/v2/form"
                             method="POST">
-                            <input type="text" id="esewa_amount" name="amount" value="100" required hidden>
-                            <input type="text" id="esewa_tax_amount" name="tax_amount" value="10" required hidden>
-                            <input type="text" id="esewa_total_amount" name="total_amount" value="110" required
-                                hidden>
+                            <input type="text" id="esewa_amount" name="amount"
+                                value="{{ $carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}) - 0 }}"
+                                required hidden>
+                            <input type="text" id="esewa_tax_amount" name="tax_amount" value="0" required hidden>
+                            <input type="text" id="esewa_total_amount" name="total_amount"
+                                value="{{ $carts->sum(function ($cart) {return $cart->product->actual_amount * $cart->quantity;}) }}"
+                                required hidden>
                             <input type="text" id="esewa_transaction_uuid" name="transaction_uuid"
                                 value="{{ $esewa_transaction_uuid }}" required hidden>
                             <input type="text" id="esewa_product_code" name="product_code" value="EPAYTEST" required
@@ -269,7 +275,7 @@
                             <input type="text" id="esewa_product_delivery_charge" name="product_delivery_charge"
                                 value="0" required hidden>
                             <input type="text" id="esewa_success_url" name="success_url"
-                                value="{{ route('payment.success') }}" required hidden>
+                                value="{{ route('payment.success', ['oid' => $order->id]) }}" required hidden>
                             <input type="text" id="esewa_failure_url" name="failure_url"
                                 value="{{ route('payment.failure') }}" required hidden>
                             <input type="text" id="esewa_signed_field_names" name="signed_field_names"
@@ -284,7 +290,7 @@
                         <input class="form-check-input" type="radio" name="payment" id="khalti" value="khalti">
                         <label class="form-check-label" for="khalti"></label>Khalti
                         <img src="{{ asset('frontend/assets/images/khalti.png') }}" alt="Khalti" height="30">
-                        
+
                     </div>
 
                     <!-- Card -->

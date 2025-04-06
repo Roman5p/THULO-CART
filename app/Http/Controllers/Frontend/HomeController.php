@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\product;
 use App\Models\ShippingAddress;
 use App\Models\Order_Item;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -123,53 +124,46 @@ class HomeController extends Controller
             ->with('success', 'Profile updated successfully!');
     }
 
-    
+
 
     // Show checkout page with shipping information
     public function checkout()
     {
-        // Get authenticated user's ID
         $user_id = auth()->id();
-        // Fetch user's permanent shipping address if exists
         $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent', true)->first();
-        // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
-        // Return checkout view with cart and shipping data
         return view('frontend.checkout', compact('carts', 'shippingInfo'));
     }
 
-    // Process checkout and store order information
     public function storeCheckout(Request $request)
     {
-        // Get the ID of the currently authenticated user
         $user_id = auth()->id();
-
-        // Retrieve all cart items associated with the authenticated user
         $carts = Cart::where('user_id', $user_id)->get();
 
-        // Create a new order instance for the checkout
-        $order = new Order();
-        $order->user_id = $user_id;              // Assign the user ID to the order
-        $order->status = 'pending';              // Set initial order status as pending
-        $order->total_cost = $carts->sum(function ($cart) {
-            // Calculate total cost by multiplying each product's price by its quantity
-            return $cart->product->price * $cart->quantity;
-        });
-        $order->total_quantity = $carts->sum('quantity');  // Sum up total quantity of all items
-        $order->save();                           // Save the order to the database
-
-        // Iterate through each cart item to create order items
-        foreach ($carts as $cart) {
-            $orderItem = new Order_Item();        // Create new order item instance
-            $orderItem->quantity = $cart->quantity;     // Set quantity from cart
-            $orderItem->product_id = $cart->product_id; // Link to the product
-            $orderItem->order_id = $order->id;         // Associate with the created order
-            $orderItem->save();                  // Save the order item to the database
+        if ($carts->isEmpty()) {
+            return redirect()->route('checkout')->with('error', 'Your cart is empty.');
         }
 
-        $shippingInfo = null;
-        // Validate shipping information from request
+        // Create a new order
+        $order = new Order();
+        $order->user_id = $user_id;
+        $order->status = 'pending'; // Initial status
+        $order->total_cost = $carts->sum(function ($cart) {
+            return $cart->product->price * $cart->quantity;
+        });
+        $order->total_quantity = $carts->sum('quantity');
+        $order->save();
 
+        // Create order items
+        foreach ($carts as $cart) {
+            $orderItem = new Order_Item();
+            $orderItem->quantity = $cart->quantity;
+            $orderItem->product_id = $cart->product_id;
+            $orderItem->order_id = $order->id;
+            $orderItem->save();
+        }
+
+        // Validate and save shipping info
         $request->validate([
             'address' => 'required|max:250',
             'number' => 'required|numeric',
@@ -180,14 +174,10 @@ class HomeController extends Controller
             'is_permanent' => 'required|boolean'
         ]);
 
+        $shippingInfo = $request->is_permanent
+            ? ShippingAddress::where('user_id', $user_id)->where('is_permanent', true)->first()
+            : null;
 
-        // Check if user wants to save this as permanent address
-        if ($request->is_permanent) {
-            // Get existing permanent shipping address if any
-            $shippingInfo = ShippingAddress::where('user_id', $user_id)->where('is_permanent', true)->first();
-        }
-
-        // Update existing shipping info if it exists
         if ($shippingInfo) {
             $shippingInfo->address = $request->address;
             $shippingInfo->number = $request->number;
@@ -197,9 +187,7 @@ class HomeController extends Controller
             $shippingInfo->state = $request->state;
             $shippingInfo->is_permanent = $request->is_permanent;
             $shippingInfo->save();
-        }
-        // Create new shipping info if none exists
-        else {
+        } else {
             $shippingInfo = new ShippingAddress();
             $shippingInfo->user_id = $user_id;
             $shippingInfo->address = $request->address;
@@ -212,44 +200,67 @@ class HomeController extends Controller
             $shippingInfo->save();
         }
 
-        // Create additional shipping info tied to this specific order
-        $shippingInfo = new ShippingAddress();
-        $shippingInfo->address = $request->address;
-        $shippingInfo->number = $request->number;
-        $shippingInfo->landmark = $request->landmark;
-        $shippingInfo->postalcode = $request->postalcode;
-        $shippingInfo->street_no = $request->street_no;
-        $shippingInfo->state = $request->state;
-        $shippingInfo->order_id = $order->id;
-        $shippingInfo->user_id = $user_id;
-        $shippingInfo->save();
+        // Save shipping info specific to this order
+        $orderShipping = new ShippingAddress();
+        $orderShipping->address = $request->address;
+        $orderShipping->number = $request->number;
+        $orderShipping->landmark = $request->landmark;
+        $orderShipping->postalcode = $request->postalcode;
+        $orderShipping->street_no = $request->street_no;
+        $orderShipping->state = $request->state;
+        $orderShipping->order_id = $order->id;
+        $orderShipping->user_id = $user_id;
+        $orderShipping->save();
 
-
-
-        // Redirect to confirmation page with success message
-        // return redirect()->route('getConfirm', $order->id)->with('success', 'Checkout successful');
+        // Redirect to confirmation page (where payment is initiated)
         return redirect()->route('getConfirm', $order->id);
-
-
     }
 
-    // Show order confirmation page
     public function getConfirm($oid)
     {
-        // Find order by ID
-        $order = Order::find($oid);
+        $order = Order::findOrFail($oid);
         $carts = Cart::where('user_id', auth()->id())->get();
+        return view('frontend.confirm', compact('order', 'carts'));
+    }
 
-        // Clear user's cart after successful checkout
+    public function success(Request $request)
+    {
+        // Get the order ID (you may need to pass this via the success URL or session)
+        $order = Order::findOrFail($request->query('oid')); // Assuming oid is passed in the URL
+
+        // Verify eSewa payment (simplified; you’d typically use an API call for production)
+        $transactionUuid = $request->query('transaction_uuid'); // eSewa should return this
+        if ($transactionUuid) {
+            // Update order status to shipped
+            $order->status = 'shipped';
+            $order->save();
+
+            // Create payment record
+            $payment = new Payment();
+            $payment->user_id = auth()->id();
+            $payment->order_id = $order->id;
+            $payment->payment_method = 'esewa';
+            $payment->payment_status = 'completed';
+            $payment->payment_id = $transactionUuid; // Store eSewa transaction ID
+            $payment->save();
+
+
+        }
+
+        $carts = Cart::where('user_id', auth()->id())->get();
 
         foreach ($carts as $cart) {
             $cart->delete();
         }
-        // Return confirmation view with order details
-        return view('frontend.confirm', compact('order', 'carts'));
+
+        return view('frontend.success', compact('carts', 'order'))->with('success', 'Payment successful! Order is now shipped.');
     }
 
-    // Show order details page
+    public function failurePage()
+    {
+        $carts = Cart::where('user_id', auth()->id())->get();
+        return view('frontend.failure', compact('carts'))->with('error', 'Payment failed. Please try again.');
+    }
 
     public function myorder()
     {
@@ -261,21 +272,6 @@ class HomeController extends Controller
         return view('frontend.myorder', compact('orders', 'carts'));
     }
 
-    public function success(request $request)
-    {
-        // Get user's cart items
-        $carts = Cart::where('user_id', auth()->id())->get();
-        // Return contact view with cart data
-        return view('frontend.success', compact('carts'));
-    }
-
-    public function failurePage()
-    {
-        // Get user's cart items
-        $carts = Cart::where('user_id', auth()->id())->get();
-        // Return contact view with cart data
-        return view('frontend.failure', compact('carts'));
-    }
 
 
 

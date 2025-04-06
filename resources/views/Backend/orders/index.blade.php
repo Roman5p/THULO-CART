@@ -38,9 +38,19 @@
                                                     @endforeach
                                                 </td>
                                                 <td>
-                                                   
-                                                   <span class="badge {{ $order->status == 'pending' ? 'bg-warning' : ($order->status == 'shipped' ? 'bg-primary' : 'bg-success') }}">{{ $order->status }}</span>
-                                                    
+                                                    <span
+                                                        class="badge 
+                                                        {{ $order->status === 'pending'
+                                                            ? 'bg-warning text-dark'
+                                                            : ($order->status === 'shipped'
+                                                                ? 'bg-primary'
+                                                                : ($order->status === 'delivered'
+                                                                    ? 'bg-success'
+                                                                    : ($order->status === 'cancelled'
+                                                                        ? 'bg-danger'
+                                                                        : 'bg-secondary'))) }}">
+                                                        {{ ucfirst($order->status) }}
+                                                    </span>
                                                 </td>
                                                 <td>
 

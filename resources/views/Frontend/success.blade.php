@@ -159,16 +159,18 @@
         }
     </style>
 
-    <div class="container">
-        <!-- Confirmation Header -->
-        <div class="confirmation-header">
-            <i class="fas fa-check-circle"></i>
-            <h1>Thank You! Your Order Has Been Placed</h1>
-            {{-- <p>Order Number: #{{ $order->id }}</p>
-            <p>We have sent a confirmation email to {{ $order->email }}.</p>
-            <p>Estimated Delivery Date: {{ $order->delivery_date }}</p> --}}
+    <div class="container py-3 py-md-4">
+        <div class="confirmation-header text-center">
+            <i class="fas fa-check-circle text-success" style="font-size: 40px;"></i>
+            <h1>Payment Successful!</h1>
+            <p>Order Number: #{{ $order->id }}</p>
+            <p>We have sent a confirmation email to {{ $order->email ?? Auth::user()->email }}.</p>
+            {{-- <p>Estimated Delivery Date:
+                {{ \Carbon\Carbon::parse($order->shippingAddress->first()->created_at)->addDays(7)->format('F j, Y') }}</p> --}}
+            <p>Status: {{ ucfirst($order->status) }}</p>
+            <a href="{{ route('index') }}" class="btn btn-primary mt-3">Continue Shopping</a>
         </div>
-
+    </div>
 @endsection
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
