@@ -7,7 +7,7 @@
         <!-- Dashboard Header -->
         <div class="mb-5 text-center">
             {{-- <h1 class="fw-bold text-dark display-4 animate__animated animate__bounceInDown" style="background: linear-gradient(45deg, #4a5568, #2d3748); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Admin Dashboard</h1> --}}
-            <p class="text-muted fw-medium animate__animated animate__fadeInUp">Explore Your Business Insights</p>
+            {{-- <p class="text-muted fw-medium animate__animated animate__fadeInUp">Explore Your Business Insights</p> --}}
         </div>
 
         <!-- Stats Cards -->
@@ -80,14 +80,21 @@
                                             <td>{{ $order->user->name ?? 'N/A' }}</td>
                                             <td>
                                                 <span
-                                                    class="badge badge-glow 
-                                                    @if ($order->status == 'Pending') bg-warning 
-                                                    @elseif($order->status == 'Completed') bg-success 
-                                                    @else bg-secondary @endif px-3 py-2">
-                                                    {{ $order->status }}
+                                                    class="badge 
+                                                                                {{ $order->status === 'pending'
+                                                                                    ? 'bg-warning text-dark'
+                                                                                    : ($order->status === 'shipped'
+                                                                                        ? 'bg-primary'
+                                                                                        : ($order->status === 'delivered'
+                                                                                            ? 'bg-success'
+                                                                                            : ($order->status === 'cancelled'
+                                                                                                ? 'bg-danger'
+                                                                                                : 'bg-secondary'))) }}">
+                                                    {{ ucfirst($order->status) }}
                                                 </span>
                                             </td>
-                                            <td>{{ $order->payment_method ?? 'Not Specified' }}</td>
+                                            <td>{{ $order->payment?->payment_method ?? 'Not specified' }}
+                                            </td>
                                             <td>{{ $order->created_at->format('d M Y, h:i A') }}</td>
                                             <td>
                                                 <a href="{{ route('admin.orders.show', $order->id) }}"

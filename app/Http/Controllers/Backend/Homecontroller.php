@@ -14,15 +14,13 @@ class Homecontroller extends Controller
 {
     public function index()
     {
-
         $totalUsers = User::count();
         $totalProducts = Product::count();
         $totalOrders = Order::count();
 
-        // Fetch recent orders (e.g., last 10 orders)
-        $recentOrders = Order::with('user') // Eager load the user relationship
-            ->orderBy('created_at', 'desc') // Sort by latest first
-            ->take(10) // Limit to 10 recent orders
+        $recentOrders = Order::with(['user', 'payment']) // Add payment relationship
+            ->orderBy('created_at', 'desc')
+            ->take(5)
             ->get();
 
         $mostlyPurchasedProducts = Product::select(
@@ -34,7 +32,7 @@ class Homecontroller extends Controller
             ->join('order_items', 'products.id', '=', 'order_items.product_id')
             ->groupBy('products.id', 'products.name', 'products.price')
             ->orderBy('total_purchases', 'desc')
-            ->limit(5) // Top 5 most purchased products
+            ->limit(5)
             ->get();
 
         return view(

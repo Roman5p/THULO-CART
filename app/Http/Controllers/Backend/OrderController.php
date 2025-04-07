@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
+
 class OrderController extends Controller
 {
     public function index()
@@ -49,5 +50,33 @@ class OrderController extends Controller
         $order = Order::find($id); // Get order by id
         $order->delete(); // Delete order
         return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully');
+    }
+
+    public function addPayment(Request $request, $orderId)
+    {
+        $request->validate([
+            'payment_method' => 'required|string|in:cash,credit_card,paypal,stripe', // Add allowed payment methods
+            'status' => 'required|string|in:pending,completed,failed',
+            'payment_id' => 'nullable|string',
+        ]);
+
+        $order = Order::findOrFail($orderId);
+
+        $payment = Payment::create([
+            'user_id' => $order->user_id,
+            'order_id' => $order->id,
+            'payment_method' => $request->payment_method,
+            'status' => $request->status,
+            'payment_id' => $request->payment_id,
+        ]);
+
+        return redirect()->route('admin.orders.show', $order->id)
+            ->with('success', 'Payment method added successfully');
+    }
+
+    public function show($id)
+    {
+        $order = Order::with(['user', 'orderItems', 'payment'])->findOrFail($id);
+        return view('backend.orders.show', compact('order'));
     }
 }

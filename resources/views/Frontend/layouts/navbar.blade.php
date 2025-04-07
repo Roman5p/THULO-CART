@@ -15,7 +15,7 @@
             </h4>
             <ul class="list-group mb-3">
                 @foreach ($carts as $cart)
-                    <li class="list-group-item d-flex justify-content-between align-items-center border-0 py-3">
+                    <li class="list-group-item 0 align-items-center border-0 py-3">
                         <div class="d-flex align-items-center w-75">
                             <h6 class="mb-0 fw-bold text-dark">{{ $loop->iteration }}.
                                 {{ optional($cart->product)->name ?? 'Unnamed Product' }}</h6>
