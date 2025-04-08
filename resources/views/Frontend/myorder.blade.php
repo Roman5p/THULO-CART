@@ -76,9 +76,10 @@
                                     </div>
 
                                     <!-- Invoice -->
+                                    <!-- Invoice -->
                                     <div class="col-md-1 col-12 text-center text-md-end">
                                         <!-- Invoice Button -->
-                                        <a href="#"
+                                        <a href="{{ route('invoice.generate', ['orderId' => $order->id]) }}" }}"
                                             class="btn btn-outline-primary btn-sm w-100 mb-2 d-flex align-items-center justify-content-center gap-1">
                                             <i class="fa-solid fa-file-invoice-dollar"></i>
                                             <span class="d-none d-md-inline">Invoice</span>

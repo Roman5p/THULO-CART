@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InvoiceController;
 
 use App\Http\Controllers\Frontend\CartController;
 
@@ -10,13 +11,13 @@ use App\Http\Controllers\Frontend\CartController;
 // return view('welcome');
 // });
 
-Route::get('/', [HomeController::class,'index'])->name('index');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/product-details/{id}', [HomeController::class, 'productDetails'])->name('productDetails');
 Route::get('/aboutus', [HomeController::class, 'aboutus'])->name('aboutus');
 Route::get('/contactus', [HomeController::class, 'contact'])->name('contact');
 Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
-Route::post('/checkout/store',[HomeController::class,'storeCheckout'])->name('checkout.store');
-Route::get('/confirm/{id}',[HomeController::class,'getConfirm'])->name('getConfirm');
+Route::post('/checkout/store', [HomeController::class, 'storeCheckout'])->name('checkout.store');
+Route::get('/confirm/{id}', [HomeController::class, 'getConfirm'])->name('getConfirm');
 Route::get('/payment', [HomeController::class, 'payment'])->name('payment');
 
 
@@ -45,6 +46,7 @@ Route::get('/user/profile', [HomeController::class, 'profile'])->name('user.prof
 
 Route::post('/profile/update', [HomeController::class, 'updatePhoto'])->name('profile.update');
 
+Route::get('/invoice/{orderId}', [InvoiceController::class, 'generateInvoice'])->name('invoice.generate');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 require __DIR__ . '/admin.php';
