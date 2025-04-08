@@ -8,166 +8,161 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #2d3748;
-            background-color: #f7fafc;
+            color: #333;
+            background-color: #f9f9f9;
             line-height: 1.6;
         }
 
         .container {
-            max-width: 850px;
+            max-width: 800px;
             margin: 30px auto;
             background-color: #ffffff;
-            border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            padding: 30px;
-            border-left: 4px solid #2c5282;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 40px;
         }
 
         .invoice-header {
             text-align: center;
             margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px dashed #e2e8f0;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
         }
 
         .invoice-header img {
-            max-width: 160px;
-            margin-bottom: 10px;
+            max-width: 180px;
+            margin-bottom: 15px;
         }
 
         .invoice-header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            color: #2c5282;
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 5px 0;
         }
 
         .invoice-header p {
-            font-size: 13px;
-            color: #718096;
+            font-size: 14px;
+            color: #666;
             margin: 4px 0;
         }
 
-        .address-section {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 35px;
+        .order-id {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 4px;
             font-size: 13px;
-            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .address-section {
+            margin-bottom: 30px;
         }
 
         .address {
-            width: 48%;
             padding: 15px;
-            background-color: #f9fafb;
-            border-radius: 4px;
-            border-left: 3px solid #bee3f8;
+            background-color: #fafafa;
+            border-radius: 6px;
+            margin-bottom: 15px;
         }
 
         .address h3 {
             font-size: 15px;
             font-weight: 600;
-            color: #2c5282;
+            color: #444;
             margin: 0 0 10px 0;
-            text-transform: uppercase;
         }
 
         .address p {
             margin: 5px 0;
-            color: #4a5568;
+            color: #555;
+            font-size: 14px;
         }
 
         .details-table {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
-            font-size: 13px;
-        }
-
-        .details-table th,
-        .details-table td {
-            border: 1px solid #e2e8f0;
-            padding: 12px 14px;
-            text-align: left;
+            font-size: 14px;
         }
 
         .details-table th {
-            background-color: #edf2f7;
+            background-color: #f5f5f5;
             font-weight: 600;
-            color: #2d3748;
-            text-transform: uppercase;
-            font-size: 12px;
+            color: #444;
+            text-align: left;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
         }
 
         .details-table td {
-            background-color: #ffffff;
-            color: #4a5568;
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+
+        .details-table tr:last-child td {
+            border-bottom: none;
         }
 
         .total-section {
-            width: 35%;
+            width: 100%;
+            max-width: 300px;
             margin-left: auto;
-            font-size: 13px;
+            font-size: 14px;
             border-collapse: collapse;
         }
 
         .total-section tr td {
-            padding: 10px 12px;
-            border: 1px solid #e2e8f0;
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
         }
 
         .total-section .label {
-            font-weight: 600;
-            color: #2d3748;
-            background-color: #f9fafb;
+            font-weight: 500;
+            color: #555;
             text-align: right;
         }
 
         .total-section .value {
             text-align: right;
-            background-color: #ffffff;
             font-weight: 500;
-        }
-
-        .discount-row .label,
-        .discount-row .value {
-            color: #c53030;
-            font-weight: 600;
+            color: #333;
         }
 
         .grand-total .label,
         .grand-total .value {
-            background-color: #2c5282;
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 14px;
-            padding: 12px 14px;
+            font-weight: 600;
+            background-color: #f5f5f5;
         }
 
-        .divider {
-            width: 60px;
-            height: 3px;
-            background-color: #2c5282;
-            margin: 20px auto;
-            border-radius: 2px;
+        .payment-method {
+            margin-top: 25px;
+            padding: 12px 15px;
+            background-color: #fafafa;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #555;
         }
 
         .footer {
-            text-align: center;
             margin-top: 40px;
-            font-size: 11px;
-            color: #718096;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 13px;
+            color: #666;
         }
 
         .footer p {
-            margin: 4px 0;
+            margin: 5px 0;
         }
 
-        .footer .highlight {
-            color: #2c5282;
-            font-weight: 600;
+        .footer a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
         }
     </style>
 </head>
@@ -175,18 +170,18 @@
 <body>
     <div class="container">
         <div class="invoice-header">
-            <img src="{{ url('frontend/assets/images/logo.png') }}" alt="Thulo Cart Logo">
+            <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="Thulo Cart Logo">
             <h1>Invoice</h1>
-            <p>Invoice #{{ $invoice_number }}</p>
-            <p>Order Date: {{ $date }}</p>
-            <p>Order ID: {{ $order->id }}</p>
+            <p>Invoice #{{ $order->orderItems->first()->product->id }}</p>
+            <p>Date: {{ $date }}</p>
+            <span class="order-id">Order #{{ $order->id }}</span>
         </div>
 
         <div class="address-section">
             <div class="address">
-                <h3>Shipped To</h3>
+                <h3>Shipping Address</h3>
                 @if ($customer)
-                    <p>{{ $customer->name }}</p>
+                    <p><strong>{{ $customer->name }}</strong></p>
                     @if ($shippingAddress)
                         <p>{{ $shippingAddress->address }}</p>
                         <p>{{ $shippingAddress->landmark }}, Street {{ $shippingAddress->street_no }}</p>
@@ -207,8 +202,8 @@
                 <tr>
                     <th>Product</th>
                     <th>Qty</th>
-                    <th>Price</th>
-                    <th>Subtotal</th>
+                    <th>Unit Price</th>
+                    <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -229,29 +224,36 @@
                 <td class="value">Rs. {{ number_format($order->total_cost, 2) }}</td>
             </tr>
             @if ($order->discount_percentage && $order->discount_percentage > 0)
-                <tr class="discount-row">
+                <tr>
                     <td class="label">Discount ({{ $order->discount_percentage }}%)</td>
-                    <td class="value">-Rs.
-                        {{ number_format(($order->total_cost * $order->discount_percentage) / 100, 2) }}</td>
+                    <td class="value">-Rs. {{ number_format(($order->total_cost * $order->discount_percentage) / 100, 2) }}</td>
                 </tr>
                 <tr class="grand-total">
-                    <td class="label">Total</td>
-                    <td class="value">Rs.
-                        {{ number_format($order->total_cost * (1 - $order->discount_percentage / 100), 2) }}</td>
+                    <td class="label">Total Amount</td>
+                    <td class="value">Rs. {{ number_format($order->total_cost * (1 - $order->discount_percentage / 100), 2) }}</td>
                 </tr>
             @else
                 <tr class="grand-total">
-                    <td class="label">Total</td>
+                    <td class="label">Total Amount</td>
                     <td class="value">Rs. {{ number_format($order->total_cost, 2) }}</td>
                 </tr>
             @endif
         </table>
 
-        <div class="divider"></div>
+        {{-- <div class="payment-method">
+            <strong>Payment Method:</strong> 
+            @if($order->payment_method === 'cod')
+                Cash on Delivery
+            @elseif($order->payment_method === 'online')
+                Online Payment
+            @else
+                {{ ucfirst($order->payment_method) }}
+            @endif
+        </div> --}}
 
         <div class="footer">
-            <p>Thank you for choosing <span class="highlight">Thulo Cart</span></p>
-            <p>Contact us at <span class="highlight">contact@thulocart.com</span> | +123-456-7890</p>
+            <p>Thank you for shopping with us</p>
+            <p>Contact: <a href="mailto:contact@thulocart.com">contact@thulocart.com</a> | +123-456-7890</p>
             <p>Terms & conditions apply</p>
         </div>
     </div>
