@@ -27,9 +27,10 @@ class CartController extends Controller  // CartController class extending base 
 
         // Calculate totals by iterating through cart items
         foreach ($carts as $cart) {
-            $total_cost = $total_cost + $cart->product->price * $cart->quantity;          // Sum original price × quantity
-            $discount = $discount + $cart->product->discount_amount * $cart->quantity;    // Sum discount × quantity
-            $cost = $cost + $cart->product->actual_amount * $cart->quantity;              // Sum final price × quantity
+            $total_cost += $cart->product->price * $cart->quantity;          // Sum original price × quantity
+            $total_quantity += $cart->quantity;                              // Sum quantity of items// Calculate discount and cost
+            $discount += $discount + $cart->product->discount_amount * $cart->quantity;    // Sum discount × quantity
+            $cost += $cart->product->actual_amount * $cart->quantity;              // Sum final price × quantity
         }
 
         // Return the cart view with calculated values
@@ -49,7 +50,7 @@ class CartController extends Controller  // CartController class extending base 
 
         // Check if product already exists in user's cart
         $cart = Cart::where('user_id', auth()->id())->where('product_id', $pid)->first();
-        
+
         if ($cart) {
             // If item exists, increment quantity
             $cart->quantity += $quantity;

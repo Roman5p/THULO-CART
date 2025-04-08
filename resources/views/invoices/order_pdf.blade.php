@@ -172,7 +172,7 @@
         <div class="invoice-header">
             <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="Thulo Cart Logo">
             <h1>Invoice</h1>
-            <p>Invoice #{{ $order->orderItems->first()->product->id }}</p>
+            <p>Invoice #{{ $order->id }}-{{ $order->orderItems->pluck('id')->implode('-') }}</p>
             <p>Date: {{ $date }}</p>
             <span class="order-id">Order #{{ $order->id }}</span>
         </div>
