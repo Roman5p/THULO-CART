@@ -86,6 +86,7 @@ class CartController extends Controller  // CartController class extending base 
         // Calculate totals (same logic as getCarts)
         foreach ($carts as $cart) {
             $total_cost = $total_cost + $cart->product->price * $cart->quantity;
+            $total_quantity += $cart->quantity;    
             $discount = $discount + $cart->product->discount_amount * $cart->quantity;
             $cost = $cost + $cart->product->actual_amount * $cart->quantity;
         }

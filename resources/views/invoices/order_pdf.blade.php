@@ -170,7 +170,7 @@
 <body>
     <div class="container">
         <div class="invoice-header">
-            <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="Thulo Cart Logo">
+            <img src="{{ asset(path: 'images/logo.jpg') }}" alt="Thulo Cart Logo">
             <h1>Invoice</h1>
             <p>Invoice #{{ $order->id }}-{{ $order->orderItems->pluck('id')->implode('-') }}</p>
             <p>Date: {{ $date }}</p>
@@ -221,35 +221,33 @@
         <table class="total-section">
             <tr>
                 <td class="label">Subtotal</td>
-                <td class="value">Rs. {{ number_format($order->total_cost, 2) }}</td>
+                <td class="value">Rs. {{ number_format($order->orderItems->sum(fn($item) => $item->product->actual_amount * $item->quantity), 2) }}</td>
             </tr>
-            @if ($order->discount_percentage && $order->discount_percentage > 0)
-                <tr>
-                    <td class="label">Discount ({{ $order->discount_percentage }}%)</td>
-                    <td class="value">-Rs. {{ number_format(($order->total_cost * $order->discount_percentage) / 100, 2) }}</td>
-                </tr>
-                <tr class="grand-total">
-                    <td class="label">Total Amount</td>
-                    <td class="value">Rs. {{ number_format($order->total_cost * (1 - $order->discount_percentage / 100), 2) }}</td>
-                </tr>
-            @else
-                <tr class="grand-total">
-                    <td class="label">Total Amount</td>
-                    <td class="value">Rs. {{ number_format($order->total_cost, 2) }}</td>
-                </tr>
-            @endif
+
+            <tr>
+                <td class="label">eSewa Charges (10%)</td>
+                <td class="value">Rs.
+                    {{ number_format($order->orderItems->sum(fn($item) => $item->product->actual_amount * $item->quantity) * 0.1, 2) }}
+                </td>
+            </tr>
+            <tr class="grand-total">
+                <td class="label">Total Amount</td>
+                <td class="value">
+                    Rs. {{ number_format($order->orderItems->sum(fn($item) => $item->product->actual_amount * $item->quantity) * 1.1, 2) }}
+                </td>
+            </tr>
         </table>
 
-        {{-- <div class="payment-method">
-            <strong>Payment Method:</strong> 
-            @if($order->payment_method === 'cod')
+        <div class="payment-method">
+            <strong>Payment Method:</strong>
+            @if ($order->payment_method === 'cod')
                 Cash on Delivery
             @elseif($order->payment_method === 'online')
-                Online Payment
+                Online Payment (eSewa)
             @else
                 {{ ucfirst($order->payment_method) }}
             @endif
-        </div> --}}
+        </div>
 
         <div class="footer">
             <p>Thank you for shopping with us</p>

@@ -269,6 +269,21 @@ class HomeController extends Controller
         $orders = Order::where('user_id', $user_id)->get();
         // Get user's cart items
         $carts = Cart::where('user_id', auth()->id())->get();
+
+
+        // Initialize variables for checkout calculations
+        $discount = 0;
+        $cost = 0;
+        $total_quantity = 0;  // Note: Currently unused in calculations
+        $total_cost = 0;
+
+        // Calculate totals (same logic as getCarts)
+        foreach ($carts as $cart) {
+            $total_cost = $total_cost + $cart->product->price * $cart->quantity;
+            $total_quantity += $cart->quantity;    
+            $discount = $discount + $cart->product->discount_amount * $cart->quantity;
+            $cost = $cost + $cart->product->actual_amount * $cart->quantity;
+        }
         // Return contact view with cart data
         return view('frontend.myorder', compact('orders', 'carts'));
     }
