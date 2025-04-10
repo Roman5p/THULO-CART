@@ -131,7 +131,6 @@
                                                                         <h5 class="text-primary">Order Summary</h5>
                                                                         <p class="mb-1"><strong>Total Quantity:</strong>
                                                                             {{ $order->total_quantity }}</p>
-
                                                                         <p class="mb-1"><strong>Subtotal Price:</strong>
                                                                             ₹{{ number_format($order->total_cost, 2) }}</p>
                                                                         <p class="mb-1"><strong>Status:</strong> <span

@@ -226,35 +226,38 @@ class HomeController extends Controller
 
     public function success(Request $request)
     {
-        // Get the order ID (you may need to pass this via the success URL or session)
-        $order = Order::findOrFail($request->query('oid')); // Assuming oid is passed in the URL
+        $order = Order::findOrFail($request->query('oid'));
+        $transactionUuid = $request->query('transaction_uuid');
 
-        // Verify eSewa payment (simplified; you’d typically use an API call for production)
-        $transactionUuid = $request->query('transaction_uuid'); // eSewa should return this
         if ($transactionUuid) {
-            // Update order status to shipped
-            $order->status = 'shipped';
+            $order->status = 'completed';
             $order->save();
 
-            // Create payment record
-            $payment = new Payment();
-            $payment->user_id = auth()->id();
-            $payment->order_id = $order->id;
-            $payment->payment_method = 'esewa';
-            $payment->payment_status = 'completed';
-            $payment->payment_id = $transactionUuid; // Store eSewa transaction ID
-            $payment->save();
+            $payment = Payment::where('order_id', $order->id)->first();
 
+            if ($payment) {
+                $payment->payment_status = 'completed';
+                $payment->payment_id = $transactionUuid;
+                $payment->save();
+            } else {
+                $payment = new Payment();
+                $payment->user_id = auth()->id();
+                $payment->order_id = $order->id;
+                $payment->payment_method = 'esewa';
+                $payment->payment_status = 'completed';
+                $payment->payment_id = $transactionUuid;
+                $payment->save();
+            }
 
+            // Fetch carts before deletion
+            $carts = Cart::where('user_id', auth()->id())->get();
+
+            // Clear the cart
+            Cart::where('user_id', auth()->id())->delete();
         }
 
-        $carts = Cart::where('user_id', auth()->id())->get();
-
-        foreach ($carts as $cart) {
-            $cart->delete();
-        }
-
-        return view('frontend.success', compact('carts', 'order'))->with('success', 'Payment successful! Order is now shipped.');
+        // Pass both $order and $carts to the view
+        return view('frontend.success', compact('order', 'carts'))->with('success', 'Payment successful! Order is now confirmed.');
     }
 
     public function failurePage()
@@ -280,7 +283,7 @@ class HomeController extends Controller
         // Calculate totals (same logic as getCarts)
         foreach ($carts as $cart) {
             $total_cost = $total_cost + $cart->product->price * $cart->quantity;
-            $total_quantity += $cart->quantity;    
+            $total_quantity += $cart->quantity;
             $discount = $discount + $cart->product->discount_amount * $cart->quantity;
             $cost = $cost + $cart->product->actual_amount * $cart->quantity;
         }
