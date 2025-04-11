@@ -5,11 +5,11 @@
     <title>Invoice #{{ $invoice_number }}</title>
     <style>
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
-            background-color: #f9f9f9;
+            background-color: #f4f4f9;
             line-height: 1.6;
         }
 
@@ -17,8 +17,8 @@
             max-width: 800px;
             margin: 30px auto;
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             padding: 40px;
         }
 
@@ -26,33 +26,34 @@
             text-align: center;
             margin-bottom: 30px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #ddd;
         }
 
         .invoice-header img {
-            max-width: 180px;
-            margin-bottom: 15px;
+            max-width: 150px;
+            margin-bottom: 10px;
         }
 
         .invoice-header h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #333;
-            margin: 0 0 5px 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #444;
+            margin: 0;
         }
 
         .invoice-header p {
             font-size: 14px;
             color: #666;
-            margin: 4px 0;
+            margin: 5px 0;
         }
 
         .order-id {
             display: inline-block;
-            background-color: #f0f0f0;
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 13px;
+            background-color: #e0f7fa;
+            padding: 6px 14px;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #00796b;
             margin-top: 10px;
         }
 
@@ -61,17 +62,18 @@
         }
 
         .address {
-            padding: 15px;
-            background-color: #fafafa;
-            border-radius: 6px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
             margin-bottom: 15px;
         }
 
         .address h3 {
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: bold;
             color: #444;
-            margin: 0 0 10px 0;
+            margin-bottom: 10px;
         }
 
         .address p {
@@ -88,12 +90,12 @@
         }
 
         .details-table th {
-            background-color: #f5f5f5;
-            font-weight: 600;
+            background-color: #f0f0f0;
+            font-weight: bold;
             color: #444;
             text-align: left;
             padding: 12px 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #ddd;
         }
 
         .details-table td {
@@ -120,28 +122,30 @@
         }
 
         .total-section .label {
-            font-weight: 500;
+            font-weight: bold;
             color: #555;
             text-align: right;
         }
 
         .total-section .value {
             text-align: right;
-            font-weight: 500;
+            font-weight: bold;
             color: #333;
         }
 
         .grand-total .label,
         .grand-total .value {
-            font-weight: 600;
-            background-color: #f5f5f5;
+            font-weight: bold;
+            background-color: #e0f7fa;
+            color: #00796b;
         }
 
         .payment-method {
             margin-top: 25px;
-            padding: 12px 15px;
-            background-color: #fafafa;
-            border-radius: 6px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
             font-size: 14px;
             color: #555;
         }
@@ -149,7 +153,7 @@
         .footer {
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 2px solid #ddd;
             text-align: center;
             font-size: 13px;
             color: #666;
@@ -160,9 +164,9 @@
         }
 
         .footer a {
-            color: #333;
+            color: #00796b;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -170,7 +174,7 @@
 <body>
     <div class="container">
         <div class="invoice-header">
-            <img src="{{ asset(path: 'images/logo.jpg') }}" alt="Thulo Cart Logo">
+            <img src="{{ asset('images/logo.jpg') }}" alt="Thulo Cart Logo">
             <h1>Invoice</h1>
             <p>Invoice #{{ $order->id }}-{{ $order->orderItems->pluck('id')->implode('-') }}</p>
             <p>Date: {{ $date }}</p>
