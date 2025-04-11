@@ -8,9 +8,9 @@
             <div class="row align-items-center gx-5">
                 <div class="col-md-12">
                     <div class="text-center">
-                        <span class="text-muted text-uppercase">Contact</span>
-                        <h2 class="display-6 fw-bold mt-2">Get in Touch</h2>
-                        <p class="text-secondary">Feel free to reach out to us with any questions or concerns. We're here to help and look forward to hearing from you!</p>
+                        <span class="text-muted text-uppercase fs-6">Contact</span>
+                        <h2 class="display-5 fw-bold mt-3 text-primary">Get in Touch</h2>
+                        <p class="text-secondary mt-3 fs-5">Have questions or need assistance? We're here to help. Reach out to us anytime, and we'll get back to you as soon as possible!</p>
                     </div>
                 </div>
             </div>
