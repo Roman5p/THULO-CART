@@ -5,19 +5,43 @@
 @section('main-section')
     <section class="py-5">
         <div class="container">
-            <div class="row align-items-center gx-4">
-                <div class="col-md-5">
-                    <div class="ms-md-2 ms-lg-5"><img class="img-fluid rounded-3"
-                            src="https://freefrontend.dev/assets/square.png"></div>
+            <div class="row align-items-center gx-5">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <span class="text-muted text-uppercase">Contact</span>
+                        <h2 class="display-6 fw-bold mt-2">Get in Touch</h2>
+                        <p class="text-secondary">Feel free to reach out to us with any questions or concerns. We're here to help and look forward to hearing from you!</p>
+                    </div>
                 </div>
-                <div class="col-md-6 offset-md-1">
-                    <div class="ms-md-2 ms-lg-5">
-                        <span class="text-muted">Contact</span>
-                        <h2 class="display-5 fw-bold">Contact Form</h2>
-                        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
-                        <p class="lead mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <h4 class="card-title text-center mb-4 text-primary fw-bold">Contact Us</h4>
+                            <form action="" method="POST">
+                                @csrf
+                                <div class="mb-4">
+                                    <label for="name" class="form-label fw-semibold">Full Name</label>
+                                    <input type="text" class="form-control rounded-pill shadow-sm" id="name" name="name" placeholder="Enter your full name" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="email" class="form-label fw-semibold">Email Address</label>
+                                    <input type="email" class="form-control rounded-pill shadow-sm" id="email" name="email" placeholder="Enter your email address" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="subject" class="form-label fw-semibold">Subject</label>
+                                    <input type="text" class="form-control rounded-pill shadow-sm" id="subject" name="subject" placeholder="Enter the subject" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="form-label fw-semibold">Your Message</label>
+                                    <textarea class="form-control rounded-3 shadow-sm" id="message" name="message" rows="6" placeholder="Write your message here..." required></textarea>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill shadow-sm fw-bold">Send Message</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
